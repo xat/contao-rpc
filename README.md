@@ -1,0 +1,5 @@
+# contao-rpc
+
+Generelle Gedanken:
+
+*
