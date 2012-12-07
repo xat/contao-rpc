@@ -9,27 +9,20 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-class FrontendRpcVm extends Frontend implements IRpcVm
+
+namespace Contao\Rpc;
+
+class FrontendRpcRuntime extends Frontend implements IRpcRuntime
 {
 	/**
 	 * Setup an Environment from within
 	 * the Rpc Calls should be executed
 	 *
-	 * @param $varAuth
 	 * @return mixed
 	 */
-	public function setUp($varAuth)
+	public function setUp()
 	{
 		// TODO: Implement setUp() method.
-	}
-
-	/**
-	 * @param $arrRpcCalls
-	 * @return mixed
-	 */
-	public function execute($arrRpcCalls)
-	{
-		// TODO: Implement execute() method.
 	}
 
 	/**

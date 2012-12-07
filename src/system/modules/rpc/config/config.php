@@ -14,15 +14,24 @@
 
 $GLOBALS['RPC'] = array
 (
-	'encoders' => array
+	'providers' => array
 	(
-		'json'  => 'JsonRpcEncoder'
+		'json'  => '\Contao\Rpc\JsonRpcProvider'
 	),
 
-	'decoders' => array
+	'runtimes' => array
 	(
-		'json' => 'JsonRpcDecoder'
+		'basic'     => '\Contao\Rpc\BasicRpcRuntime',
+		'frontend'  => '\Contao\Rpc\FrontendRpcRuntime',
+		'backend'   => '\Contao\Rpc\BackendRpcRuntime'
 	),
 
-	'methods' => array()
+	'methods' => array
+	(
+		'doSomethingAwesome'    => array
+		(
+			'runtime' => 'basic',
+			'call'    => array('MyClass', 'MyMethod')
+		)
+	)
 );

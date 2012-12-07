@@ -9,7 +9,13 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-class BackendRpcVm extends Backend implements IRpcVm
+
+namespace Contao\Rpc;
+
+/**
+ *
+ */
+class BackendRpcRuntime extends Backend implements IRpcRuntime
 {
 	/**
 	 * Setup an Environment from within
@@ -18,18 +24,9 @@ class BackendRpcVm extends Backend implements IRpcVm
 	 * @param $varAuth
 	 * @return mixed
 	 */
-	public function setUp($varAuth)
+	public function setUp()
 	{
 		// TODO: Implement setUp() method.
-	}
-
-	/**
-	 * @param $arrRpcCalls
-	 * @return mixed
-	 */
-	public function execute($arrRpcCalls)
-	{
-		// TODO: Implement execute() method.
 	}
 
 	/**

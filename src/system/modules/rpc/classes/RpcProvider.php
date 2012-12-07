@@ -9,16 +9,19 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-abstract class RpcProvider
+
+namespace Contao\Rpc;
+
+abstract class RpcProvider extends System
 {
 	/**
 	 * Creates a Response String that
 	 * can be sent back to the client
 	 *
-	 * @param RpcCall $objCall
+	 * @param array
 	 * @return string
 	 */
-	abstract public function encode(RpcCall $objCall);
+	abstract public function encode($arrResponses);
 
 	/**
 	 * Takes a raw Request and transforms it to

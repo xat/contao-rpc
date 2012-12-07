@@ -9,23 +9,22 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-interface IRpcVm
+
+namespace Contao\Rpc;
+
+class BasicRpcRuntime implements IRpcRuntime
 {
 
 	/**
 	 * Setup an Environment from within
 	 * the Rpc Calls should be executed
 	 *
-	 * @param $varAuth
 	 * @return mixed
 	 */
-	public function setUp($varAuth);
-
-	/**
-	 * @param $arrRpcCalls
-	 * @return mixed
-	 */
-	public function execute($arrRpcCalls);
+	public function setUp()
+	{
+		// TODO: Implement setUp() method.
+	}
 
 	/**
 	 * Teardown the Environment.
@@ -33,6 +32,8 @@ interface IRpcVm
 	 *
 	 * @return mixed
 	 */
-	public function tearDown();
-
+	public function tearDown()
+	{
+		// TODO: Implement tearDown() method.
+	}
 }
