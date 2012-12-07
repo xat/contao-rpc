@@ -29,8 +29,6 @@ class RpcRequest
 	/**
 	 * @param string
 	 * @param string
-	 * @param string
-	 * @param array
 	 */
 	function __construct($strMethodName, $varParams)
 	{

@@ -63,18 +63,20 @@ class JsonRpcProvider extends RpcProvider
 
 		foreach ($varRpc as $objRpc)
 		{
+			$objPair = new \stdClass();
+
 			if ($intErrorType = $this->validateCall($objRpc))
 			{
-				$objResponse = (new RpcResponse())->setErrorType($intErrorType);
-				$arrReturn[] = array('error' => $objResponse);
+				$objResponse    = (new RpcResponse())->setErrorType($intErrorType);
+				$objPair->error = $objResponse;
 			}
 			else
 			{
-				$arrReturn[] = array(
-					'request'   => new JsonRpcRequest($objRpc->method, $objRpc->params, $objRpc->id),
-					'response'  => new RpcResponse()
-				);
+				$objPair->request  = new JsonRpcRequest($objRpc->method, $objRpc->params, $objRpc->id);
+				$objPair->response = new RpcResponse();
 			}
+
+			$arrReturn[] = $objPair;
 		}
 
 		return $arrReturn;

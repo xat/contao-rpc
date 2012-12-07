@@ -22,7 +22,19 @@ class FrontendRpcRuntime extends Frontend implements IRpcRuntime
 	 */
 	public function setUp()
 	{
-		// TODO: Implement setUp() method.
+		// What we want todo here is to MockUp a
+		// SESSION if the RpcRequest is performed by
+		// an FrontendUser.
+		// The goal is, that someone can use the FrontendUser Object
+		// within his remote method and has access to the current logged in User.
+
+		// There should also be the option to use an existing Frontend SESSION.
+		// In this case we don't need to tear it down.
+
+		// This can be handy if RPC Calls are performed from within the Browser
+		// of an Frontend User. So you can also use this as Entry point for Ajax requests.
+		// Actually in my Eyes the Browser can also be seen as some sort of RPC-Client
+		// and thats why I think this makes sense.
 	}
 
 	/**
@@ -33,7 +45,7 @@ class FrontendRpcRuntime extends Frontend implements IRpcRuntime
 	 */
 	public function tearDown()
 	{
-		// TODO: Implement tearDown() method.
+		// Here we will clean everything up again and destroy the SESSION.
 	}
 
 }

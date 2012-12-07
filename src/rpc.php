@@ -16,7 +16,7 @@ require 'system/initialize.php';
 
 /**
  * This is the actual entrypoint
- * of each RPC Request.
+ * of each RPC Call.
  */
 class Runner extends \System
 {
@@ -37,40 +37,58 @@ class Runner extends \System
 		}
 
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
+
+		// encode() Takes an raw input string and
+		// creates a bunch of RpcRequest/RpcResponse Objects.
+		// Each rpc call gets its own RpcRequest and its
+		// own RpcResponse object.
 		$arrPairs    = $objProvider->encode();
 
+		// there was an error before an request/response pair
+		// could even be created. We will just return an Error response
 		if ($arrPairs instanceof RpcResponse)
 		{
 			$objProvider->decode($arrPairs);
 			return;
 		}
 
-		foreach($arrPairs as $arrPair)
+		// loop through all incoming RPC Requests
+		// and proceed them
+		foreach($arrPairs as $objPair)
 		{
-			if (!isset($arrPair['error']))
+			if (!isset($objPair->error))
 			{
-				$arrRpc          = $GLOBALS['RPC']['methods'][$arrPair['request']->getMethodName()];
+				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 				$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];
+
+				// TODO: Doing the Environment setUp and tearDown
+				// each time is inefficient. We need to find a better way.
 
 				// Import the Runtime
 				$this->import($strRuntimeClass);
 
-				// setUp the Environment
+				// Setup an Environment from within
+				// the RPC Calls should be fired
 				$this->$strRuntimeClass->setUp();
 
-				// Run the actual Method
+				// Run the actual RPC Method and pass in
+				// an Request and an Response object
 				$this->import($arrRpc['call'][0]);
-				$this->$arrRpc['call'][0]->$arrRpc['call'][1]($arrPair['request'], $arrPair['response']);
+				$this->$arrRpc['call'][0]->$arrRpc['call'][1]($objPair->request, $objPair->response);
 
-				// tearDown the Environtment
+				// We are done.. pull down the Environment again.
 				$this->$strRuntimeClass->tearDown();
 			}
 		}
 
-		$objProvider->decode($varPairs);
+		// transform all reponses into something
+		// we can send back to the user.
+		$objProvider->decode($arrPairs);
 	}
 
 }
 
 $objRunner = new Runner();
+
+// Let's rock!
 $objRunner->run();

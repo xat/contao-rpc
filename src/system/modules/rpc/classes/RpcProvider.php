@@ -21,7 +21,7 @@ abstract class RpcProvider extends System
 	 * @param array
 	 * @return string
 	 */
-	abstract public function encode($arrResponses);
+	abstract public function encode($arrPairs);
 
 	/**
 	 * Takes a raw Request and transforms it to

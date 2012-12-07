@@ -26,7 +26,10 @@ class BackendRpcRuntime extends Backend implements IRpcRuntime
 	 */
 	public function setUp()
 	{
-		// TODO: Implement setUp() method.
+		// Mockup a SESSION from within Backend-User Calls can be performed.
+		// This Runtime can be useful if someone wants to create
+		// an own AdminInterface for example and wants to allow
+		// BackendUsers to perform RPC-Calls
 	}
 
 	/**
