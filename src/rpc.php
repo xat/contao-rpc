@@ -80,7 +80,11 @@ class Runner extends \System
 		// could even be created. We will just return an Error response
 		if ($arrPairs instanceof RpcResponse)
 		{
-			$objProvider->decode($arrPairs);
+			$strResponse = $objProvider->decode($arrPairs);
+
+			// TODO: Do encryption, if required.
+
+			echo $strResponse;
 			return;
 		}
 
