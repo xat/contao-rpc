@@ -21,16 +21,25 @@ $GLOBALS['RPC'] = array
 
 	'runtimes' => array
 	(
-		'basic'     => '\Contao\Rpc\BasicRpcRuntime',
-		'frontend'  => '\Contao\Rpc\FrontendRpcRuntime',
-		'backend'   => '\Contao\Rpc\BackendRpcRuntime'
+		'basic'     => '\Contao\Rpc\BasicRpcRuntime'
 	),
+
+	'encrypters' => array
+	(
+
+	),
+
+	'decrypters' => array
+	(
+
+	),
+
+	'default_runtime' => 'basic',
 
 	'methods' => array
 	(
 		'doSomethingAwesome'    => array
 		(
-			'runtime' => 'basic',
 			'call'    => array('MyClass', 'MyMethod')
 		)
 	)

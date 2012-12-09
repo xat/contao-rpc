@@ -23,9 +23,7 @@ class BasicRpcRuntime implements IRpcRuntime
 	 */
 	public function setUp()
 	{
-		// This is the most basic Runtime.
-		// We don't want todo any magic in here like MockingUp SESSIONs
-		// and other ugly stuff. Just run the RemoteMethod, that is all.
+		// TODO: Implement setUp() method.
 	}
 
 	/**

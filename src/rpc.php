@@ -27,6 +27,13 @@ class Runner extends \System
 	public function run()
 	{
 		$this->import('Input');
+
+		// TODO: Here we must perform decryption, if the client has encrypted his request
+		// We know if we must decrypt stuff if there is an POST field 'decrypt' with
+		// an value which indicates what decrypter should be used. Decrypters
+		// are defined in $GLOBALS['RPC']['decrypters'][<decrypterName>] and
+		// implement the IRpcDecrypter Interface.
+
 		$strProvider = $this->Input->post('provider');
 
 		// There must be an parameter 'provider' set
@@ -37,6 +44,21 @@ class Runner extends \System
 		}
 
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
+
+		// TODO: Authentication takes place here.
+		// Authentication is separated from the actual remote method calls.
+		// This means, there is only one authentication by each HTTP Request, even if we
+		// receive a batch of RPC calls.
+		// RPC-Users can be Contao-Users AND/OR-Members in general, if
+		// they have the permissions to use certain Remote Methods.
+		// Permissions can be defined in the Contao Backend.
+
+		// Authentication can be performed in 3 ways:
+
+		// 1. By sending Username and Password.
+		// 2. By sending an APIKEY (which can be defined in the backend on a per-User/Member base)
+		// 3. By sending an Hash (=Token).
+		// Basicly an hash is the same thing that also gets stored in the FE_USER_AUTH / BE_USER_AUTH cookies.
 
 		// encode() Takes an raw input string and
 		// creates a bunch of RpcRequest/RpcResponse Objects.
@@ -61,9 +83,6 @@ class Runner extends \System
 				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 				$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];
 
-				// TODO: Doing the Environment setUp and tearDown
-				// each time is inefficient. We need to find a better way.
-
 				// Import the Runtime
 				$this->import($strRuntimeClass);
 
@@ -83,7 +102,16 @@ class Runner extends \System
 
 		// transform all reponses into something
 		// we can send back to the user.
-		$objProvider->decode($arrPairs);
+		$strResponse = $objProvider->decode($arrPairs);
+
+		// TODO: If the Client wants encryption of the response we must do it here,
+		// before the response gets sent back to the client.
+		// Encrypters are defined in $GLOBALS['RPC']['encrypters'][<encryterName>] and
+		// implement the IRpcEncrypter Interface.
+		// We know if the Response should be encrypted if the POST field 'encrypt' is
+		// set to an Encryption Handler defined within $GLOBALS['RPC']['encrypters'][<encrypterName>]
+
+		echo $strResponse;
 	}
 
 }
