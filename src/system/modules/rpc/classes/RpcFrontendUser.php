@@ -9,7 +9,12 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-class RpcFrontendUser
+
+namespace Contao\Rpc;
+
+class RpcFrontendUser extends \FrontendUser
 {
 
+
+	public function __destruct() {}
 }

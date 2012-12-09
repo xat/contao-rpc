@@ -34,10 +34,9 @@ class RpcBackendUser extends \BackendUser
 	 *
 	 * @param $strUsername
 	 * @param $strPassword
-	 * @param $blnSession
 	 * @return bool
 	 */
-	public function authenticate($strUsername, $strPassword, $blnSession = false)
+	public function authenticate($strUsername, $strPassword)
 	{
 
 		if (empty($strUsername) || empty($strPassword) || !$strUsername || !$strPassword)
@@ -87,11 +86,6 @@ class RpcBackendUser extends \BackendUser
 		$this->setUserFromDb();
 
 		// TODO: Checkout if we should also update stuff like 'lastLogin' etc.
-
-		if ($blnSession)
-		{
-			return $this->generateSession();
-		}
 
 		return true;
 	}
@@ -144,7 +138,7 @@ class RpcBackendUser extends \BackendUser
 	 *
 	 * @param $strApikey
 	 */
-	public function authenticateWithApikey($strApikey, $blnSession = false)
+	public function authenticateWithApikey($strApikey)
 	{
 		if (empty($strApikey) || !$strApikey)
 		{
@@ -174,7 +168,7 @@ class RpcBackendUser extends \BackendUser
 	 *
 	 * @return string
 	 */
-	protected function generateSession()
+	protected function generateHash()
 	{
 		$time = time();
 
