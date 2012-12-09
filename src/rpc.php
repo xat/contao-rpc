@@ -43,6 +43,16 @@ class Runner extends \System
 			die('Bad Request');
 		}
 
+		// A Provider defines a way how to encode/decode Requests.
+		// Our default Provider is able to encode and decode JSON-RPC.
+		// It should be easy to also create an XML-RPC Provider.
+		// However: It wont be possible to implement ALL RPC Mechanisms
+		// availible out there with this simple abstraction. Therefor
+		// the remote methods would need to know the current RPC Mechanism used
+		// to add metadata used by that specific RPC Mechanism.
+		// And we dont want that. The RPC Methods should work without them knowing
+		// from within which RPC Mechanism they are called.
+
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
 
 		// TODO: Authentication takes place here.
@@ -62,7 +72,7 @@ class Runner extends \System
 
 		// encode() Takes an raw input string and
 		// creates a bunch of RpcRequest/RpcResponse Objects.
-		// Each rpc call gets its own RpcRequest and its
+		// Each RPC call gets its own RpcRequest and its
 		// own RpcResponse object.
 		$arrPairs    = $objProvider->encode();
 
