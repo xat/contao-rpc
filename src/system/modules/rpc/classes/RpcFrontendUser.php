@@ -15,6 +15,7 @@ namespace Contao\Rpc;
 class RpcFrontendUser extends \FrontendUser
 {
 
+	use TRpcUser;
 
 	public function __destruct() {}
 }
