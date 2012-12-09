@@ -34,6 +34,8 @@ $GLOBALS['RPC'] = array
 
 	),
 
+	'decrypted_fields' => array(  'rpc', 'fetoken', 'feusername', 'fehash', 'feapikey', 'fepassword', 'beusername', 'bepassword', 'beusername', 'bepassword', 'behash', 'beapikey'),
+
 	'default_runtime' => 'basic',
 
 	'methods' => array

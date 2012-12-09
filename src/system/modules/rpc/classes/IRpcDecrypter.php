@@ -17,6 +17,6 @@ interface IRpcDecrypter
 	 * @param $strKey
 	 * @return mixed
 	 */
-	static public function decrypt($strMessage, $strKey);
+	public function decrypt($strMessage, $strKey);
 
 }

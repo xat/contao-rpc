@@ -34,6 +34,20 @@ class Runner extends \System
 		// are defined in $GLOBALS['RPC']['decrypters'][<decrypterName>] and
 		// implement the IRpcDecrypter Interface.
 
+		if ($this->Input->post('decrypt', false) && isset($GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')]))
+		{
+			$strDecrypterClass = $GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')];
+			$this->import($strDecrypterClass);
+
+			foreach ($GLOBALS['RPC']['decrypted_fields'] as $strField)
+			{
+				if ($strVal = $this->Input->post($strField, false))
+				{
+					$this->Input->setPost($strField, $this->$strDecrypterClass->decrypt($strVal));
+				}
+			}
+		}
+
 		$strProvider = $this->Input->post('provider');
 
 		// There must be an parameter 'provider' set
@@ -90,7 +104,7 @@ class Runner extends \System
 
 		// loop through all incoming RPC Requests
 		// and proceed them
-		foreach($arrPairs as $objPair)
+		foreach ($arrPairs as $objPair)
 		{
 			if (!isset($objPair->error))
 			{

@@ -17,6 +17,6 @@ interface IRpcEncrypter
 	 * @param $strKey
 	 * @return mixed
 	 */
-	static public function encrypt($strEncryptedMessage, $strKey);
+	public function encrypt($strEncryptedMessage, $strKey);
 
 }
