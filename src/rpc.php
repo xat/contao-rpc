@@ -22,6 +22,14 @@ class Runner extends \System
 {
 
 	/**
+	 * Make the constructor accesible
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
 	 * Process an incoming RPC Request
 	 */
 	public function run()

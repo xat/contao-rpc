@@ -24,9 +24,22 @@ class JsonRpcProvider extends RpcProvider
 	 * @param array
 	 * @return string
 	 */
-	public function encode($arrResponses)
+	public function encode($arrPairs)
 	{
-		// TODO: Implement encode() method.
+		$strReturn = '';
+
+		foreach ($arrPairs as $objPair)
+		{
+			if (isset($objPair->error))
+			{
+
+			} else
+			{
+
+			}
+		}
+
+		return $strReturn;
 	}
 
 	/**
