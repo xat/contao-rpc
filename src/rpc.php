@@ -12,6 +12,8 @@
 
 namespace Contao\Rpc;
 
+define('BYPASS_TOKEN_CHECK', true);
+
 require 'system/initialize.php';
 
 /**
