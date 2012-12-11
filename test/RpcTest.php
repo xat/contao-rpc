@@ -60,6 +60,19 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '-32600');
 	}
 
+	public function testJsonRpcVersion()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'method' => 'helloWorld')
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Invalid Request');
+		$this->assertEquals($varResult->error->code, '-32600');
+	}
+
 	public function testMissingMethod()
 	{
 		$strResult = rpcRequest(
