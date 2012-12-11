@@ -38,4 +38,9 @@ class BackendCredentialsAuthenticator extends \System implements IAuthenticator
 			return self::AUTH_FAILED;
 		}
 	}
+
+	public function getType()
+	{
+		return 'FRONTEND';
+	}
 }

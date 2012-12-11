@@ -21,4 +21,5 @@ interface IAuthenticator
 
 	public function authenticate();
 
+	public function getType();
 }

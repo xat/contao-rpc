@@ -105,7 +105,16 @@ class Runner extends \System
 				// Abort on a failed authentication.
 				header('HTTP/1.1 403 Access Denied');
 				die('Access Denied');
+			} elseif ($intTest == IAuthenticator::AUTH_SUCCESS)
+			{
+				define('RPC_AUTH', $objAuthenticator->getType());
+				break;
 			}
+		}
+
+		if (!defined('RPC_AUTH'))
+		{
+			define('RPC_AUTH', 'NONE');
 		}
 
 		// decode() Takes an raw input string and
@@ -132,11 +141,13 @@ class Runner extends \System
 		{
 			if (!$objPair->response->getError())
 			{
+				// TODO: here we must check if the current User
+				// has access to this RPC Method
+
 				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 
 				// Run the actual RPC Method and pass in
 				// an Request and an Response object
-				//$this->import($arrRpc['call'][0]);
 				(new $arrRpc['call'][0])->$arrRpc['call'][1]($objPair->request, $objPair->response);
 			}
 		}
