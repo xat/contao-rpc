@@ -19,11 +19,6 @@ $GLOBALS['RPC'] = array
 		'json'  => '\Contao\Rpc\JsonRpcProvider'
 	),
 
-	'runtimes' => array
-	(
-		'basic'     => '\Contao\Rpc\BasicRpcRuntime'
-	),
-
 	'encrypters' => array
 	(
 

@@ -119,22 +119,11 @@ class Runner extends \System
 			if (!$objPair->response->getError())
 			{
 				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
-				//$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];
-
-				// Import the Runtime
-				//$this->import($strRuntimeClass);
-
-				// Setup an Environment from within
-				// the RPC Calls should be fired
-				//$this->$strRuntimeClass->setUp();
 
 				// Run the actual RPC Method and pass in
 				// an Request and an Response object
 				//$this->import($arrRpc['call'][0]);
 				(new $arrRpc['call'][0])->$arrRpc['call'][1]($objPair->request, $objPair->response);
-
-				// We are done.. pull down the Environment again.
-				//$this->$strRuntimeClass->tearDown();
 			}
 		}
 
