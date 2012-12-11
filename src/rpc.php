@@ -98,7 +98,7 @@ class Runner extends \System
 		// creates a bunch of RpcRequest/RpcResponse Objects.
 		// Each RPC call gets its own RpcRequest and its
 		// own RpcResponse object.
-		$arrPairs    = $objProvider->encode();
+		$arrPairs    = $objProvider->encode($this->Input->post('rpc'));
 
 		// there was an error before an request/response pair
 		// could even be created. We will just return an Error response
@@ -116,7 +116,7 @@ class Runner extends \System
 		// and proceed them
 		foreach ($arrPairs as $objPair)
 		{
-			if (!isset($objPair->error))
+			if (!$objPair->response->getError())
 			{
 				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 				$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];

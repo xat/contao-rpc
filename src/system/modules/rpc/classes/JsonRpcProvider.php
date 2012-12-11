@@ -26,20 +26,19 @@ class JsonRpcProvider extends RpcProvider
 	 */
 	public function encode($arrPairs)
 	{
-		$strReturn = '';
+		$arrRpcObjects = array();
 
 		foreach ($arrPairs as $objPair)
 		{
-			if (isset($objPair->error))
-			{
-
-			} else
-			{
-
-			}
+			$arrRpcObjects[] = $this->pairToJsonRpcObj($objPair->request, $objPair->response);
 		}
 
-		return $strReturn;
+		if (count($arrRpcObjects) == 1)
+		{
+			return json_encode($arrRpcObjects[0]);
+		}
+
+		return json_encode($arrRpcObjects);
 	}
 
 	/**
@@ -47,13 +46,11 @@ class JsonRpcProvider extends RpcProvider
 	 * a Datastructure that can actually be used within
 	 * PHP.
 	 *
+	 * @param string
 	 * @return array
 	 */
-	public function decode()
+	public function decode($strRpc)
 	{
-		$this->Import('Input');
-		$strRpc = $this->Input->post('rpc');
-
 		if (!$strRpc)
 		{
 			return (new RpcResponse())->setErrorType(RpcResponse::PARSE_ERROR);
@@ -78,14 +75,15 @@ class JsonRpcProvider extends RpcProvider
 		{
 			$objPair = new \stdClass();
 
+			$objPair->request  = new JsonRpcRequest($objRpc->method, $objRpc->params, $objRpc->id);
+
 			if ($intErrorType = $this->validateCall($objRpc))
 			{
 				$objResponse    = (new RpcResponse())->setErrorType($intErrorType);
-				$objPair->error = $objResponse;
+				$objPair->response = $objResponse;
 			}
 			else
 			{
-				$objPair->request  = new JsonRpcRequest($objRpc->method, $objRpc->params, $objRpc->id);
 				$objPair->response = new RpcResponse();
 			}
 
@@ -138,6 +136,33 @@ class JsonRpcProvider extends RpcProvider
 		}
 
 		return false;
+	}
+
+	/**
+	 * Transfrom a pair of $objRequest and
+	 * $objResponse into an simple object
+	 * which can be encoded into an JSON String
+	 *
+	 * @param Object
+	 */
+	protected function pairToJsonRpcObj($objRequest, $objResponse)
+	{
+		$obj = new \stdClass();
+		$obj->jsonrpc = '2.0';
+		$obj->id = $objRequest->getId();
+
+		// Check if it's a error response
+		if ($arrError = $objResponse->getError())
+		{
+			$obj->error = new \stdClass();
+			$obj->error->code = $arrError['code'];
+			$obj->error->message = $arrError['message'];
+		} else
+		{
+			$obj->result = $objResponse->getData();
+		}
+
+		return $obj;
 	}
 
 }
