@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcProvider extends System
+interface IRpcProvider
 {
 	/**
 	 * Creates a Response String that
@@ -21,7 +21,7 @@ abstract class RpcProvider extends System
 	 * @param array
 	 * @return string
 	 */
-	abstract public function encode($arrPairs);
+	public function encode($arrPairs);
 
 	/**
 	 * Takes a raw Request and transforms it to
@@ -30,6 +30,6 @@ abstract class RpcProvider extends System
 	 *
 	 * @return array
 	 */
-	abstract public function decode();
+	public function decode();
 
 }

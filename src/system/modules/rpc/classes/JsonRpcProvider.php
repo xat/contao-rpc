@@ -15,7 +15,7 @@ namespace Contao\Rpc;
 /**
  *
  */
-class JsonRpcProvider extends RpcProvider
+class JsonRpcProvider extends \System implements \IRpcProvider
 {
 	/**
 	 * Creates a Response String that

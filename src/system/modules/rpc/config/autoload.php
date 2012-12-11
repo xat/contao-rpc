@@ -23,7 +23,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\JsonRpcRequest' => 'system/modules/rpc/classes/JsonRpcRequest.php',
 	'Contao\Rpc\RpcBackendUser' => 'system/modules/rpc/classes/RpcBackendUser.php',
 	'Contao\Rpc\RpcFrontendUser' => 'system/modules/rpc/classes/RpcFrontendUser.php',
-	'Contao\Rpc\RpcProvider' => 'system/modules/rpc/classes/RpcProvider.php',
+	'Contao\Rpc\IRpcProvider' => 'system/modules/rpc/classes/IRpcProvider.php',
 	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\RpcResponse' => 'system/modules/rpc/classes/RpcResponse.php',
 	'Contao\Rpc\TRpcUser' => 'system/modules/rpc/classes/TRpcUser.php',
