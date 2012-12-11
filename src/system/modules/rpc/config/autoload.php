@@ -27,6 +27,8 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\RpcResponse' => 'system/modules/rpc/classes/RpcResponse.php',
 	'Contao\Rpc\TRpcUser' => 'system/modules/rpc/classes/TRpcUser.php',
+	'Contao\Rpc\IAuthenticator' => 'system/modules/rpc/classes/IAuthenticator.php',
+	'Contao\Rpc\BackendCredentialsAuthenticator' => 'system/modules/rpc/classes/BackendCredentialsAuthenticator.php',
 
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
 ));

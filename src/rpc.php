@@ -79,6 +79,7 @@ class Runner extends \System
 
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
 
+
 		// TODO: Authentication takes place here.
 		// Authentication is separated from the actual remote method calls.
 		// This means, there is only one authentication by each HTTP Request, even if we
@@ -93,6 +94,19 @@ class Runner extends \System
 		// 2. By sending an APIKEY (which can be defined in the backend on a per-User/Member base)
 		// 3. By sending an Hash (=Token).
 		// Basicly an hash is the same thing that also gets stored in the FE_USER_AUTH / BE_USER_AUTH cookies.
+
+		foreach ($GLOBALS['RPC']['authenticators'] as $strAuthenticatorClass)
+		{
+			$objAuthenticator = new $strAuthenticatorClass();
+			$intTest = $objAuthenticator->authenticate();
+
+			if ($intTest == IAuthenticator::AUTH_FAILED)
+			{
+				// Abort on a failed authentication.
+				header('HTTP/1.1 403 Access Denied');
+				die('Access Denied');
+			}
+		}
 
 		// decode() Takes an raw input string and
 		// creates a bunch of RpcRequest/RpcResponse Objects.

@@ -19,6 +19,11 @@ $GLOBALS['RPC'] = array
 		'json'  => '\Contao\Rpc\JsonRpcProvider'
 	),
 
+	'authenticators' => array
+	(
+		'backend_credentials' => '\Contao\Rpc\BackendCredentialsAuthenticator'
+	),
+
 	'encrypters' => array
 	(
 

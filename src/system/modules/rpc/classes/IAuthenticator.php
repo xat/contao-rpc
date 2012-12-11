@@ -12,14 +12,13 @@
 
 namespace Contao\Rpc;
 
-interface IRpcDecrypter
+interface IAuthenticator
 {
 
-	/**
-	 * @param $strMessage
-	 * @param $strKey
-	 * @return mixed
-	 */
-	public function decrypt($strMessage, $strKey);
+	const AUTH_FAILED           = 0;
+	const AUTH_SUCCESS          = 1;
+	const AUTH_NOT_RESPONSIBLE  = 2;
+
+	public function authenticate();
 
 }

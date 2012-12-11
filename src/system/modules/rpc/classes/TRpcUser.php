@@ -26,7 +26,7 @@ trait TRpcUser
 	 * @param $strPassword
 	 * @return bool
 	 */
-	public function authenticate($strUsername, $strPassword)
+	public function authenticateWithCredentials($strUsername, $strPassword)
 	{
 
 		if (empty($strUsername) || empty($strPassword) || !$strUsername || !$strPassword)

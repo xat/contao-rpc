@@ -9,6 +9,9 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
+
+namespace Contao\Rpc;
+
 interface IRpcEncrypter
 {
 
