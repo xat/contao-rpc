@@ -34,19 +34,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals(rpcRequest(RPC_URL, array('provider' => 'json')), 'Bad Request');
 	}
 
-	public function testHelloWorld()
-	{
-		$strResult = rpcRequest(
-			RPC_URL,
-			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
-		);
-
-		$varResult = json_decode($strResult);
-		$this->assertEquals($varResult->result, 'Hello World');
-		$this->assertEquals($varResult->id, '1337');
-	}
-
 	public function testMissingId()
 	{
 		$strResult = rpcRequest(
@@ -60,7 +47,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '-32600');
 	}
 
-	public function testJsonRpcVersion()
+	public function testMissingJsonRpcVersion()
 	{
 		$strResult = rpcRequest(
 			RPC_URL,
@@ -84,6 +71,39 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->error->message, 'Method not found');
 		$this->assertEquals($varResult->error->code, '-32601');
+	}
+
+	public function testHelloWorld()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'Hello World');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	public function testBatchHelloWorld()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array(
+				array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld'),
+				array('id' => '1338', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+			)
+		);
+
+		$varResult = json_decode($strResult);
+
+		$this->assertEquals($varResult[0]->result, 'Hello World');
+		$this->assertEquals($varResult[0]->id, '1337');
+
+		$this->assertEquals($varResult[1]->result, 'Hello World');
+		$this->assertEquals($varResult[1]->id, '1338');
 	}
 
 }
