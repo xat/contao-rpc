@@ -94,18 +94,18 @@ class Runner extends \System
 		// 3. By sending an Hash (=Token).
 		// Basicly an hash is the same thing that also gets stored in the FE_USER_AUTH / BE_USER_AUTH cookies.
 
-		// encode() Takes an raw input string and
+		// decode() Takes an raw input string and
 		// creates a bunch of RpcRequest/RpcResponse Objects.
 		// Each RPC call gets its own RpcRequest and its
 		// own RpcResponse object.
-		$arrPairs    = $objProvider->encode($this->Input->post('rpc'));
+
+		$arrPairs    = $objProvider->decode($this->Input->post('rpc'));
 
 		// there was an error before an request/response pair
 		// could even be created. We will just return an Error response
 		if ($arrPairs instanceof RpcResponse)
 		{
-			$strResponse = $objProvider->decode($arrPairs);
-
+			$strResponse = $objProvider->encode($arrPairs);
 			// TODO: Do encryption, if required.
 
 			echo $strResponse;
@@ -119,28 +119,29 @@ class Runner extends \System
 			if (!$objPair->response->getError())
 			{
 				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
-				$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];
+				//$strRuntimeClass = $GLOBALS['RPC']['runtimes'][$arrRpc['runtime']];
 
 				// Import the Runtime
-				$this->import($strRuntimeClass);
+				//$this->import($strRuntimeClass);
 
 				// Setup an Environment from within
 				// the RPC Calls should be fired
-				$this->$strRuntimeClass->setUp();
+				//$this->$strRuntimeClass->setUp();
 
 				// Run the actual RPC Method and pass in
 				// an Request and an Response object
-				$this->import($arrRpc['call'][0]);
-				$this->$arrRpc['call'][0]->$arrRpc['call'][1]($objPair->request, $objPair->response);
+				//$this->import($arrRpc['call'][0]);
+				(new $arrRpc['call'][0])->$arrRpc['call'][1]($objPair->request, $objPair->response);
 
 				// We are done.. pull down the Environment again.
-				$this->$strRuntimeClass->tearDown();
+				//$this->$strRuntimeClass->tearDown();
 			}
 		}
 
 		// transform all reponses into something
 		// we can send back to the user.
-		$strResponse = $objProvider->decode($arrPairs);
+
+		$strResponse = $objProvider->encode($arrPairs);
 
 		// TODO: If the Client wants encryption of the response we must do it here,
 		// before the response gets sent back to the client.

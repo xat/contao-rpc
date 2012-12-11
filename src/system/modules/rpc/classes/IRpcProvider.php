@@ -30,6 +30,6 @@ interface IRpcProvider
 	 *
 	 * @return array
 	 */
-	public function decode();
+	public function decode($strRaw);
 
 }

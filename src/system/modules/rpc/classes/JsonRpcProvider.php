@@ -15,7 +15,7 @@ namespace Contao\Rpc;
 /**
  *
  */
-class JsonRpcProvider extends \System implements \IRpcProvider
+class JsonRpcProvider extends \System implements IRpcProvider
 {
 	/**
 	 * Creates a Response String that
@@ -26,6 +26,7 @@ class JsonRpcProvider extends \System implements \IRpcProvider
 	 */
 	public function encode($arrPairs)
 	{
+
 		$arrRpcObjects = array();
 
 		foreach ($arrPairs as $objPair)
@@ -51,6 +52,7 @@ class JsonRpcProvider extends \System implements \IRpcProvider
 	 */
 	public function decode($strRpc)
 	{
+
 		if (!$strRpc)
 		{
 			return (new RpcResponse())->setErrorType(RpcResponse::PARSE_ERROR);

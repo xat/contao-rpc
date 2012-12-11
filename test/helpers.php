@@ -11,11 +11,24 @@
  */
 
 
-function rpcRequest($url, $postFields = array()) {
+function rpcRequest($url, $postFields = array(), $data = null) {
+	if ($data)
+	{
+		$postFields['rpc'] =  json_encode(array_to_object($data));
+	}
+
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$result = curl_exec($ch);
 	return $result;
+}
+
+function array_to_object($array) {
+	$obj = new stdClass;
+	foreach($array as $k => $v) {
+		$obj->{$k} = $v;
+	}
+	return $obj;
 }

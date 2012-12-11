@@ -34,4 +34,17 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals(rpcRequest(RPC_URL, array('provider' => 'json')), 'Bad Request');
 	}
 
+	public function testHelloWorld()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'Hello World');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
 }

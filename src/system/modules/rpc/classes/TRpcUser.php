@@ -13,6 +13,8 @@
 // TODO: Sadly in the final version we wont be able to use Traits...
 // since Contao3 also supports PHP 5.4<
 
+namespace Contao\Rpc;
+
 trait TRpcUser
 {
 
