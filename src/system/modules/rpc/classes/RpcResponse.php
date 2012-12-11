@@ -54,7 +54,7 @@ class RpcResponse
 	 * Overwrite this Method if you need to react someother way
 	 *
 	 * @param $intType
-	 * @return mixed
+	 * @return object
 	 */
 	public function setErrorType($intType)
 	{
@@ -76,6 +76,8 @@ class RpcResponse
 				$this->setError(-32603, 'Internal error');
 				break;
 		}
+
+		return $this;
 	}
 
 	/**
@@ -90,6 +92,8 @@ class RpcResponse
 			'code'    => $intCode,
 			'message' => $strMessage
 		);
+
+		return $this;
 	}
 
 	/**
