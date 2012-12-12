@@ -128,4 +128,26 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals($strResult, 'Access Denied');
 	}
 
+	public function testWrongFrontendAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_username' => 'j.smith', 'fe_password' => 'whatever'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertEquals($strResult, 'Access Denied');
+	}
+
+	public function testCorrectFrontendAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_username' => 'j.smith', 'fe_password' => 'johnsmith'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertNotEquals($strResult, 'Access Denied');
+	}
+
 }

@@ -21,7 +21,8 @@ $GLOBALS['RPC'] = array
 
 	'authenticators' => array
 	(
-		'backend_credentials' => '\Contao\Rpc\BackendCredentialsAuthenticator'
+		'backend_credentials' => '\Contao\Rpc\RpcBeCredentialsAuthenticator',
+		'frontend_credentials' => '\Contao\Rpc\RpcFeCredentialsAuthenticator'
 	),
 
 	'encrypters' => array
@@ -35,8 +36,6 @@ $GLOBALS['RPC'] = array
 	),
 
 	'decrypted_fields' => array(  'rpc', 'fetoken', 'feusername', 'fehash', 'feapikey', 'fepassword', 'beusername', 'bepassword', 'beusername', 'bepassword', 'behash', 'beapikey'),
-
-	'default_runtime' => 'basic',
 
 	'methods' => array
 	(

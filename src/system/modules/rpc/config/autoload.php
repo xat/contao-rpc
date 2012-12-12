@@ -27,8 +27,11 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\RpcResponse' => 'system/modules/rpc/classes/RpcResponse.php',
 	'Contao\Rpc\TRpcUser' => 'system/modules/rpc/classes/TRpcUser.php',
-	'Contao\Rpc\IAuthenticator' => 'system/modules/rpc/classes/IAuthenticator.php',
-	'Contao\Rpc\BackendCredentialsAuthenticator' => 'system/modules/rpc/classes/BackendCredentialsAuthenticator.php',
+
+	'Contao\Rpc\IRpcAuthenticator' => 'system/modules/rpc/classes/IRpcAuthenticator.php',
+	'Contao\Rpc\RpcBeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcBeCredentialsAuthenticator.php',
+	'Contao\Rpc\RpcFeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcFeCredentialsAuthenticator.php',
+	'Contao\Rpc\RpcCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcCredentialsAuthenticator.php',
 
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
 ));

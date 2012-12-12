@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-interface IAuthenticator
+interface IRpcAuthenticator
 {
 
 	const AUTH_FAILED           = 0;
