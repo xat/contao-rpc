@@ -128,6 +128,28 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals($strResult, 'Access Denied');
 	}
 
+	public function testBackendCorrectApikeyAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_apikey' => '098f6bcd4621d373cade4e832627b4f6'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertNotEquals($strResult, 'Access Denied');
+	}
+
+	public function testBackendWrongApikeyAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_apikey' => 'whatever'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertEquals($strResult, 'Access Denied');
+	}
+
 	public function testWrongFrontendAuthentication()
 	{
 		$strResult = rpcRequest(
@@ -148,6 +170,28 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->assertNotEquals($strResult, 'Access Denied');
+	}
+
+	public function testFrontendCorrectApikeyAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_apikey' => '098f6bcd4621d373cade4e832627b4f6'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertNotEquals($strResult, 'Access Denied');
+	}
+
+	public function testFrontendWrongApikeyAuthentication()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_apikey' => 'whatever'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertEquals($strResult, 'Access Denied');
 	}
 
 }

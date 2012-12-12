@@ -79,7 +79,6 @@ class Runner extends \System
 
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
 
-
 		// TODO: Authentication takes place here.
 		// Authentication is separated from the actual remote method calls.
 		// This means, there is only one authentication by each HTTP Request, even if we
