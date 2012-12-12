@@ -39,7 +39,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('method' => 'helloWorld', 'jsonrpc' => '2.0')
+			array('method' => 'pong', 'jsonrpc' => '2.0')
 		);
 
 		$varResult = json_decode($strResult);
@@ -52,7 +52,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'method' => 'helloWorld')
+			array('id' => '1337', 'method' => 'pong')
 		);
 
 		$varResult = json_decode($strResult);
@@ -73,36 +73,36 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '-32601');
 	}
 
-	public function testHelloWorld()
+	public function testSimplePing()
 	{
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping'))
 		);
 
 		$varResult = json_decode($strResult);
-		$this->assertEquals($varResult->result, 'Hello World');
+		$this->assertEquals($varResult->result, 'ping');
 		$this->assertEquals($varResult->id, '1337');
 	}
 
-	public function testBatchHelloWorld()
+	public function testBatchPing()
 	{
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
 			array(
-				array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld'),
-				array('id' => '1338', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+				array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping1')),
+				array('id' => '1338', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping2'))
 			)
 		);
 
 		$varResult = json_decode($strResult);
 
-		$this->assertEquals($varResult[0]->result, 'Hello World');
+		$this->assertEquals($varResult[0]->result, 'ping1');
 		$this->assertEquals($varResult[0]->id, '1337');
 
-		$this->assertEquals($varResult[1]->result, 'Hello World');
+		$this->assertEquals($varResult[1]->result, 'ping2');
 		$this->assertEquals($varResult[1]->id, '1338');
 	}
 
@@ -111,7 +111,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json', 'be_username' => 'k.jones', 'be_password' => 'whatever'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
 		);
 
 		$this->assertEquals($strResult, 'Access Denied');
@@ -122,7 +122,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json', 'be_username' => 'k.jones', 'be_password' => 'kevinjones'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'helloWorld')
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
 		);
 
 		$this->assertNotEquals($strResult, 'Access Denied');

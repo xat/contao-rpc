@@ -40,9 +40,9 @@ $GLOBALS['RPC'] = array
 
 	'methods' => array
 	(
-		'helloWorld'    => array
+		'pong'    => array
 		(
-			'call'    => array('Contao\Rpc\TestMethods', 'helloWorld')
+			'call'    => array('Contao\Rpc\TestMethods', 'pong')
 		)
 	)
 );

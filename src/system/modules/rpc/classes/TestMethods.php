@@ -15,9 +15,9 @@ namespace Contao\Rpc;
 class TestMethods
 {
 
-	public function helloWorld(&$objRequest, &$objResponse)
+	public function pong(&$objRequest, &$objResponse)
 	{
-		$objResponse->setData('Hello World');
+		$objResponse->setData($objRequest->getParams()[0]);
 	}
 
 }
