@@ -46,6 +46,11 @@ $GLOBALS['RPC'] = array
 		'pong'    => array
 		(
 			'call'    => array('Contao\Rpc\TestMethods', 'pong')
+		),
+		'generateHash'    => array
+		(
+			'call'    => array('Contao\Rpc\RpcStandardMethods', 'generateHash')
 		)
+
 	)
 );

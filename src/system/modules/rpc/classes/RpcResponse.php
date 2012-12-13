@@ -35,6 +35,9 @@ class RpcResponse
 	 */
 	const INTERNAL_ERROR   = 16;
 
+
+	const AUTH_REQUIRED    = 32;
+
 	/**
 	 * @var
 	 */
@@ -60,6 +63,8 @@ class RpcResponse
 	{
 		switch($intType)
 		{
+			// Standard JSON/XML-RPC Errors
+
 			case self::PARSE_ERROR:
 				$this->setError(-32700, 'Parse error');
 				break;
@@ -74,6 +79,12 @@ class RpcResponse
 				break;
 			case self::INTERNAL_ERROR:
 				$this->setError(-32603, 'Internal error');
+				break;
+
+			// Application based errors
+
+			case self::AUTH_REQUIRED:
+				$this->arrError(1, 'Authentication required');
 				break;
 		}
 

@@ -41,5 +41,6 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcFeHashAuthenticator' => 'system/modules/rpc/classes/RpcFeHashAuthenticator.php',
 	'Contao\Rpc\RpcHashAuthenticator' => 'system/modules/rpc/classes/RpcHashAuthenticator.php',
 
+	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php',
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
 ));

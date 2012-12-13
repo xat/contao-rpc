@@ -158,7 +158,7 @@ trait TRpcUser
 	 *
 	 * @return string
 	 */
-	protected function generateHash()
+	public function generateHash()
 	{
 		$time = time();
 

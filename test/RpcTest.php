@@ -173,6 +173,29 @@ class RpcTest extends PHPUnit_Framework_TestCase
 	}
 */
 
+	public function testBackendHashGeneration()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_username' => 'k.jones', 'be_password' => 'kevinjones'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'generateHash')
+		);
+
+		$varResult = json_decode($strResult);
+
+		$this->assertInternalType('string', $varResult->result);
+
+		$strHash = $varResult->result;
+
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_hash' => $strHash),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertNotEquals($strResult, 'Access Denied');
+	}
+
 	public function testFrontendWrongAuthentication()
 	{
 		$strResult = rpcRequest(
@@ -240,5 +263,28 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals($strResult, 'Access Denied');
 	}
 	*/
+
+	public function testFrontendHashGeneration()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_username' => 'j.smith', 'fe_password' => 'johnsmith'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'generateHash')
+		);
+
+		$varResult = json_decode($strResult);
+
+		$this->assertInternalType('string', $varResult->result);
+
+		$strHash = $varResult->result;
+
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_hash' => $strHash),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
+		);
+
+		$this->assertNotEquals($strResult, 'Access Denied');
+	}
 
 }
