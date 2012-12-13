@@ -99,12 +99,12 @@ class Runner extends \System
 			$objAuthenticator = new $strAuthenticatorClass();
 			$intTest = $objAuthenticator->authenticate();
 
-			if ($intTest == IRpcAuthenticator::AUTH_FAILED)
+			if ($intTest === IRpcAuthenticator::AUTH_FAILED)
 			{
 				// Abort on a failed authentication.
 				header('HTTP/1.1 403 Access Denied');
 				die('Access Denied');
-			} elseif ($intTest == IRpcAuthenticator::AUTH_SUCCESS)
+			} elseif ($intTest === IRpcAuthenticator::AUTH_SUCCESS)
 			{
 				define('RPC_AUTH', $objAuthenticator->getType());
 				break;

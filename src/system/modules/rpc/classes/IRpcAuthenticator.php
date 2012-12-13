@@ -15,11 +15,26 @@ namespace Contao\Rpc;
 interface IRpcAuthenticator
 {
 
+	/**
+	 *
+	 */
 	const AUTH_FAILED           = 0;
+	/**
+	 *
+	 */
 	const AUTH_SUCCESS          = 1;
+	/**
+	 *
+	 */
 	const AUTH_NOT_RESPONSIBLE  = 2;
 
+	/**
+	 * @return mixed
+	 */
 	public function authenticate();
 
+	/**
+	 * @return mixed
+	 */
 	public function getType();
 }
