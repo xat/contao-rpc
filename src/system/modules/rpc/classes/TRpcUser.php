@@ -160,6 +160,8 @@ trait TRpcUser
 	 */
 	public function generateHash()
 	{
+		// TODO: Stop Hash pollution (Delete old Session and think about an own $strCookie name).
+
 		$time = time();
 
 		$this->strHash = sha1(session_id()  . $this->strCookie);
