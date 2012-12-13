@@ -49,13 +49,12 @@ class Runner extends \System
 		if ($this->Input->post('decrypt', false) && isset($GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')]))
 		{
 			$strDecrypterClass = $GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')];
-			$this->import($strDecrypterClass);
 
 			foreach ($GLOBALS['RPC']['decrypted_fields'] as $strField)
 			{
 				if ($strVal = $this->Input->post($strField, false))
 				{
-					$this->Input->setPost($strField, $this->$strDecrypterClass->decrypt($strVal));
+					$this->Input->setPost($strField, $strDecrypterClass::decrypt($strVal));
 				}
 			}
 		}
@@ -81,7 +80,6 @@ class Runner extends \System
 
 		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
 
-		// TODO: Authentication takes place here.
 		// Authentication is separated from the actual remote method calls.
 		// This means, there is only one authentication by each HTTP Request, even if we
 		// receive a batch of RPC calls.
@@ -113,6 +111,8 @@ class Runner extends \System
 			}
 		}
 
+		// TODO: Somehow this if sucks. Find a better way.
+
 		if (!defined('RPC_AUTH'))
 		{
 			define('RPC_AUTH', 'NONE');
@@ -123,7 +123,7 @@ class Runner extends \System
 		// Each RPC call gets its own RpcRequest and its
 		// own RpcResponse object.
 
-		$arrPairs    = $objProvider->decode($this->Input->post('rpc'));
+		$arrPairs = $objProvider->decode($this->Input->post('rpc'));
 
 		// loop through all incoming RPC Requests
 		// and proceed them
@@ -147,12 +147,17 @@ class Runner extends \System
 
 		$strResponse = $objProvider->encode($arrPairs);
 
-		// TODO: If the Client wants encryption of the response we must do it here,
+		// If the Client wants encryption of the response we must do it here,
 		// before the response gets sent back to the client.
 		// Encrypters are defined in $GLOBALS['RPC']['encrypters'][<encryterName>] and
 		// implement the IRpcEncrypter Interface.
 		// We know if the Response should be encrypted if the POST field 'encrypt' is
 		// set to an Encryption Handler defined within $GLOBALS['RPC']['encrypters'][<encrypterName>]
+
+		if ($this->Input->post('encrypt', false) && isset($GLOBALS['RPC']['encrypters'][$this->Input->post('encrypt')]))
+		{
+			$strResponse = $GLOBALS['RPC']['encrypters'][$this->Input->post('encrypt')]::encrypt($strResponse);
+		}
 
 		echo $strResponse;
 	}
