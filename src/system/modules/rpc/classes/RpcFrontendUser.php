@@ -17,5 +17,7 @@ class RpcFrontendUser extends \FrontendUser
 
 	use TRpcUser;
 
+	protected $strHashName = 'FE_RPC_AUTH';
+
 	public function __destruct() {}
 }

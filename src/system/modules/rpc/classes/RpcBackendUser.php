@@ -27,7 +27,7 @@ class RpcBackendUser extends \BackendUser
 	 *
 	 * @var string
 	 */
-	//protected $strCookie = 'RPC_USER_AUTH';
+	protected $strHashName = 'BE_RPC_AUTH';
 
 
 	/**

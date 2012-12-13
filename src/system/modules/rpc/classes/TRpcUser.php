@@ -88,11 +88,18 @@ trait TRpcUser
 	 */
 	public function authenticateWithHash($strHash)
 	{
-		$objSession = \SessionModel::findByHashAndName($strHash, $this->strCookie);
+		$objSession = \SessionModel::findByHashAndName($strHash, $this->strHashName);
 
 		if (!isset($objSession->hash))
 		{
-			return false;
+			// We also want to provide users Access with an BE_USER_AUTH or FE_USER_AUTH hash
+
+			$objSession = \SessionModel::findByHashAndName($strHash, $this->strCookie);
+
+			if (!isset($objSession->hash))
+			{
+				return false;
+			}
 		}
 
 		$this->intId = $objSession->pid;
@@ -160,11 +167,9 @@ trait TRpcUser
 	 */
 	public function generateHash()
 	{
-		// TODO: Stop Hash pollution (Delete old Session and think about an own $strCookie name).
-
 		$time = time();
 
-		$this->strHash = sha1(session_id()  . $this->strCookie);
+		$this->strHash = sha1(session_id()  . $this->strHashName);
 
 		// Clean up old sessions
 		$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
@@ -172,7 +177,7 @@ trait TRpcUser
 
 		// Save the session in the database
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-			->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
+			->execute($this->intId, $time, $this->strHashName, session_id(), $this->strIp, $this->strHash);
 
 		// Save the login status
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
