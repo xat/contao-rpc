@@ -24,7 +24,9 @@ $GLOBALS['RPC'] = array
 		'backend_credentials' => '\Contao\Rpc\RpcBeCredentialsAuthenticator',
 		'frontend_credentials' => '\Contao\Rpc\RpcFeCredentialsAuthenticator',
 		'backend_apikey' => '\Contao\Rpc\RpcBeApikeyAuthenticator',
-		'frontend_apikey' => '\Contao\Rpc\RpcFeApikeyAuthenticator'
+		'frontend_apikey' => '\Contao\Rpc\RpcFeApikeyAuthenticator',
+		'backend_hash' => '\Contao\Rpc\RpcBeHashAuthenticator',
+		'frontend_hash' => '\Contao\Rpc\RpcFeHashAuthenticator'
 	),
 
 	'encrypters' => array

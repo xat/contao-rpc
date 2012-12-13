@@ -37,5 +37,9 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcFeApikeyAuthenticator' => 'system/modules/rpc/classes/RpcFeApikeyAuthenticator.php',
 	'Contao\Rpc\RpcApikeyAuthenticator' => 'system/modules/rpc/classes/RpcApikeyAuthenticator.php',
 
+	'Contao\Rpc\RpcBeHashAuthenticator' => 'system/modules/rpc/classes/RpcBeHashAuthenticator.php',
+	'Contao\Rpc\RpcFeHashAuthenticator' => 'system/modules/rpc/classes/RpcFeHashAuthenticator.php',
+	'Contao\Rpc\RpcHashAuthenticator' => 'system/modules/rpc/classes/RpcHashAuthenticator.php',
+
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
 ));

@@ -90,7 +90,7 @@ trait TRpcUser
 	{
 		$objSession = \SessionModel::findByHashAndName($strHash, $this->strCookie);
 
-		if ($objSession->numRows < 1)
+		if (!isset($objSession->hash))
 		{
 			return false;
 		}
@@ -106,14 +106,14 @@ trait TRpcUser
 		$objSession->tstamp = time();
 		$objSession->save();
 
-		if (session_id() != $objSession->SessionID)
+		if (session_id() != $objSession->sessionID)
 		{
 			// Destroy any previous Session
 			session_destroy();
 
 			// Since RPC Clients (normally) dont have Cookies where an SESSION-ID could be
 			// stored in we have to recreate Sessions by our own.
-			session_id($objSession->SessionID);
+			session_id($objSession->sessionID);
 
 			// go for it.
 			session_start();
