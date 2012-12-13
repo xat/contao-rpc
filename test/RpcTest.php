@@ -251,7 +251,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($strResult, 'Access Denied');
 	}
 
-
+/*
 	public function testFrontendCorrectHashAuthentication()
 	{
 		$strResult = rpcRequest(
@@ -262,7 +262,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 
 		$this->assertNotEquals($strResult, 'Access Denied');
 	}
-
+*/
 
 	public function testFrontendHashGeneration()
 	{

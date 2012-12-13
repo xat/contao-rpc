@@ -125,17 +125,6 @@ class Runner extends \System
 
 		$arrPairs    = $objProvider->decode($this->Input->post('rpc'));
 
-		// there was an error before an request/response pair
-		// could even be created. We will just return an Error response
-		if ($arrPairs instanceof RpcResponse)
-		{
-			$strResponse = $objProvider->encode($arrPairs);
-			// TODO: Do encryption, if required.
-
-			echo $strResponse;
-			return;
-		}
-
 		// loop through all incoming RPC Requests
 		// and proceed them
 		foreach ($arrPairs as $objPair)
@@ -145,7 +134,7 @@ class Runner extends \System
 				// TODO: here we must check if the current User
 				// has access to this RPC Method
 
-				$arrRpc          = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
+				$arrRpc = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 
 				// Run the actual RPC Method and pass in
 				// an Request and an Response object

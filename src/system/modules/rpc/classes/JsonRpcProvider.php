@@ -55,14 +55,14 @@ class JsonRpcProvider extends \System implements IRpcProvider
 
 		if (!$strRpc)
 		{
-			return (new RpcResponse())->setErrorType(RpcResponse::PARSE_ERROR);
+			return array($this->createErrorPair(RpcResponse::PARSE_ERROR));
 		}
 
 		$varRpc = json_decode($strRpc);
 
 		if ($varRpc == NULL)
 		{
-			return (new RpcResponse())->setErrorType(RpcResponse::PARSE_ERROR);
+			return array($this->createErrorPair(RpcResponse::PARSE_ERROR));
 		}
 
 		if (!is_array($varRpc))
@@ -147,11 +147,18 @@ class JsonRpcProvider extends \System implements IRpcProvider
 	 *
 	 * @param Object
 	 */
-	protected function pairToJsonRpcObj($objRequest, $objResponse)
+	protected function pairToJsonRpcObj($objRequest = null, $objResponse)
 	{
 		$obj = new \stdClass();
 		$obj->jsonrpc = '2.0';
-		$obj->id = $objRequest->getId();
+
+		if (is_null($objRequest))
+		{
+			$obj->id = null;
+		} else
+		{
+			$obj->id = $objRequest->getId();
+		}
 
 		// Check if it's a error response
 		if ($arrError = $objResponse->getError())
@@ -167,4 +174,11 @@ class JsonRpcProvider extends \System implements IRpcProvider
 		return $obj;
 	}
 
+
+	protected function createErrorPair($intErrorType)
+	{
+		$objPair = new \stdClass();
+		$objPair->response  = (new RpcResponse())->setErrorType($intErrorType);
+		return $objPair;
+	}
 }
