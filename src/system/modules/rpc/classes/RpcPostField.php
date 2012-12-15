@@ -10,17 +10,8 @@
  * @copyright Simon Kusterer 2012
  */
 
-namespace Contao\Rpc;
-
-interface IRpcAuthenticator
+class RpcPostField implements IRpcField
 {
-	/**
-	 * @return mixed
-	 */
-	public function authenticate();
 
-	/**
-	 * @return mixed
-	 */
-	public function getType();
+
 }

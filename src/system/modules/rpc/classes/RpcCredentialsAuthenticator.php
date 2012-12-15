@@ -12,40 +12,34 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthenticator
+abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthenticator, IRpcResponsible
 {
 
 	/**
 	 * @var string
 	 */
-	protected $strUsernameField = 'be_username';
+	static $strUsernameField = 'be_username';
 
 	/**
 	 * @var string
 	 */
-	protected $strPasswordField = 'be_password';
+	static $strPasswordField = 'be_password';
 
 	/**
-	 * @return int
+	 * @return boolean
 	 */
 	public function authenticate()
 	{
 		$this->import('Input');
 
-		if (!$this->Input->post($this->strUsernameField, false) || !$this->Input->post($this->strPasswordField, false))
-		{
-			return self::AUTH_NOT_RESPONSIBLE;
-		}
-
 		$objRpcUser = $this->getUser();
 
 		if ($objRpcUser->authenticateWithCredentials($this->Input->post($this->strUsernameField), $this->Input->post($this->strPasswordField)))
 		{
-			return self::AUTH_SUCCESS;
-		} else
-		{
-			return self::AUTH_FAILED;
+			return true;
 		}
+
+		return false;
 	}
 
 	/**
@@ -61,4 +55,20 @@ abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthen
 		return $this->strType;
 	}
 
+	/**
+	 * Checks if this Object is responsible
+	 *
+	 * @return boolean
+	 */
+	public function isResponsible()
+	{
+		$this->import('Input');
+
+		if (!$this->Input->post($this->strUsernameField, false) || !$this->Input->post($this->strPasswordField, false))
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

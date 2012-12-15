@@ -9,18 +9,12 @@
  * @license   LGPL
  * @copyright Simon Kusterer 2012
  */
-
-namespace Contao\Rpc;
-
-interface IRpcAuthenticator
+class RpcProviderManager
 {
-	/**
-	 * @return mixed
-	 */
-	public function authenticate();
 
-	/**
-	 * @return mixed
-	 */
-	public function getType();
+	static public function findResponsible()
+	{
+
+	}
+
 }

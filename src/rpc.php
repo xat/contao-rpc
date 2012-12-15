@@ -97,14 +97,18 @@ class Runner extends \System
 		foreach ($GLOBALS['RPC']['authenticators'] as $strAuthenticatorClass)
 		{
 			$objAuthenticator = new $strAuthenticatorClass();
-			$intTest = $objAuthenticator->authenticate();
 
-			if ($intTest === IRpcAuthenticator::AUTH_FAILED)
+			if (!$objAuthenticator->isResponsible())
+			{
+				continue;
+			}
+
+			if (!$objAuthenticator->authenticate())
 			{
 				// Abort on a failed authentication.
 				header('HTTP/1.1 403 Access Denied');
 				die('Access Denied');
-			} elseif ($intTest === IRpcAuthenticator::AUTH_SUCCESS)
+			} else
 			{
 				define('RPC_AUTH', $objAuthenticator->getType());
 				break;

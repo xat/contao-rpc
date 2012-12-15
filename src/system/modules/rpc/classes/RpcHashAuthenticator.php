@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcHashAuthenticator extends \System implements IRpcAuthenticator
+abstract class RpcHashAuthenticator extends \System implements IRpcAuthenticator, IRpcResponsible
 {
 
 	/**
@@ -20,29 +20,22 @@ abstract class RpcHashAuthenticator extends \System implements IRpcAuthenticator
 	 */
 	protected $strHashField = 'be_hash';
 
-	/**
 
 	/**
-	 * @return int
+	 * @return boolean
 	 */
 	public function authenticate()
 	{
 		$this->import('Input');
 
-		if (!$this->Input->post($this->strHashField, false))
-		{
-			return self::AUTH_NOT_RESPONSIBLE;
-		}
-
 		$objRpcUser = $this->getUser();
 
 		if ($objRpcUser->authenticateWithHash($this->Input->post($this->strHashField)))
 		{
-			return self::AUTH_SUCCESS;
-		} else
-		{
-			return self::AUTH_FAILED;
+			return true;
 		}
+
+		return false;
 	}
 
 	/**
@@ -58,4 +51,18 @@ abstract class RpcHashAuthenticator extends \System implements IRpcAuthenticator
 		return $this->strType;
 	}
 
+	/**
+	 * Checks if this Object is responsible
+	 *
+	 * @return boolean
+	 */
+	public function isResponsible()
+	{
+		if (!$this->Input->post($this->strHashField, false))
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

@@ -12,15 +12,14 @@
 
 namespace Contao\Rpc;
 
-interface IRpcAuthenticator
+interface IRpcResponsible
 {
-	/**
-	 * @return mixed
-	 */
-	public function authenticate();
 
 	/**
-	 * @return mixed
+	 * Checks if this Object is responsible
+	 *
+	 * @return boolean
 	 */
-	public function getType();
+	public function isResponsible();
+
 }

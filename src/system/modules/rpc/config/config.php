@@ -16,7 +16,34 @@ $GLOBALS['RPC'] = array
 (
 	'providers' => array
 	(
-		'json'  => '\Contao\Rpc\JsonRpcProvider'
+		'json'  => array
+		(
+			'call' => '\Contao\Rpc\JsonRpcProvider',
+
+
+
+			'input' => array
+			(
+				'post' => array
+				(
+					'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
+					'default' => '\Contao\Rpc\RpcPostField',
+					'fields' => array
+					(
+					)
+				)
+			),
+
+			'encrypters' => array
+			(
+
+			),
+
+			'decrypters' => array
+			(
+
+			)
+		),
 	),
 
 	'authenticators' => array
@@ -28,18 +55,6 @@ $GLOBALS['RPC'] = array
 		'backend_hash' => '\Contao\Rpc\RpcBeHashAuthenticator',
 		'frontend_hash' => '\Contao\Rpc\RpcFeHashAuthenticator'
 	),
-
-	'encrypters' => array
-	(
-
-	),
-
-	'decrypters' => array
-	(
-
-	),
-
-	'decrypted_fields' => array(  'rpc', 'fetoken', 'feusername', 'fehash', 'feapikey', 'fepassword', 'beusername', 'bepassword', 'beusername', 'bepassword', 'behash', 'beapikey'),
 
 	'methods' => array
 	(

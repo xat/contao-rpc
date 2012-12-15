@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcApikeyAuthenticator extends \System implements IRpcAuthenticator
+abstract class RpcApikeyAuthenticator extends \System implements IRpcAuthenticator, IRpcResponsible
 {
 
 	/**
@@ -21,26 +21,20 @@ abstract class RpcApikeyAuthenticator extends \System implements IRpcAuthenticat
 	protected $strApikeyField = 'be_apikey';
 
 	/**
-	 * @return int
+	 * @return boolean
 	 */
 	public function authenticate()
 	{
 		$this->import('Input');
 
-		if (!$this->Input->post($this->strApikeyField, false))
-		{
-			return self::AUTH_NOT_RESPONSIBLE;
-		}
-
 		$objRpcUser = $this->getUser();
 
 		if ($objRpcUser->authenticateWithApikey($this->Input->post($this->strApikeyField)))
 		{
-			return self::AUTH_SUCCESS;
-		} else
-		{
-			return self::AUTH_FAILED;
+			return true;
 		}
+
+		return false;
 	}
 
 	/**
@@ -56,4 +50,20 @@ abstract class RpcApikeyAuthenticator extends \System implements IRpcAuthenticat
 		return $this->strType;
 	}
 
+	/**
+	 * Checks if this Object is responsible
+	 *
+	 * @return boolean
+	 */
+	public function isResponsible()
+	{
+		$this->import('Input');
+
+		if (!$this->Input->post($this->strApikeyField, false))
+		{
+			return false;
+		}
+
+		return true;
+	}
 }
