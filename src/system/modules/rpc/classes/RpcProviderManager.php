@@ -15,6 +15,14 @@ class RpcProviderManager
 	static public function findResponsible()
 	{
 
+		foreach($GLOBALS['RPC']['providers'] as $strProvider => $arrProviderMeta)
+		{
+
+
+		}
+
+		// If Found: Return the Provider Instance, otherwise null
+
 	}
 
 }
