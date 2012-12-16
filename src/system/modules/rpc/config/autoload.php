@@ -15,19 +15,37 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\Rpc\BasicRpcRuntime' => 'system/modules/rpc/classes/BasicRpcRuntime.php',
+
+	'Contao\Rpc\RpcRunner' => 'system/modules/rpc/classes/RpcRunner.php',
+
+	'Contao\Rpc\IRpcDecoder' => 'system/modules/rpc/classes/IRpcDecoder.php',
+	'Contao\Rpc\IRpcEncoder' => 'system/modules/rpc/classes/IRpcEncoder.php',
 	'Contao\Rpc\IRpcDecrypter' => 'system/modules/rpc/classes/IRpcDecrypter.php',
 	'Contao\Rpc\IRpcEncrypter' => 'system/modules/rpc/classes/IRpcEncrypter.php',
-	'Contao\Rpc\IRpcRuntime' => 'system/modules/rpc/classes/IRpcRuntime.php',
-	'Contao\Rpc\JsonRpcProvider' => 'system/modules/rpc/classes/JsonRpcProvider.php',
+	'Contao\Rpc\JsonRpcDecoder' => 'system/modules/rpc/classes/JsonRpcDecoder.php',
+	'Contao\Rpc\JsonRpcEncoder' => 'system/modules/rpc/classes/JsonRpcEncoder.php',
+	'Contao\Rpc\SetupFactory' => 'system/modules/rpc/classes/SetupFactory.php',
+	'Contao\Rpc\TRpcSetup' => 'system/modules/rpc/classes/TRpcSetup.php',
+
 	'Contao\Rpc\JsonRpcRequest' => 'system/modules/rpc/classes/JsonRpcRequest.php',
 	'Contao\Rpc\RpcBackendUser' => 'system/modules/rpc/classes/RpcBackendUser.php',
 	'Contao\Rpc\RpcFrontendUser' => 'system/modules/rpc/classes/RpcFrontendUser.php',
 	'Contao\Rpc\IRpcProvider' => 'system/modules/rpc/classes/IRpcProvider.php',
-	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\RpcResponse' => 'system/modules/rpc/classes/RpcResponse.php',
 	'Contao\Rpc\TRpcUser' => 'system/modules/rpc/classes/TRpcUser.php',
 
+	'Contao\Rpc\IRpcField' => 'system/modules/rpc/classes/IRpcField.php',
+	'Contao\Rpc\RpcPostField' => 'system/modules/rpc/classes/RpcPostField.php',
+	'Contao\Rpc\IRpcInput' => 'system/modules/rpc/classes/IRpcInput.php',
+	'Contao\Rpc\RpcBasicInput' => 'system/modules/rpc/classes/RpcBasicInput.php',
+	'Contao\Rpc\IRpcOutput' => 'system/modules/rpc/classes/IRpcOutput.php',
+	'Contao\Rpc\RpcBasicOutput' => 'system/modules/rpc/classes/RpcBasicOutput.php',
+	'Contao\Rpc\IRpcResponsible' => 'system/modules/rpc/classes/IRpcResponsible.php',
+	'Contao\Rpc\RpcBasicResponsibility' => 'system/modules/rpc/classes/RpcBasicResponsibility.php',
+	'Contao\Rpc\IRpcSetup' => 'system/modules/rpc/classes/IRpcSetup.php',
+
+	'Contao\Rpc\IRpcAuthenticate' => 'system/modules/rpc/classes/IRpcAuthenticate.php',
+	'Contao\Rpc\RpcBasicAuthentication' => 'system/modules/rpc/classes/RpcBasicAuthentication.php',
 	'Contao\Rpc\IRpcAuthenticator' => 'system/modules/rpc/classes/IRpcAuthenticator.php',
 	'Contao\Rpc\RpcBeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcBeCredentialsAuthenticator.php',
 	'Contao\Rpc\RpcFeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcFeCredentialsAuthenticator.php',
