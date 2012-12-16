@@ -21,7 +21,7 @@ require 'system/initialize.php';
 // Let's Rock!
 
 (new RpcRunner())
-	->findProvider() // Determ a suitable Provider
+	->find()         // Find a suitable Provider
 	->decrypt()      // Perform decryption
 	->authenticate() // Perform authentication
 	->decode()       // Decode the RPC Methods

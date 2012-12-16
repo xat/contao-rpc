@@ -46,7 +46,7 @@ class RpcRunner extends \System
 	/**
 	 * @return RpcRunner
 	 */
-	public function findProvider()
+	public function find()
 	{
 		$blnFoundProvider = false;
 
