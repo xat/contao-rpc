@@ -139,7 +139,7 @@ $GLOBALS['RPC'] = array
 
 			'output' => array
 			(
-				'class' => '\Contao\Rpc\RpcSimpleOutput',
+				'class' => '\Contao\Rpc\RpcBasicOutput',
 				'config' => array
 				(
 
