@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-class RpcRunner extends \System
+class RpcRunner
 {
 
 	/**
@@ -34,14 +34,6 @@ class RpcRunner extends \System
 	 * @var
 	 */
 	protected $strResponse;
-
-	/**
-	 * Make the constructor accesible
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
 
 	/**
 	 * @return RpcRunner
