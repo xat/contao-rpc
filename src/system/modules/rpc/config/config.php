@@ -34,7 +34,7 @@ $GLOBALS['RPC'] = array
 
 			'responsibility' => array
 			(
-				'class' => '\Contao\Rpc\RpcSimpleResponsibilityHandler',
+				'class' => '\Contao\Rpc\RpcBasicResponsibility',
 				'config' => array
 				(
 					'require' => array

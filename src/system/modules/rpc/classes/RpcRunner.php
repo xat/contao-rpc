@@ -54,8 +54,9 @@ class RpcRunner extends \System
 		{
 			$objInput           = SetupFactory::create($arrSettings['input']);
 			$objResponsibility  = SetupFactory::create($arrSettings['responsibility']);
+			$objResponsibility->setInput($objInput);
 
-			if ($objResponsibility->check($objInput))
+			if ($objResponsibility->isResponsible())
 			{
 				// This Provider seams to be responsible
 				$blnFoundProvider = true;

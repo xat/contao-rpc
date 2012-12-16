@@ -22,4 +22,11 @@ interface IRpcResponsible
 	 */
 	public function isResponsible();
 
+	/**
+	 * Set an Input Handler
+	 *
+	 * @return IRpcInput
+	 */
+	public function setInput(IRpcInput $objInput);
+
 }
