@@ -14,6 +14,13 @@ namespace Contao\Rpc;
 
 class RpcStandardMethods extends \System
 {
+	/**
+	 * Make the constructor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
 	/**
 	 * Generate a new Hash for the currently logged in user

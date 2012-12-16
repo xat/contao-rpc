@@ -26,7 +26,7 @@ abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSet
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithCredentials($this->objInput->get($this->arrConfig('username_field')), $this->objInput->get($this->arrConfig('password_field'))))
+		if ($objRpcUser->authenticateWithCredentials($this->objInput->get($this->arrConfig['username_field']), $this->objInput->get($this->arrConfig['password_field'])))
 		{
 			return true;
 		}
@@ -51,7 +51,7 @@ abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSet
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig('username_field')) || !$this->objInput->get($this->arrConfig('password_field')))
+		if (!$this->objInput->get($this->arrConfig['username_field']) || !$this->objInput->get($this->arrConfig['password_field']))
 		{
 			return false;
 		}

@@ -42,10 +42,11 @@ class RpcRunner
 	{
 		$blnFoundProvider = false;
 
-		foreach ($GLOBALS['providers'] as $arrSettings)
+		foreach ($GLOBALS['RPC']['providers'] as $arrSettings)
 		{
 			$objInput           = SetupFactory::create($arrSettings['input']);
 			$objResponsibility  = SetupFactory::create($arrSettings['responsibility']);
+
 			$objResponsibility->setInput($objInput);
 
 			if ($objResponsibility->isResponsible())
@@ -75,8 +76,8 @@ class RpcRunner
 	public function decrypt()
 	{
 		// perform decryption, if needed
-		$objDecryption  = SetupFactory::create($this->arrSettings['decryption']);
-		$objDecryption->decrypt($this->objInput);
+		//$objDecryption  = SetupFactory::create($this->arrSettings['decryption']);
+		//$objDecryption->decrypt($this->objInput);
 
 		return $this;
 	}
@@ -88,7 +89,8 @@ class RpcRunner
 	{
 		// perform authentication
 		$objAuthentication  = SetupFactory::create($this->arrSettings['authentication']);
-		if (!($strAuthType = $objAuthentication->authenticate($this->objInput)))
+		$objAuthentication->setInput($this->objInput);
+		if (!($strAuthType = $objAuthentication->authenticate()))
 		{
 			// Abort on a failed authentication.
 			header('HTTP/1.1 403 Access Denied');
@@ -106,6 +108,7 @@ class RpcRunner
 	public function decode()
 	{
 		$objDecoder = SetupFactory::create($this->arrSettings['decoder']);
+		$objDecoder->setInput($this->objInput);
 		$this->arrPairs = $objDecoder->decode();
 
 		return $this;
@@ -142,7 +145,6 @@ class RpcRunner
 	public function encode()
 	{
 		$objEncoder = SetupFactory::create($this->arrSettings['encoder']);
-
 		// transform all RPC Reponses into something
 		// we can send back to the user.
 		$this->strResponse = $objEncoder->encode($this->arrPairs);
@@ -156,8 +158,8 @@ class RpcRunner
 	public function encrypt()
 	{
 		// Run encryption, if needed
-		$objEncryption = SetupFactory::create($this->arrSettings['encryption']);
-		$this->strResponse = $objEncryption->encrypt($this->objInput, $this->strResponse);
+		//$objEncryption = SetupFactory::create($this->arrSettings['encryption']);
+		//$this->strResponse = $objEncryption->encrypt($this->objInput, $this->strResponse);
 
 		return $this;
 	}
@@ -169,7 +171,7 @@ class RpcRunner
 	public function output()
 	{
 		$objOutput = SetupFactory::create($this->arrSettings['output']);
-		$objOutput->send($this->strResponse);
+		$objOutput->output($this->strResponse);
 
 		return $this;
 	}

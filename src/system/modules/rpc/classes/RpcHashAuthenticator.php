@@ -26,7 +26,7 @@ abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithHash($this->objInput->get($this->arrConfig('hash_field'))))
+		if ($objRpcUser->authenticateWithHash($this->objInput->get($this->arrConfig['hash_field'])))
 		{
 			return true;
 		}
@@ -51,7 +51,7 @@ abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig('hash_field')))
+		if (!$this->objInput->get($this->arrConfig['hash_field']))
 		{
 			return false;
 		}

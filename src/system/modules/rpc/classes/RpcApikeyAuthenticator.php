@@ -26,7 +26,7 @@ abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithApikey($this->objInput->get($this->arrConfig('apikey_field'))))
+		if ($objRpcUser->authenticateWithApikey($this->objInput->get($this->arrConfig['apikey_field'])))
 		{
 			return true;
 		}
@@ -51,7 +51,7 @@ abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig('apikey_field')))
+		if (!$this->objInput->get($this->arrConfig['apikey_field']))
 		{
 			return false;
 		}

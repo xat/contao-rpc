@@ -41,7 +41,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			array('provider' => 'json'),
 			array('method' => 'pong', 'jsonrpc' => '2.0')
 		);
-
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->error->message, 'Invalid Request');
 		$this->assertEquals($varResult->error->code, '-32600');

@@ -31,14 +31,15 @@ class SetupFactory
 			return false;
 		}
 
+		$obj = new $arrSettings['class']();
+
 		// If the class does not implement the IRpcSetup interface
 		// then return false.
-		if (!isset(class_implements($arrSettings['class'])['IRpcSetup']))
+		if (!($obj instanceof IRpcSetup))
 		{
 			return false;
 		}
 
-		$obj = new $arrSettings['class']();
 		$obj->setup($arrSettings['config']);
 
 		// Create an instance of

@@ -15,6 +15,14 @@ namespace Contao\Rpc;
 class RpcPostField extends \System implements IRpcField
 {
 	/**
+	 * Make Constructor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
 	 * Get a Value
 	 *
 	 * @param $strKey

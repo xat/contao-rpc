@@ -27,6 +27,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\SetupFactory' => 'system/modules/rpc/classes/SetupFactory.php',
 	'Contao\Rpc\TRpcSetup' => 'system/modules/rpc/classes/TRpcSetup.php',
 
+	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\JsonRpcRequest' => 'system/modules/rpc/classes/JsonRpcRequest.php',
 	'Contao\Rpc\RpcBackendUser' => 'system/modules/rpc/classes/RpcBackendUser.php',
 	'Contao\Rpc\RpcFrontendUser' => 'system/modules/rpc/classes/RpcFrontendUser.php',
