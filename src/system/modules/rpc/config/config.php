@@ -18,43 +18,133 @@ $GLOBALS['RPC'] = array
 	(
 		'json'  => array
 		(
-			'call' => '\Contao\Rpc\JsonRpcProvider'
-		),
-	),
 
-	'provider_defaults' => array
-	(
-		'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
+			'input' => array
+			(
+				'class' => '\Contao\Rpc\RpcSimpleInputHandler',
+				'config' => array
+				(
+					'default' => '\Contao\Rpc\RpcSimplePostField',
+					'fields' => array
+					(
+						// 'rpc' => '\Contao\Rpc\RpcRawPostField'
+					)
+				)
+			),
 
-		'field_setup' => 'post',
+			'responsibility' => array
+			(
+				'class' => '\Contao\Rpc\RpcSimpleResponsibilityHandler',
+				'config' => array
+				(
+					'require' => array
+					(
+						'provider' => 'json'
+					)
+				)
+			),
 
-		'encrypters' => array
-		(
+			'decryption' => array
+			(
+				'class' => '\Contao\Rpc\RpcSimpleDecryptionHandler',
+				'config' => array
+				(
+					'require' => array('decrypt'), // This field must be set for decryption to take place
+					'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
+					'decrypters' => array
+					(
 
-		),
+					)
+				)
+			),
 
-		'decrypters' => array
-		(
+			'authentication' => array
+			(
+				'class' => '\Contao\Rpc\RpcSimpleAuthenticationHandler',
+				'config' => array
+				(
+					'authenticators' => array
+					(
+						'backend_credentials' => array
+						(
+							'class' => '\Contao\Rpc\RpcBeCredentialsAuthenticator',
+							'config' => array
+							(
+								'username_field' => 'be_username',
+								'password_field' => 'be_password'
+							)
+						),
+						'frontend_credentials' => array
+						(
+							'class' => '\Contao\Rpc\RpcFeCredentialsAuthenticator',
+							'config' => array
+							(
+								'username_field' => 'fe_username',
+								'password_field' => 'fe_password'
+							)
+						),
+						'backend_apikey' => array
+						(
+							'class' => '\Contao\Rpc\RpcBeApikeyAuthenticator',
+							'config' => array
+							(
+								'apikey_field' => 'be_apikey'
+							)
+						),
+						'frontend_apikey' => array
+						(
+							'class' => '\Contao\Rpc\RpcFeApikeyAuthenticator',
+							'config' => array
+							(
+								'apikey_field' => 'fe_apikey'
+							)
+						),
+						'backend_hash' => array
+						(
+							'class' => '\Contao\Rpc\RpcBeHashAuthenticator',
+							'config' => array
+							(
+								'hash_field' => 'be_hash'
+							)
+						),
+						'frontend_hash' => array
+						(
+							'class' => '\Contao\Rpc\RpcFeHashAuthenticator',
+							'config' => array
+							(
+								'hash_field' => 'fe_hash'
+							)
+						)
+					)
+				)
+			),
 
-		),
+			'encoder' => array
+			(
+				'class' => '\Contao\Rpc\JsonRpcEncoder',
+				'config' => array
+				(
 
-		'authenticators' => array
-		(
-			'backend_credentials' => '\Contao\Rpc\RpcBeCredentialsAuthenticator',
-			'frontend_credentials' => '\Contao\Rpc\RpcFeCredentialsAuthenticator',
-			'backend_apikey' => '\Contao\Rpc\RpcBeApikeyAuthenticator',
-			'frontend_apikey' => '\Contao\Rpc\RpcFeApikeyAuthenticator',
-			'backend_hash' => '\Contao\Rpc\RpcBeHashAuthenticator',
-			'frontend_hash' => '\Contao\Rpc\RpcFeHashAuthenticator'
-		)
-	),
+				)
+			),
 
-	'field_setups' => array
-	(
-		'post' => array
-		(
-			'default' => '\Contao\Rpc\RpcPostField',
-			'fields' => array()
+			'decoder' => array
+			(
+				'class' => '\Contao\Rpc\JsonRpcDecoder',
+				'config' => array
+				(
+
+				)
+			),
+
+			'output' => array
+			(
+				'class' => '\Contao\Rpc\RpcSimpleOutput',
+				'config' => array
+				(
+
+				)
+			)
 		)
 	),
 

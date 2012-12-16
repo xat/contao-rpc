@@ -12,8 +12,15 @@
 
 namespace Contao\Rpc;
 
-class RpcPostField implements IRpcField
+interface IRpcSetup
 {
 
+	/**
+	 * Configure with an Setup-Array
+	 *
+	 * @param $arrConfig
+	 * @return void
+	 */
+	public function setup($arrConfig);
 
 }

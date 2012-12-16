@@ -14,6 +14,13 @@ namespace Contao\Rpc;
 
 interface IRpcProvider
 {
+
+	/**
+	 * @param $arrConfig
+	 * @return mixed
+	 */
+	public function setup($arrConfig);
+
 	/**
 	 * Creates a Response String that
 	 * can be sent back to the client
@@ -30,6 +37,12 @@ interface IRpcProvider
 	 *
 	 * @return array
 	 */
-	public function decode($strRaw);
+	public function decode();
+
+	/**
+	 * @return boolean
+	 */
+	public function isResponsible();
+
 
 }

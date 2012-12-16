@@ -18,12 +18,12 @@ abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthen
 	/**
 	 * @var string
 	 */
-	static $strUsernameField = 'be_username';
+	protected $strUsernameField = 'be_username';
 
 	/**
 	 * @var string
 	 */
-	static $strPasswordField = 'be_password';
+	protected $strPasswordField = 'be_password';
 
 	/**
 	 * @return boolean

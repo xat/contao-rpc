@@ -38,96 +38,46 @@ class Runner extends \System
 	 */
 	public function run()
 	{
-		$this->import('Input');
+		$blnFoundProvider = false;
 
-		// TODO: Here we must perform decryption, if the client has encrypted his request
-		// We know if we must decrypt stuff if there is an POST field 'decrypt' with
-		// an value which indicates what decrypter should be used. Decrypters
-		// are defined in $GLOBALS['RPC']['decrypters'][<decrypterName>] and
-		// implement the IRpcDecrypter Interface.
-
-		if ($this->Input->post('decrypt', false) && isset($GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')]))
+		foreach ($GLOBALS['providers'] as $arrSettings)
 		{
-			$strDecrypterClass = $GLOBALS['RPC']['decrypters'][$this->Input->post('decrypt')];
+			$objInput           = SetupFactory::create($arrSettings['input']);
+			$objResponsibility  = SetupFactory::create($arrSettings['responsibility']);
 
-			foreach ($GLOBALS['RPC']['decrypted_fields'] as $strField)
+			if ($objResponsibility->check($objInput))
 			{
-				if ($strVal = $this->Input->post($strField, false))
-				{
-					$this->Input->setPost($strField, $strDecrypterClass::decrypt($strVal));
-				}
-			}
-		}
-
-		$strProvider = $this->Input->post('provider');
-
-		// There must be an parameter 'provider' set
-		if (!isset($GLOBALS['RPC']['providers'][$strProvider]))
-		{
-			header('HTTP/1.1 400 Bad Request');
-			die('Bad Request');
-		}
-
-		// A Provider defines a way how to encode/decode Requests.
-		// Our default Provider is able to encode and decode JSON-RPC.
-		// It should be easy to also create an XML-RPC Provider.
-		// However: It wont be possible to implement ALL RPC Mechanisms
-		// availible out there with this simple abstraction. Therefor
-		// the remote methods would need to know the current RPC Mechanism used
-		// to add metadata used by that specific RPC Mechanism.
-		// And we dont want that. The RPC Methods should work without them knowing
-		// from within which RPC Mechanism they are called.
-
-		$objProvider = new $GLOBALS['RPC']['providers'][$strProvider]();
-
-		// Authentication is separated from the actual remote method calls.
-		// This means, there is only one authentication by each HTTP Request, even if we
-		// receive a batch of RPC calls.
-		// RPC-Users can be Contao-Users AND/OR-Members in general, if
-		// they have the permissions to use certain Remote Methods.
-		// Permissions can be defined in the Contao Backend.
-
-		// Authentication can be performed in 3 ways:
-
-		// 1. By sending Username and Password.
-		// 2. By sending an APIKEY (which can be defined in the backend on a per-User/Member base)
-		// 3. By sending an Hash (=Token).
-		// Basicly an hash is the same thing that also gets stored in the FE_USER_AUTH / BE_USER_AUTH cookies.
-
-		foreach ($GLOBALS['RPC']['authenticators'] as $strAuthenticatorClass)
-		{
-			$objAuthenticator = new $strAuthenticatorClass();
-
-			if (!$objAuthenticator->isResponsible())
-			{
-				continue;
-			}
-
-			if (!$objAuthenticator->authenticate())
-			{
-				// Abort on a failed authentication.
-				header('HTTP/1.1 403 Access Denied');
-				die('Access Denied');
-			} else
-			{
-				define('RPC_AUTH', $objAuthenticator->getType());
+				// This Provider seams to be responsible
+				$blnFoundProvider = true;
 				break;
 			}
 		}
 
-		// TODO: Somehow this if sucks. Find a better way.
-
-		if (!defined('RPC_AUTH'))
+		if (!$blnFoundProvider)
 		{
-			define('RPC_AUTH', 'NONE');
+			// No Provider found. abort.
+			header('HTTP/1.1 400 Bad Request');
+			die('Bad Request');
 		}
 
-		// decode() Takes an raw input string and
-		// creates a bunch of RpcRequest/RpcResponse Objects.
-		// Each RPC call gets its own RpcRequest and its
-		// own RpcResponse object.
+		// perform decryption, if needed
+		$objDecryption  = SetupFactory::create($arrSettings['decryption']);
+		$objDecryption->decrypt($objInput);
 
-		$arrPairs = $objProvider->decode($this->Input->post('rpc'));
+		// perform authentication
+		$objAuthentication  = SetupFactory::create($arrSettings['authentication']);
+
+		if (!($strAuthType = $objAuthentication->authenticate($objInput)))
+		{
+			// Abort on a failed authentication.
+			header('HTTP/1.1 403 Access Denied');
+			die('Access Denied');
+		}
+
+		define('RPC_AUTH', $strAuthType);
+
+		$objDecoder = SetupFactory::create($arrSettings['decoder']);
+		$arrPairs = $objDecoder->decode();
 
 		// loop through all incoming RPC Requests
 		// and proceed them
@@ -146,24 +96,18 @@ class Runner extends \System
 			}
 		}
 
-		// transform all reponses into something
+		$objEncoder = SetupFactory::create($arrSettings['encoder']);
+
+		// transform all RPC Reponses into something
 		// we can send back to the user.
+		$strResponse = $objEncoder->encode($arrPairs);
 
-		$strResponse = $objProvider->encode($arrPairs);
+		// Run encryption, if needed
+		$objEncryption = SetupFactory::create($arrSettings['encryption']);
+		$strResponse = $objEncryption->encrypt($objInput, $strResponse);
 
-		// If the Client wants encryption of the response we must do it here,
-		// before the response gets sent back to the client.
-		// Encrypters are defined in $GLOBALS['RPC']['encrypters'][<encryterName>] and
-		// implement the IRpcEncrypter Interface.
-		// We know if the Response should be encrypted if the POST field 'encrypt' is
-		// set to an Encryption Handler defined within $GLOBALS['RPC']['encrypters'][<encrypterName>]
-
-		if ($this->Input->post('encrypt', false) && isset($GLOBALS['RPC']['encrypters'][$this->Input->post('encrypt')]))
-		{
-			$strResponse = $GLOBALS['RPC']['encrypters'][$this->Input->post('encrypt')]::encrypt($strResponse);
-		}
-
-		echo $strResponse;
+		$objOutput = SetupFactory::create($arrSettings['output']);
+		$objOutput->send($strResponse);
 	}
 
 }

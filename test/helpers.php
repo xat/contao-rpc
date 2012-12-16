@@ -17,11 +17,11 @@ function rpcRequest($url, $postFields = array(), $data = null)
 	{
 		if (is_assoc($data))
 		{
-			$postFields['rpc'] =  json_encode(array_to_object($data));
+			$postFields['rpc'] =  json_encode((object)($data));
 		} else {
 			foreach ($data as $k => $val)
 			{
-				$data[$k] = array_to_object($val);
+				$data[$k] = (object)($val);
 			}
 			$postFields['rpc'] = json_encode($data);
 		}
@@ -34,18 +34,6 @@ function rpcRequest($url, $postFields = array(), $data = null)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$result = curl_exec($ch);
 	return $result;
-}
-
-function array_to_object($array)
-{
-	$obj = new stdClass;
-
-	foreach($array as $k => $v)
-	{
-		$obj->{$k} = $v;
-	}
-
-	return $obj;
 }
 
 function is_assoc ($arr)

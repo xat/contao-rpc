@@ -12,8 +12,14 @@
 
 namespace Contao\Rpc;
 
-class RpcPostField implements IRpcField
+class RpcFieldSetup
 {
 
+
+
+	public function __construct($strSetup)
+	{
+
+	}
 
 }
