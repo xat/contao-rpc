@@ -14,6 +14,10 @@ namespace Contao\Rpc;
 
 interface IRpcAuthenticator
 {
+	const TYPE_BACKEND  = 'BE';
+	const TYPE_FRONTEND = 'FE';
+	const TYPE_NONE     = 'NONE';
+
 	/**
 	 * @return mixed
 	 */
@@ -23,4 +27,17 @@ interface IRpcAuthenticator
 	 * @return mixed
 	 */
 	public function getType();
+
+	/**
+	 * @return boolean
+	 */
+	public function isResponsible();
+
+	/**
+	 * Set an Input Handler
+	 *
+	 * @param IRpcInput
+	 * @return mixed
+	 */
+	public function setInput(IRpcInput $objInput);
 }

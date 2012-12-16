@@ -60,7 +60,7 @@ $GLOBALS['RPC'] = array
 
 			'authentication' => array
 			(
-				'class' => '\Contao\Rpc\RpcSimpleAuthenticationHandler',
+				'class' => '\Contao\Rpc\RpcBasicAuthentication',
 				'config' => array
 				(
 					'authenticators' => array

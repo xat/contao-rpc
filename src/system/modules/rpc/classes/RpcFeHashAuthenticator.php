@@ -18,20 +18,18 @@ namespace Contao\Rpc;
 class RpcFeHashAuthenticator extends RpcHashAuthenticator
 {
 	/**
-	 * @var string
-	 */
-	protected $strHashField = 'fe_hash';
-
-	/**
-	 * @var string
-	 */
-	protected $strType = 'FE';
-
-	/**
 	 * @return mixed
 	 */
 	public function getUser()
 	{
 		return \Contao\Rpc\RpcFrontendUser::getInstance();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getType()
+	{
+		return IRpcAuthenticator::TYPE_FRONTEND;
 	}
 }

@@ -12,17 +12,11 @@
 
 namespace Contao\Rpc;
 
-// TODO: This classname sucks! Find a better one.
-
 /**
  *
  */
 class RpcBeCredentialsAuthenticator extends RpcCredentialsAuthenticator
 {
-	/**
-	 * @var string
-	 */
-	protected $strType = 'BE';
 
 	/**
 	 * @return mixed
@@ -30,5 +24,13 @@ class RpcBeCredentialsAuthenticator extends RpcCredentialsAuthenticator
 	public function getUser()
 	{
 		return \Contao\Rpc\RpcBackendUser::getInstance();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return IRpcAuthenticator::TYPE_BACKEND;
 	}
 }

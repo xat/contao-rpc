@@ -18,20 +18,18 @@ namespace Contao\Rpc;
 class RpcBeHashAuthenticator extends RpcHashAuthenticator
 {
 	/**
-	 * @var string
-	 */
-	protected $strApikeyField = 'be_hash';
-
-	/**
-	 * @var string
-	 */
-	protected $strType = 'BE';
-
-	/**
 	 * @return mixed
 	 */
 	public function getUser()
 	{
 		return \Contao\Rpc\RpcBackendUser::getInstance();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getType()
+	{
+		return IRpcAuthenticator::TYPE_BACKEND;
 	}
 }

@@ -12,33 +12,24 @@
 
 namespace Contao\Rpc;
 
-// TODO: This classname sucks! Find a better one.
-
 /**
  *
  */
 class RpcFeCredentialsAuthenticator extends RpcCredentialsAuthenticator
 {
 	/**
-	 * @var string
-	 */
-	protected $strType = 'FE';
-
-	/**
-	 * @var string
-	 */
-	protected $strUsernameField = 'fe_username';
-
-	/**
-	 * @var string
-	 */
-	protected $strPasswordField = 'fe_password';
-
-	/**
 	 * @return mixed
 	 */
 	public function getUser()
 	{
 		return \Contao\Rpc\RpcFrontendUser::getInstance();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return IRpcAuthenticator::TYPE_FRONTEND;
 	}
 }

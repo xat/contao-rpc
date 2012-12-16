@@ -18,15 +18,18 @@ namespace Contao\Rpc;
 class RpcBeApikeyAuthenticator extends RpcApikeyAuthenticator
 {
 	/**
-	 * @var string
-	 */
-	protected $strType = 'BE';
-
-	/**
 	 * @return mixed
 	 */
 	public function getUser()
 	{
 		return \Contao\Rpc\RpcBackendUser::getInstance();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getType()
+	{
+		return IRpcAuthenticator::TYPE_BACKEND;
 	}
 }

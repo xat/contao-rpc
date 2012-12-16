@@ -12,29 +12,21 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthenticator, IRpcResponsible
+abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSetup
 {
 
-	/**
-	 * @var string
-	 */
-	protected $strUsernameField = 'be_username';
+	use TRpcSetup;
 
-	/**
-	 * @var string
-	 */
-	protected $strPasswordField = 'be_password';
+	protected $objInput;
 
 	/**
 	 * @return boolean
 	 */
 	public function authenticate()
 	{
-		$this->import('Input');
-
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithCredentials($this->Input->post($this->strUsernameField), $this->Input->post($this->strPasswordField)))
+		if ($objRpcUser->authenticateWithCredentials($this->objInput->get($this->arrConfig('username_field')), $this->objInput->get($this->arrConfig('password_field'))))
 		{
 			return true;
 		}
@@ -50,10 +42,7 @@ abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthen
 	/**
 	 * @return mixed
 	 */
-	public function getType()
-	{
-		return $this->strType;
-	}
+	abstract public function getType();
 
 	/**
 	 * Checks if this Object is responsible
@@ -62,13 +51,22 @@ abstract class RpcCredentialsAuthenticator extends \System implements IRpcAuthen
 	 */
 	public function isResponsible()
 	{
-		$this->import('Input');
-
-		if (!$this->Input->post($this->strUsernameField, false) || !$this->Input->post($this->strPasswordField, false))
+		if (!$this->objInput->get($this->arrConfig('username_field')) || !$this->objInput->get($this->arrConfig('password_field')))
 		{
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Set an Input Handler
+	 *
+	 * @param IRpcInput
+	 * @return mixed
+	 */
+	public function setInput(IRpcInput $objInput)
+	{
+		$this->objInput = $objInput;
 	}
 }

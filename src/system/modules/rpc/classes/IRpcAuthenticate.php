@@ -12,25 +12,20 @@
 
 namespace Contao\Rpc;
 
-/**
- *
- */
-class RpcFeApikeyAuthenticator extends RpcApikeyAuthenticator
+interface IRpcAuthenticate
 {
 	/**
+	 * Run Authentication
+	 *
 	 * @return mixed
 	 */
-	public function getUser()
-	{
-		return \Contao\Rpc\RpcFrontendUser::getInstance();
-	}
+	public function authenticate();
 
 	/**
+	 * Set an Input Handler
+	 *
+	 * @param IRpcInput
 	 * @return mixed
 	 */
-	public function getType()
-	{
-		return IRpcAuthenticator::TYPE_FRONTEND;
-	}
-
+	public function setInput(IRpcInput $objInput);
 }
