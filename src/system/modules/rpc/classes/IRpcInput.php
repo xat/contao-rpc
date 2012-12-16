@@ -12,17 +12,23 @@
 
 namespace Contao\Rpc;
 
-class RpcPostField extends \System implements IRpcField
+interface IRpcInput
 {
 	/**
-	 * Get a Value
+	 * Get a value
 	 *
-	 * @param $strKey
+	 * @param string
 	 * @return mixed
 	 */
-	public function get($strKey)
-	{
-		$this->import('Input');
-		return $this->Input->post($strKey, false);
-	}
+	public function get($strKey);
+
+	/**
+	 * Set a value
+	 *
+	 * @param string
+	 * @param string
+	 * @return mixed
+	 */
+	public function set($strKey, $strVal);
+
 }

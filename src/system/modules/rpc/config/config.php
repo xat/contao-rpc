@@ -21,10 +21,10 @@ $GLOBALS['RPC'] = array
 
 			'input' => array
 			(
-				'class' => '\Contao\Rpc\RpcSimpleInputHandler',
+				'class' => '\Contao\Rpc\RpcBasicInput',
 				'config' => array
 				(
-					'default' => '\Contao\Rpc\RpcSimplePostField',
+					'default' => '\Contao\Rpc\RpcPostField',
 					'fields' => array
 					(
 						// 'rpc' => '\Contao\Rpc\RpcRawPostField'

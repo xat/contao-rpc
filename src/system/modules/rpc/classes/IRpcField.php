@@ -16,27 +16,11 @@ interface IRpcField
 {
 
 	/**
-	 *
+	 * Get a Value
 	 *
 	 * @param $strKey
 	 * @return mixed
 	 */
-	public function setup($strKey);
-
-	/**
-	 * @return mixed
-	 */
-	public function getValue();
-
-	/**
-	 * @param $strValue
-	 * @return mixed
-	 */
-	public function setValue($strValue);
-
-	/**
-	 * @return mixed
-	 */
-	public function getKey();
+	public function get($strKey);
 
 }
