@@ -12,15 +12,8 @@
 
 namespace Contao\Rpc;
 
-interface IRpcProvider
+interface IRpcEncoder
 {
-
-	/**
-	 * @param $arrConfig
-	 * @return mixed
-	 */
-	public function setup($arrConfig);
-
 	/**
 	 * Creates a Response String that
 	 * can be sent back to the client
@@ -29,20 +22,4 @@ interface IRpcProvider
 	 * @return string
 	 */
 	public function encode($arrPairs);
-
-	/**
-	 * Takes a raw Request and transforms it to
-	 * a Datastructure that can actually be used within
-	 * PHP.
-	 *
-	 * @return array
-	 */
-	public function decode();
-
-	/**
-	 * @return boolean
-	 */
-	public function isResponsible();
-
-
 }

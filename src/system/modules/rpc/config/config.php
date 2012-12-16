@@ -124,7 +124,7 @@ $GLOBALS['RPC'] = array
 				'class' => '\Contao\Rpc\JsonRpcEncoder',
 				'config' => array
 				(
-
+					'rpc_field' => 'rpc'
 				)
 			),
 

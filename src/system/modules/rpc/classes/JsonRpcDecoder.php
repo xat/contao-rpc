@@ -12,46 +12,38 @@
 
 namespace Contao\Rpc;
 
-/**
- *
- */
-class JsonRpcProvider extends \System implements IRpcProvider
+class JsonRpcDecoder implements IRpcDecoder, IRpcSetup
 {
+
+	protected $arrDefaults = array
+	(
+		'rpc_field' => 'rpc'
+	);
+
+	protected $objInput;
+
+	use TRpcSetup;
+
 	/**
-	 * Creates a Response String that
-	 * can be sent back to the client
+	 * Set an Input Processor
 	 *
-	 * @param array
-	 * @return string
+	 * @param object
+	 * @return void
 	 */
-	public function encode($arrPairs)
+	public function setInput($objInput)
 	{
-
-		$arrRpcObjects = array();
-
-		foreach ($arrPairs as $objPair)
-		{
-			$arrRpcObjects[] = $this->pairToJsonRpcObj($objPair->request, $objPair->response);
-		}
-
-		if (count($arrRpcObjects) == 1)
-		{
-			return json_encode($arrRpcObjects[0]);
-		}
-
-		return json_encode($arrRpcObjects);
+		$this->objInput = $objInput;
 	}
 
 	/**
-	 * Takes a raw Request and transforms it to
-	 * a Datastructure that can actually be used within
-	 * PHP.
+	 * Take something from anywhere and transform
+	 * it into valid RpcRequest/RpcResponse Pairs
 	 *
-	 * @param string
 	 * @return array
 	 */
-	public function decode($strRpc)
+	public function decode()
 	{
+		$strRpc = $this->objInput->get($this->arrConfig['rpc_field']);
 
 		if (!$strRpc)
 		{
@@ -141,40 +133,11 @@ class JsonRpcProvider extends \System implements IRpcProvider
 	}
 
 	/**
-	 * Transfrom a pair of $objRequest and
-	 * $objResponse into an simple object
-	 * which can be encoded into an JSON String
+	 * Create an Error Pair
 	 *
-	 * @param Object
+	 * @param $intErrorType
+	 * @return object
 	 */
-	protected function pairToJsonRpcObj($objRequest = null, $objResponse)
-	{
-		$obj = new \stdClass();
-		$obj->jsonrpc = '2.0';
-
-		if (is_null($objRequest))
-		{
-			$obj->id = null;
-		} else
-		{
-			$obj->id = $objRequest->getId();
-		}
-
-		// Check if it's a error response
-		if ($arrError = $objResponse->getError())
-		{
-			$obj->error = new \stdClass();
-			$obj->error->code = $arrError['code'];
-			$obj->error->message = $arrError['message'];
-		} else
-		{
-			$obj->result = $objResponse->getData();
-		}
-
-		return $obj;
-	}
-
-
 	protected function createErrorPair($intErrorType)
 	{
 		$objPair = new \stdClass();
