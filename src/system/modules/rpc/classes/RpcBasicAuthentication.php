@@ -12,12 +12,12 @@
 
 namespace Contao\Rpc;
 
-class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup
+class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup, IRpcSetInput
 {
 
 	use TRpcSetup;
 
-	protected $objInput;
+	use TRpcSetInput;
 
 	/**
 	 * Run Authentication
@@ -44,17 +44,6 @@ class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup
 		}
 
 		return IRpcAuthenticator::TYPE_NONE;
-	}
-
-	/**
-	 * Set an Input Handler
-	 *
-	 * @param IRpcInput
-	 * @return mixed
-	 */
-	public function setInput(IRpcInput $objInput)
-	{
-		$this->objInput = $objInput;
 	}
 
 }

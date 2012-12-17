@@ -12,13 +12,15 @@
 
 namespace Contao\Rpc;
 
-interface IRpcAuthenticate
+interface IRpcSetInput
 {
+
 	/**
-	 * Run Authentication
+	 * Set an Input Handler
 	 *
-	 * @return mixed
+	 * @param IRpcInput
+	 * @return void
 	 */
-	public function authenticate();
+	public function setInput(IRpcInput $objInput);
 
 }

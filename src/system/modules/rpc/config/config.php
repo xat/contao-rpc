@@ -49,11 +49,37 @@ $GLOBALS['RPC'] = array
 				'class' => '\Contao\Rpc\RpcSimpleDecryptionHandler',
 				'config' => array
 				(
-					'require' => array('decrypt'), // This field must be set for decryption to take place
+					'decryptmethod_field' => 'decrypt',
+					'lookups' => array
+					(
+						'backend' => array
+						(
+							'class' => '\Contao\Rpc\RpcBasicLookup',
+							'config' => array
+							(
+								'table' => 'tl_user',
+								'match' => array('username' => 'decrypt_be_username'),
+								'value' => 'cryptsecret'
+							)
+						),
+						'frontend' => array
+						(
+							'class' => '\Contao\Rpc\RpcBasicLookup',
+							'config' => array
+							(
+								'table' => 'tl_member',
+								'match' => array('username' => 'decrypt_fe_username'),
+								'value' => 'cryptsecret'
+							)
+						)
+					),
 					'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
 					'decrypters' => array
 					(
-
+						'contao' => array
+						(
+							'class' => '\Contao\Rpc\RpcContaoDecrypter'
+						)
 					)
 				)
 			),

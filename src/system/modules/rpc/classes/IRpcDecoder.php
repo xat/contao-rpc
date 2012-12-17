@@ -22,11 +22,4 @@ interface IRpcDecoder
 	 */
 	public function decode();
 
-	/**
-	 * Set an Input Processor
-	 *
-	 * @param object
-	 * @return void
-	 */
-	public function setInput($objInput);
 }

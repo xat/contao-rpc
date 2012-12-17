@@ -12,12 +12,12 @@
 
 namespace Contao\Rpc;
 
-class RpcBasicResponsibility implements IRpcResponsible, IRpcSetup
+class RpcBasicResponsibility implements IRpcResponsible, IRpcSetup, IRpcSetInput
 {
 
 	use TRpcSetup;
 
-	protected $objInput;
+	use TRpcSetInput;
 
 	/**
 	 * Checks if this Object is responsible
@@ -35,16 +35,6 @@ class RpcBasicResponsibility implements IRpcResponsible, IRpcSetup
 		}
 
 		return true;
-	}
-
-	/**
-	 * Set an Input Handler
-	 *
-	 * @return IRpcInput
-	 */
-	public function setInput(IRpcInput $objInput)
-	{
-		$this->objInput = $objInput;
 	}
 
 }

@@ -33,11 +33,4 @@ interface IRpcAuthenticator
 	 */
 	public function isResponsible();
 
-	/**
-	 * Set an Input Handler
-	 *
-	 * @param IRpcInput
-	 * @return mixed
-	 */
-	public function setInput(IRpcInput $objInput);
 }

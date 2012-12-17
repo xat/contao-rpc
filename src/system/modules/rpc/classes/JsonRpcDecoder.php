@@ -12,28 +12,17 @@
 
 namespace Contao\Rpc;
 
-class JsonRpcDecoder implements IRpcDecoder, IRpcSetup
+class JsonRpcDecoder implements IRpcDecoder, IRpcSetup, IRpcSetInput
 {
+
+	use TRpcSetup;
+
+	use TRpcSetInput;
 
 	protected $arrDefaults = array
 	(
 		'rpc_field' => 'rpc'
 	);
-
-	protected $objInput;
-
-	use TRpcSetup;
-
-	/**
-	 * Set an Input Processor
-	 *
-	 * @param object
-	 * @return void
-	 */
-	public function setInput($objInput)
-	{
-		$this->objInput = $objInput;
-	}
 
 	/**
 	 * Take something from anywhere and transform

@@ -44,6 +44,8 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\IRpcResponsible' => 'system/modules/rpc/classes/IRpcResponsible.php',
 	'Contao\Rpc\RpcBasicResponsibility' => 'system/modules/rpc/classes/RpcBasicResponsibility.php',
 	'Contao\Rpc\IRpcSetup' => 'system/modules/rpc/classes/IRpcSetup.php',
+	'Contao\Rpc\IRpcSetInput' => 'system/modules/rpc/classes/IRpcSetInput.php',
+	'Contao\Rpc\TRpcSetInput' => 'system/modules/rpc/classes/TRpcSetInput.php',
 
 	'Contao\Rpc\IRpcAuthenticate' => 'system/modules/rpc/classes/IRpcAuthenticate.php',
 	'Contao\Rpc\RpcBasicAuthentication' => 'system/modules/rpc/classes/RpcBasicAuthentication.php',
