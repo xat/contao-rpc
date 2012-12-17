@@ -41,6 +41,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			array('provider' => 'json'),
 			array('method' => 'pong', 'jsonrpc' => '2.0')
 		);
+
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->error->message, 'Invalid Request');
 		$this->assertEquals($varResult->error->code, '-32600');
@@ -294,7 +295,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			RPC_URL,
 			array('provider' => 'json', 'decrypt_fe_username' => 'j.smith', 'decrypt' => 'contao'),
 			'2sWga5qLUyybeJYQskHu7hjlJa0cd6djm1Uezrj7GW/Wm1lkbZnKvu6hP7bYUePG5sy0fXMXcDGSOfgBT0VLALj9q+oiYgZPbyvhODCtWIFxL4eci5wwR2JqcpjgpmJjxHB4c02avIGxKEfAUw=='
-
 		);
 
 		$varResult = json_decode($strResult);
@@ -314,6 +314,36 @@ class RpcTest extends PHPUnit_Framework_TestCase
 
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->result, 'decryptedping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	public function testFrontendEncryption()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'encrypt' => 'contao', 'fe_username' => 'j.smith', 'fe_password' => 'johnsmith'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping'))
+		);
+
+		$strResult = simple_decrypter($strResult, 'testtesttesttest');
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'ping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+
+	public function testBackendEncryption()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'encrypt' => 'contao', 'be_username' => 'k.jones', 'be_password' => 'kevinjones'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping'))
+		);
+
+		$strResult = simple_decrypter($strResult, 'testtesttesttest');
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'ping');
 		$this->assertEquals($varResult->id, '1337');
 	}
 

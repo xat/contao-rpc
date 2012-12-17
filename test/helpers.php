@@ -42,3 +42,23 @@ function is_assoc ($arr)
 {
 	return (is_array($arr) && count(array_filter(array_keys($arr),'is_string')) == count($arr));
 }
+
+function simple_decrypter ($varValue, $strKey)
+{
+	$resTd = mcrypt_module_open('rijndael-256', '', 'cfb', '');
+	$varValue = base64_decode($varValue);
+	$ivsize = mcrypt_enc_get_iv_size($resTd);
+	$iv = substr($varValue, 0, $ivsize);
+	$varValue = substr($varValue, $ivsize);
+
+	if ($varValue == '')
+	{
+		return '';
+	}
+
+	mcrypt_generic_init($resTd, md5($strKey), $iv);
+	$strDecrypted = mdecrypt_generic($resTd, $varValue);
+	mcrypt_generic_deinit($resTd);
+
+	return $strDecrypted;
+}

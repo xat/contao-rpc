@@ -163,6 +163,43 @@ $GLOBALS['RPC'] = array
 				)
 			),
 
+			'encryption' => array
+			(
+				'class' => '\Contao\Rpc\RpcBasicEncryption',
+				'config' => array
+				(
+					'encrypt_field' => 'encrypt',
+					'lookups' => array
+					(
+						'backend' => array
+						(
+							'class' => '\Contao\Rpc\RpcUserLookup',
+							'config' => array
+							(
+								'user_class' => '\Contao\Rpc\RpcBackendUser',
+								'column' => 'encryptionkey'
+							)
+						),
+						'frontend' => array
+						(
+							'class' => '\Contao\Rpc\RpcUserLookup',
+							'config' => array
+							(
+								'user_class' => '\Contao\Rpc\RpcFrontendUser',
+								'column' => 'encryptionkey'
+							)
+						)
+					),
+					'encrypters' => array
+					(
+						'contao' => array
+						(
+							'class' => '\Contao\Rpc\RpcContaoEncrypter'
+						)
+					)
+				)
+			),
+
 			'output' => array
 			(
 				'class' => '\Contao\Rpc\RpcBasicOutput',

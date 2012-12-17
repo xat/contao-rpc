@@ -154,8 +154,11 @@ class RpcRunner
 	public function encrypt()
 	{
 		// Run encryption, if needed
-		//$objEncryption = SetupFactory::create($this->arrSettings['encryption']);
-		//$this->strResponse = $objEncryption->encrypt($this->objInput, $this->strResponse);
+		$objEncryption = RpcSetupFactory::create($this->arrSettings['encryption'], $this->objInput);
+		if ($strEncrypted = $objEncryption->encrypt($this->strResponse))
+		{
+			$this->strResponse = $strEncrypted;
+		}
 
 		return $this;
 	}

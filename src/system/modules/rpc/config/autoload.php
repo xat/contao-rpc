@@ -23,6 +23,12 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\IRpcDecryption' => 'system/modules/rpc/classes/IRpcDecryption.php',
 	'Contao\Rpc\IRpcDecrypter' => 'system/modules/rpc/classes/IRpcDecrypter.php',
 	'Contao\Rpc\IRpcEncrypter' => 'system/modules/rpc/classes/IRpcEncrypter.php',
+
+	'Contao\Rpc\RpcBasicEncryption' => 'system/modules/rpc/classes/RpcBasicEncryption.php',
+	'Contao\Rpc\RpcContaoEncrypter' => 'system/modules/rpc/classes/RpcContaoEncrypter.php',
+	'Contao\Rpc\RpcUserLookup' => 'system/modules/rpc/classes/RpcUserLookup.php',
+	'Contao\Rpc\IRpcEncryption' => 'system/modules/rpc/classes/IRpcEncryption.php',
+
 	'Contao\Rpc\IRpcLookup' => 'system/modules/rpc/classes/IRpcLookup.php',
 	'Contao\Rpc\RpcTableLookup' => 'system/modules/rpc/classes/RpcTableLookup.php',
 	'Contao\Rpc\RpcBasicDecryption' => 'system/modules/rpc/classes/RpcBasicDecryption.php',

@@ -12,14 +12,16 @@
 
 namespace Contao\Rpc;
 
-interface IRpcEncrypter
+interface IRpcEncryption
 {
 
 	/**
-	 * @param $strValue
-	 * @param $strKey
+	 * Try to perform decryption.
+	 * If successful return true, otherwise false
+	 *
+	 * @param string
 	 * @return mixed
 	 */
-	public function encrypt($strValue, $strKey);
+	public function encrypt($strResponse);
 
 }
