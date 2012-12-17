@@ -74,8 +74,8 @@ class RpcRunner
 	public function decrypt()
 	{
 		// perform decryption, if needed
-		//$objDecryption  = SetupFactory::create($this->arrSettings['decryption']);
-		//$objDecryption->decrypt($this->objInput);
+		$objDecryption  = RpcSetupFactory::create($this->arrSettings['decryption'], $this->objInput);
+		$objDecryption->decrypt();
 
 		return $this;
 	}

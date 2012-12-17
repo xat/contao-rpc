@@ -286,4 +286,35 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEquals($strResult, 'Access Denied');
 	}
 
+	// Encryption key is: testtesttesttest
+	// encrypted method: {"id": "1337","jsonrpc": "2.0", "method": "pong","params": ["decryptedping"]}
+	public function testFrontendDecryption()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'decrypt_fe_username' => 'j.smith', 'decrypt' => 'contao'),
+			'2sWga5qLUyybeJYQskHu7hjlJa0cd6djm1Uezrj7GW/Wm1lkbZnKvu6hP7bYUePG5sy0fXMXcDGSOfgBT0VLALj9q+oiYgZPbyvhODCtWIFxL4eci5wwR2JqcpjgpmJjxHB4c02avIGxKEfAUw=='
+
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'decryptedping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	// Encryption key is: testtesttesttest
+	// encrypted method: {"id": "1337","jsonrpc": "2.0", "method": "pong","params": ["decryptedping"]}
+	public function testBackendDecryption()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'decrypt_be_username' => 'k.jones', 'decrypt' => 'contao'),
+			'2sWga5qLUyybeJYQskHu7hjlJa0cd6djm1Uezrj7GW/Wm1lkbZnKvu6hP7bYUePG5sy0fXMXcDGSOfgBT0VLALj9q+oiYgZPbyvhODCtWIFxL4eci5wwR2JqcpjgpmJjxHB4c02avIGxKEfAUw=='
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'decryptedping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
 }

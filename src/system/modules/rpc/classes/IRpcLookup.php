@@ -12,14 +12,15 @@
 
 namespace Contao\Rpc;
 
-interface IRpcDecrypter
+interface IRpcLookup
 {
 
 	/**
-	 * @param $strValue
-	 * @param $strKey
+	 * Perform a lookup.
+	 * Return either the resulting Value or null.
+	 *
 	 * @return mixed
 	 */
-	public function decrypt($strValue, $strKey);
+	public function lookup();
 
 }

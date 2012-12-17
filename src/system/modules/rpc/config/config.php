@@ -53,27 +53,27 @@ $GLOBALS['RPC'] = array
 					(
 						'backend' => array
 						(
-							'class' => '\Contao\Rpc\RpcBasicLookup',
+							'class' => '\Contao\Rpc\RpcTableLookup',
 							'config' => array
 							(
 								'table' => 'tl_user',
-								'match' => array('username' => 'decrypt_be_username'),
-								'value' => 'cryptsecret'
+								'where' => array('username = ?', 'decrypt_be_username'),
+								'column' => 'encryptionkey'
 							)
 						),
 						'frontend' => array
 						(
-							'class' => '\Contao\Rpc\RpcBasicLookup',
+							'class' => '\Contao\Rpc\RpcTableLookup',
 							'config' => array
 							(
 								'table' => 'tl_member',
-								'match' => array('username' => 'decrypt_fe_username'),
-								'value' => 'cryptsecret'
+								'where' => array('username = ?', 'decrypt_fe_username'),
+								'column' => 'encryptionkey'
 							)
 						)
 					),
 					'decrypt_field' => 'decrypt',
-					'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
+					'decrypted_fields' => array('rpc'),
 					'decrypters' => array
 					(
 						'contao' => array

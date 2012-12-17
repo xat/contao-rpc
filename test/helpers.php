@@ -18,12 +18,14 @@ function rpcRequest($url, $postFields = array(), $data = null)
 		if (is_assoc($data))
 		{
 			$postFields['rpc'] =  json_encode((object)($data));
-		} else {
+		} elseif (is_array($data)) {
 			foreach ($data as $k => $val)
 			{
 				$data[$k] = (object)($val);
 			}
 			$postFields['rpc'] = json_encode($data);
+		} else {
+			$postFields['rpc'] = $data;
 		}
 
 	}

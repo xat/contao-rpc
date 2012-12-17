@@ -12,15 +12,8 @@
 
 namespace Contao\Rpc;
 
-class RpcPostField extends \System implements IRpcField
+class RpcPostField implements IRpcField
 {
-	/**
-	 * Make Constructor public
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
 
 	/**
 	 * Get a Value
@@ -30,7 +23,10 @@ class RpcPostField extends \System implements IRpcField
 	 */
 	public function get($strKey)
 	{
-		$this->import('Input');
-		return $this->Input->post($strKey, false);
+		// Not using $this->Input->post() here
+		// since it fucks up the Post values which results
+		// in errors, for example when using encryption.
+
+		return $_POST[$strKey];
 	}
 }

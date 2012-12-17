@@ -16,6 +16,11 @@ interface IRpcDecryption
 {
 
 	/**
+	 * How many characters does the Cryptionkey at least need
+	 */
+	const MIN_KEY_LENGTH = 16;
+
+	/**
 	 * Try to perform decryption.
 	 * If successful return true, otherwise false
 	 *

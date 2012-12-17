@@ -10,11 +10,11 @@
  * @copyright Simon Kusterer 2012
  */
 
-$GLOBALS['TL_DCA']['tl_user']['palettes']['default'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['default']);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['admin'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['admin']);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['group'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['group']);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['custom']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['default'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey,encryptionkey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['admin'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey,encryptionkey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['admin']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['group'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey,encryptionkey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['group']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey,encryptionkey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace('admin;', 'admin;{rpc_legend:hide},apikey,encryptionkey;', $GLOBALS['TL_DCA']['tl_user']['palettes']['custom']);
 
 $GLOBALS['TL_DCA']['tl_user']['fields']['apikey'] = array
 (
@@ -22,6 +22,16 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['apikey'] = array
 	'exclude'                 => true,
 	'search'                  => false,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+	'eval'                    => array('maxlength'=>255, 'minlength' => 16, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_user']['fields']['encryptionkey'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['encryptionkey'],
+	'exclude'                 => true,
+	'search'                  => false,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>255, 'minlength' => 16, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
