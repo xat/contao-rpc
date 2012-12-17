@@ -12,14 +12,15 @@
 
 namespace Contao\Rpc;
 
-interface IRpcDecrypter
+interface IRpcDecryption
 {
 
 	/**
-	 * @param $strMessage
-	 * @param $strKey
-	 * @return mixed
+	 * Try to perform decryption.
+	 * If successful return true, otherwise false
+	 *
+	 * @return boolean
 	 */
-	public function decrypt($strMessage, $strKey);
+	public function decrypt();
 
 }

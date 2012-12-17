@@ -46,7 +46,7 @@ $GLOBALS['RPC'] = array
 
 			'decryption' => array
 			(
-				'class' => '\Contao\Rpc\RpcSimpleDecryptionHandler',
+				'class' => '\Contao\Rpc\RpcBasicDecryption',
 				'config' => array
 				(
 					'decryptmethod_field' => 'decrypt',

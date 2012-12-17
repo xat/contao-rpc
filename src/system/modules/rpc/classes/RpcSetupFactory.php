@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-class SetupFactory
+class RpcSetupFactory
 {
 
 	/**

@@ -44,8 +44,8 @@ class RpcRunner
 
 		foreach ($GLOBALS['RPC']['providers'] as $arrSettings)
 		{
-			$objInput           = SetupFactory::create($arrSettings['input']);
-			$objResponsibility  = SetupFactory::create($arrSettings['responsibility']);
+			$objInput           = RpcSetupFactory::create($arrSettings['input']);
+			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility']);
 
 			$objResponsibility->setInput($objInput);
 
@@ -88,7 +88,7 @@ class RpcRunner
 	public function authenticate()
 	{
 		// perform authentication
-		$objAuthentication  = SetupFactory::create($this->arrSettings['authentication']);
+		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication']);
 		$objAuthentication->setInput($this->objInput);
 		if (!($strAuthType = $objAuthentication->authenticate()))
 		{
@@ -107,7 +107,7 @@ class RpcRunner
 	 */
 	public function decode()
 	{
-		$objDecoder = SetupFactory::create($this->arrSettings['decoder']);
+		$objDecoder = RpcSetupFactory::create($this->arrSettings['decoder']);
 		$objDecoder->setInput($this->objInput);
 		$this->arrPairs = $objDecoder->decode();
 
@@ -144,7 +144,7 @@ class RpcRunner
 	 */
 	public function encode()
 	{
-		$objEncoder = SetupFactory::create($this->arrSettings['encoder']);
+		$objEncoder = RpcSetupFactory::create($this->arrSettings['encoder']);
 		// transform all RPC Reponses into something
 		// we can send back to the user.
 		$this->strResponse = $objEncoder->encode($this->arrPairs);
@@ -170,7 +170,7 @@ class RpcRunner
 	 */
 	public function output()
 	{
-		$objOutput = SetupFactory::create($this->arrSettings['output']);
+		$objOutput = RpcSetupFactory::create($this->arrSettings['output']);
 		$objOutput->output($this->strResponse);
 
 		return $this;

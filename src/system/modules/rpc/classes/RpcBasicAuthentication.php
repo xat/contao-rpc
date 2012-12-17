@@ -28,7 +28,7 @@ class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup, IRpcSetInpu
 	{
 		foreach ($this->arrConfig['authenticators'] as $arrSettings)
 		{
-			$objAuthenticator = SetupFactory::create($arrSettings);
+			$objAuthenticator = RpcSetupFactory::create($arrSettings);
 			$objAuthenticator->setInput($this->objInput);
 
 			if ($objAuthenticator->isResponsible())

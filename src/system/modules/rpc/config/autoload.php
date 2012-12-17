@@ -24,7 +24,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\IRpcEncrypter' => 'system/modules/rpc/classes/IRpcEncrypter.php',
 	'Contao\Rpc\JsonRpcDecoder' => 'system/modules/rpc/classes/JsonRpcDecoder.php',
 	'Contao\Rpc\JsonRpcEncoder' => 'system/modules/rpc/classes/JsonRpcEncoder.php',
-	'Contao\Rpc\SetupFactory' => 'system/modules/rpc/classes/SetupFactory.php',
+	'Contao\Rpc\RpcSetupFactory' => 'system/modules/rpc/classes/RpcSetupFactory.php',
 	'Contao\Rpc\TRpcSetup' => 'system/modules/rpc/classes/TRpcSetup.php',
 
 	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
