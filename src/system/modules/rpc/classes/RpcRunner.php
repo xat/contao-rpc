@@ -45,9 +45,7 @@ class RpcRunner
 		foreach ($GLOBALS['RPC']['providers'] as $arrSettings)
 		{
 			$objInput           = RpcSetupFactory::create($arrSettings['input']);
-			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility']);
-
-			$objResponsibility->setInput($objInput);
+			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility'], $objInput);
 
 			if ($objResponsibility->isResponsible())
 			{
@@ -88,8 +86,7 @@ class RpcRunner
 	public function authenticate()
 	{
 		// perform authentication
-		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication']);
-		$objAuthentication->setInput($this->objInput);
+		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication'], $this->objInput);
 		if (!($strAuthType = $objAuthentication->authenticate()))
 		{
 			// Abort on a failed authentication.
@@ -107,8 +104,7 @@ class RpcRunner
 	 */
 	public function decode()
 	{
-		$objDecoder = RpcSetupFactory::create($this->arrSettings['decoder']);
-		$objDecoder->setInput($this->objInput);
+		$objDecoder = RpcSetupFactory::create($this->arrSettings['decoder'], $this->objInput);
 		$this->arrPairs = $objDecoder->decode();
 
 		return $this;

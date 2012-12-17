@@ -49,7 +49,6 @@ $GLOBALS['RPC'] = array
 				'class' => '\Contao\Rpc\RpcBasicDecryption',
 				'config' => array
 				(
-					'decryptmethod_field' => 'decrypt',
 					'lookups' => array
 					(
 						'backend' => array
@@ -73,6 +72,7 @@ $GLOBALS['RPC'] = array
 							)
 						)
 					),
+					'decrypt_field' => 'decrypt',
 					'decrypted_fields' => array( 'rpc', 'fe_token', 'fe_hash', 'fe_apikey', 'fe_password', 'be_password', 'be_hash', 'be_apikey' ),
 					'decrypters' => array
 					(

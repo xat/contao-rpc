@@ -28,6 +28,18 @@ class RpcBasicDecryption implements IRpcDecryption, IRpcSetup, IRpcSetInput
 	public function decrypt()
 	{
 
+		if (!($strDecryptField = $this->objInput->get($this->arrConfig['decrypt_field'])))
+		{
+			return false;
+		}
+
+		if (!($arrDecrypterSettings  = $this->arrConfig['decrypters'][$strDecryptField]))
+		{
+			return false;
+		}
+
+
+
 	}
 
 }
