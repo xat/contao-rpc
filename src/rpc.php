@@ -18,8 +18,6 @@ define('TL_MODE', 'RPC');
 define('BYPASS_TOKEN_CHECK', true);
 require 'system/initialize.php';
 
-// Let's Rock!
-
 $objRunner = new $GLOBALS['RPC']['runner']();
 
 $objRunner
