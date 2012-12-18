@@ -236,6 +236,8 @@ $GLOBALS['RPC'] = array
 		)
 	),
 
+	'runner' => '\Contao\Rpc\RpcRunner',
+
 	'methods' => array
 	(
 		'pong'    => array

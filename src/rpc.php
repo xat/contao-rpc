@@ -20,7 +20,9 @@ require 'system/initialize.php';
 
 // Let's Rock!
 
-(new RpcRunner())
+$objRunner = new $GLOBALS['RPC']['runner']();
+
+$objRunner
 	->find()         // Find a suitable Provider
 	->decrypt()      // Perform decryption
 	->authenticate() // Perform authentication
