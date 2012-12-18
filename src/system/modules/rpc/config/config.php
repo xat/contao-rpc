@@ -10,8 +10,6 @@
  * @copyright Simon Kusterer 2012
  */
 
-
-
 $GLOBALS['RPC'] = array
 (
 	'providers' => array
@@ -223,4 +221,9 @@ $GLOBALS['RPC'] = array
 		)
 
 	)
+);
+
+$GLOBALS['BE_MOD']['system']['rpc'] = array
+(
+	'tables' => array('tl_rpc')
 );

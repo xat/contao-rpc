@@ -57,7 +57,6 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcBasicResponsibility' => 'system/modules/rpc/classes/RpcBasicResponsibility.php',
 	'Contao\Rpc\IRpcSetup' => 'system/modules/rpc/classes/IRpcSetup.php',
 	'Contao\Rpc\IRpcSetInput' => 'system/modules/rpc/classes/IRpcSetInput.php',
-	'Contao\Rpc\TRpcSetInput' => 'system/modules/rpc/classes/TRpcSetInput.php',
 
 	'Contao\Rpc\IRpcAuthenticate' => 'system/modules/rpc/classes/IRpcAuthenticate.php',
 	'Contao\Rpc\RpcBasicAuthentication' => 'system/modules/rpc/classes/RpcBasicAuthentication.php',
@@ -73,6 +72,9 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcBeHashAuthenticator' => 'system/modules/rpc/classes/RpcBeHashAuthenticator.php',
 	'Contao\Rpc\RpcFeHashAuthenticator' => 'system/modules/rpc/classes/RpcFeHashAuthenticator.php',
 	'Contao\Rpc\RpcHashAuthenticator' => 'system/modules/rpc/classes/RpcHashAuthenticator.php',
+
+	// TODO: Namespace caused Problems: Fatal error: Class 'RpcModel' not found in /home/sope/projects/contaorpc.dev.soped.lan/www/src/system/modules/rpc/dca/tl_rpc.php on line 152
+	'RpcModel' => 'system/modules/rpc/models/RpcModel.php',
 
 	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php',
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
