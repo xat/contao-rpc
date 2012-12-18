@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'not_public'                     => 'fe_groups,be_groups'
+		'not_public'                     => 'admins,fe_groups,be_groups'
 	),
 
 	// Fields
@@ -141,6 +141,14 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+		),
+		'admins' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['admins'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );

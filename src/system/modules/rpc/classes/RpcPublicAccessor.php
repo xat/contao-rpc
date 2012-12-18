@@ -26,7 +26,7 @@ class RpcPublicAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($arrMethod)
 	{
-		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] === '0')
+		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] !== '1')
 		{
 			return true;
 		}

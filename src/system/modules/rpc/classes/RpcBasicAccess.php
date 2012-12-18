@@ -55,6 +55,11 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 			}
 		}
 
+		if ($arrSettings['active'] !== '1')
+		{
+			return false;
+		}
+
 		foreach ($this->arrConfig['accessors'] as $arrAccessor)
 		{
 			// TODO: We are poluting objects here. Find better way.

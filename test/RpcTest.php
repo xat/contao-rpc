@@ -342,6 +342,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$strResult = simple_decrypter($strResult, 'testtesttesttest');
+
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->result, 'ping');
 		$this->assertEquals($varResult->id, '1337');
@@ -405,6 +406,33 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			RPC_URL,
 			array('provider' => 'json', 'be_username' => 'h.lewis', 'fe_password' => 'helenlewis'),
 			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'beGroupPong', 'params' => array('ping'))
+		);
+
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Access denied');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
+	public function testAccessCorrectAdminMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_username' => 'k.jones', 'be_password' => 'kevinjones'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'adminPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'ping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	public function testAccessNotCorrectAdminMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_username' => 'h.lewis', 'be_password' => 'helenlewis'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'adminPong', 'params' => array('ping'))
 		);
 
 		$varResult = json_decode($strResult);

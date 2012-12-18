@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-class RpcActiveAccessor implements IRpcAccessor, IRpcSetup
+class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 {
 
 	use TRpcSetup;
@@ -26,9 +26,14 @@ class RpcActiveAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($arrMethod)
 	{
-		if (isset($arrMethod['active']) && $arrMethod['active'] === '1')
+		$objUser = \Contao\Rpc\RpcBackendUser::getInstance();
+
+		if (isset($arrMethod['admins']) && $arrMethod['admins'] === '1')
 		{
-			return true;
+			if ($objUser->admin === '1')
+			{
+				return true;
+			}
 		}
 
 		return false;

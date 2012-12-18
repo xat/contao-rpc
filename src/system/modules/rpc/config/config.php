@@ -150,9 +150,9 @@ $GLOBALS['RPC'] = array
 				(
 					'accessors' => array
 					(
-						'active' => array
+						'admin' => array
 						(
-							'class' => '\Contao\Rpc\RpcActiveAccessor'
+							'class' => '\Contao\Rpc\RpcAdminAccessor'
 						),
 						'public' => array
 						(
@@ -255,6 +255,10 @@ $GLOBALS['RPC'] = array
 			'call'    => array('Contao\Rpc\TestMethods', 'pong')
 		),
 		'beGroupPong'    => array
+		(
+			'call'    => array('Contao\Rpc\TestMethods', 'pong')
+		),
+		'adminPong'    => array
 		(
 			'call'    => array('Contao\Rpc\TestMethods', 'pong')
 		)
