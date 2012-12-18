@@ -115,14 +115,19 @@ class RpcRunner
 	 */
 	public function run()
 	{
+		$objAccess = RpcSetupFactory::create($this->arrSettings['access']);
+
 		// loop through all incoming RPC Requests
 		// and proceed them
 		foreach ($this->arrPairs as $objPair)
 		{
 			if (!$objPair->response->getError())
 			{
-				// TODO: here we must check if the current User
-				// has access to this RPC Method
+				if (!$objAccess->hasAccess($objPair->request->getMethodName()))
+				{
+					$objPair->response->setErrorType(RpcResponse::ACCESS_DENIED);
+					continue;
+				}
 
 				$arrRpc = $GLOBALS['RPC']['methods'][$objPair->request->getMethodName()];
 

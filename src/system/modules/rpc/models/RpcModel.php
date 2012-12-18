@@ -62,12 +62,35 @@ class RpcModel extends \Model
 				$objRpc = new self();
 				$objRpc->tstamp = $time;
 				$objRpc->method = $strMethod;
+				$objRpc->active = '0';
+				$objRpc->not_public = '1';
 				$objRpc->save();
 			} else
 			{
 				\Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE method=?")->execute($strMethod);
 			}
 		}
+	}
+
+	/**
+	 * I know, worst methodname ever.
+	 *
+	 * @return array
+	 */
+	public static function findAllAssocWithMethodAsKey()
+	{
+		$objResults = static::findAll();
+		$arrResults = array();
+
+		if (!is_null($objResults))
+		{
+			while ($objResults->next())
+			{
+				$arrResults[$objResults->method] = $objResults->row();
+			}
+		}
+
+		return $arrResults;
 	}
 
 }

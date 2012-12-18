@@ -75,7 +75,7 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 	'palettes' => array
 	(
 		'__selector__'                   => array('not_public'),
-		'default'                     => '{title_legend},method;{rights_legend},activate,not_public'
+		'default'                     => '{title_legend},method;{rights_legend},active,not_public'
 	),
 
 	// Subpalettes
@@ -103,9 +103,9 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 			'eval'                    => array('maxlength'=>255, 'disabled'=>true),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'activate' => array
+		'active' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['activate'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['active'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'filter'                  => true,

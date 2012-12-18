@@ -34,9 +34,14 @@ class RpcResponse
 	 *
 	 */
 	const INTERNAL_ERROR   = 16;
-
-
+	/**
+	 *
+	 */
 	const AUTH_REQUIRED    = 32;
+	/**
+	 *
+	 */
+	const ACCESS_DENIED    = 64;
 
 	/**
 	 * @var
@@ -84,7 +89,10 @@ class RpcResponse
 			// Application based errors
 
 			case self::AUTH_REQUIRED:
-				$this->arrError(1, 'Authentication required');
+				$this->setError(1, 'Authentication required');
+				break;
+			case self::ACCESS_DENIED:
+				$this->setError(2, 'Access denied');
 				break;
 		}
 

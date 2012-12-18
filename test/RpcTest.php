@@ -347,4 +347,69 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->id, '1337');
 	}
 
+	public function testAccessNotActiveMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'notActivePong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Access denied');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
+	public function testAccessCorrectFeGroupMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_username' => 'j.smith', 'fe_password' => 'johnsmith'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'feGroupPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'ping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	public function testAccessNotCorrectFeGroupMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'fe_username' => 'd.evans', 'fe_password' => 'donnaevans'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'feGroupPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Access denied');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
+	public function testAccessCorrectBeGroupMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_username' => 'j.wilson', 'be_password' => 'jameswilson'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'beGroupPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, 'ping');
+		$this->assertEquals($varResult->id, '1337');
+	}
+
+	public function testAccessNotCorrectBeGroupMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_username' => 'h.lewis', 'fe_password' => 'helenlewis'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'beGroupPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Access denied');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
 }

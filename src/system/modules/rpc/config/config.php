@@ -143,6 +143,33 @@ $GLOBALS['RPC'] = array
 				)
 			),
 
+			'access' => array
+			(
+				'class' => '\Contao\Rpc\RpcBasicAccess',
+				'config' => array
+				(
+					'accessors' => array
+					(
+						'active' => array
+						(
+							'class' => '\Contao\Rpc\RpcActiveAccessor'
+						),
+						'public' => array
+						(
+							'class' => '\Contao\Rpc\RpcPublicAccessor'
+						),
+						'backend' => array
+						(
+							'class' => '\Contao\Rpc\RpcBeAccessor'
+						),
+						'frontend' => array
+						(
+							'class' => '\Contao\Rpc\RpcFeAccessor'
+						)
+					)
+				)
+			),
+
 			'encoder' => array
 			(
 				'class' => '\Contao\Rpc\JsonRpcEncoder',
@@ -218,8 +245,19 @@ $GLOBALS['RPC'] = array
 		'generateHash'    => array
 		(
 			'call'    => array('Contao\Rpc\RpcStandardMethods', 'generateHash')
+		),
+		'notActivePong'    => array
+		(
+			'call'    => array('Contao\Rpc\TestMethods', 'pong')
+		),
+		'feGroupPong'    => array
+		(
+			'call'    => array('Contao\Rpc\TestMethods', 'pong')
+		),
+		'beGroupPong'    => array
+		(
+			'call'    => array('Contao\Rpc\TestMethods', 'pong')
 		)
-
 	)
 );
 

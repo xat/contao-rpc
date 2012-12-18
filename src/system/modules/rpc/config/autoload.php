@@ -57,6 +57,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcBasicResponsibility' => 'system/modules/rpc/classes/RpcBasicResponsibility.php',
 	'Contao\Rpc\IRpcSetup' => 'system/modules/rpc/classes/IRpcSetup.php',
 	'Contao\Rpc\IRpcSetInput' => 'system/modules/rpc/classes/IRpcSetInput.php',
+	'Contao\Rpc\TRpcSetInput' => 'system/modules/rpc/classes/TRpcSetInput.php',
 
 	'Contao\Rpc\IRpcAuthenticate' => 'system/modules/rpc/classes/IRpcAuthenticate.php',
 	'Contao\Rpc\RpcBasicAuthentication' => 'system/modules/rpc/classes/RpcBasicAuthentication.php',
@@ -64,14 +65,21 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcBeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcBeCredentialsAuthenticator.php',
 	'Contao\Rpc\RpcFeCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcFeCredentialsAuthenticator.php',
 	'Contao\Rpc\RpcCredentialsAuthenticator' => 'system/modules/rpc/classes/RpcCredentialsAuthenticator.php',
-
 	'Contao\Rpc\RpcBeApikeyAuthenticator' => 'system/modules/rpc/classes/RpcBeApikeyAuthenticator.php',
 	'Contao\Rpc\RpcFeApikeyAuthenticator' => 'system/modules/rpc/classes/RpcFeApikeyAuthenticator.php',
 	'Contao\Rpc\RpcApikeyAuthenticator' => 'system/modules/rpc/classes/RpcApikeyAuthenticator.php',
-
 	'Contao\Rpc\RpcBeHashAuthenticator' => 'system/modules/rpc/classes/RpcBeHashAuthenticator.php',
 	'Contao\Rpc\RpcFeHashAuthenticator' => 'system/modules/rpc/classes/RpcFeHashAuthenticator.php',
 	'Contao\Rpc\RpcHashAuthenticator' => 'system/modules/rpc/classes/RpcHashAuthenticator.php',
+
+	'Contao\Rpc\RpcUserAccessor' => 'system/modules/rpc/classes/RpcUserAccessor.php',
+	'Contao\Rpc\RpcPublicAccessor' => 'system/modules/rpc/classes/RpcPublicAccessor.php',
+	'Contao\Rpc\RpcActiveAccessor' => 'system/modules/rpc/classes/RpcActiveAccessor.php',
+	'Contao\Rpc\RpcFeAccessor' => 'system/modules/rpc/classes/RpcFeAccessor.php',
+	'Contao\Rpc\RpcBeAccessor' => 'system/modules/rpc/classes/RpcBeAccessor.php',
+	'Contao\Rpc\RpcBasicAccess' => 'system/modules/rpc/classes/RpcBasicAccess.php',
+	'Contao\Rpc\IRpcAccessor' => 'system/modules/rpc/classes/IRpcAccessor.php',
+	'Contao\Rpc\IRpcAccess' => 'system/modules/rpc/classes/IRpcAccess.php',
 
 	// TODO: Namespace caused Problems: Fatal error: Class 'RpcModel' not found in /home/sope/projects/contaorpc.dev.soped.lan/www/src/system/modules/rpc/dca/tl_rpc.php on line 152
 	'RpcModel' => 'system/modules/rpc/models/RpcModel.php',
