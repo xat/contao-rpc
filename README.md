@@ -26,3 +26,10 @@ class MyPong
 }
 ```
 
+In the backend of contao you can define who is able to access the methods from external:
+
+![CustomSelectWidget](https://raw.github.com/xat/contao-rpc/master/contao-rpc.png)
+
+## License
+Copyright (c) 2012 Simon Kusterer
+Licensed under the LGPL license.
