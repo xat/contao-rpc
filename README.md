@@ -1,7 +1,28 @@
 # contao-rpc
 
-This is some basic Mockup of contao-rpc. At this point of implementation I'm still trying to figure out how things should work.
-If you want to follow my thoughts you may consider looking into the rpc.php file and read through the comments to
-get an idea in which direction I want to push this project.
+This is an RPC extension for the Content Management System Contao. It allows you as a developer
+to define RPC Methods as simple as this:
 
-That being said, I'm happy for any feedback.
+```php
+
+\\ In your config.php:
+
+$GLOBALS['RPC']['methods'] => array
+(
+  'pong'    => array
+  (
+    'call'    => array('MyPong', 'pong')
+  )
+);
+
+\\ Your MyPong class:
+
+class MyPong
+{
+  public function pong($objRequest, $objResponse)
+  {
+    $objResponse->setData($objRequest->getParams()[0]);
+  }
+}
+```
+
