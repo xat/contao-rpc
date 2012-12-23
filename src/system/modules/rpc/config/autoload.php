@@ -39,11 +39,13 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcSetupFactory' => 'system/modules/rpc/classes/RpcSetupFactory.php',
 	'Contao\Rpc\TRpcSetup' => 'system/modules/rpc/classes/TRpcSetup.php',
 
+	'Contao\Rpc\IRpcRequest' => 'system/modules/rpc/classes/IRpcRequest.php',
 	'Contao\Rpc\RpcRequest' => 'system/modules/rpc/classes/RpcRequest.php',
 	'Contao\Rpc\JsonRpcRequest' => 'system/modules/rpc/classes/JsonRpcRequest.php',
 	'Contao\Rpc\RpcBackendUser' => 'system/modules/rpc/classes/RpcBackendUser.php',
 	'Contao\Rpc\RpcFrontendUser' => 'system/modules/rpc/classes/RpcFrontendUser.php',
 	'Contao\Rpc\IRpcProvider' => 'system/modules/rpc/classes/IRpcProvider.php',
+	'Contao\Rpc\IRpcResponse' => 'system/modules/rpc/classes/IRpcResponse.php',
 	'Contao\Rpc\RpcResponse' => 'system/modules/rpc/classes/RpcResponse.php',
 	'Contao\Rpc\TRpcUser' => 'system/modules/rpc/classes/TRpcUser.php',
 

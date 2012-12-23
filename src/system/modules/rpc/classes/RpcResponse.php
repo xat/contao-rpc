@@ -12,37 +12,8 @@
 
 namespace Contao\Rpc;
 
-class RpcResponse
+class RpcResponse implements IRpcResponse
 {
-	/**
-	 *
-	 */
-	const PARSE_ERROR      = 1;
-	/**
-	 *
-	 */
-	const INVALID_REQUEST  = 2;
-	/**
-	 *
-	 */
-	const METHOD_NOTFOUND  = 4;
-	/**
-	 *
-	 */
-	const INVALID_PARAMS   = 8;
-	/**
-	 *
-	 */
-	const INTERNAL_ERROR   = 16;
-	/**
-	 *
-	 */
-	const AUTH_REQUIRED    = 32;
-	/**
-	 *
-	 */
-	const ACCESS_DENIED    = 64;
-
 	/**
 	 * @var
 	 */

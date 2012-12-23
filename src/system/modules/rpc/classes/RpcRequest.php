@@ -12,7 +12,7 @@
 
 namespace Contao\Rpc;
 
-class RpcRequest
+class RpcRequest implements IRpcRequest
 {
 	/**
 	 * The MethodName of the RPC Call
