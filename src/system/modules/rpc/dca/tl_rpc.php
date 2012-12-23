@@ -74,7 +74,7 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                   => array('not_public'),
+		'__selector__'                => array('not_public', 'method'),
 		'default'                     => '{title_legend},method;{rights_legend},active,not_public'
 	),
 
