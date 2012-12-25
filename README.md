@@ -11,17 +11,17 @@ $GLOBALS['RPC']['methods'] => array
 (
   'pong'    => array
   (
-    'call'    => array('MyPong', 'pong')
+    'call'    => array('MyPing', 'ping')
   )
 );
 
 \\ Your MyPong class:
 
-class MyPong
+class MyPing
 {
-  public function pong($objRequest, $objResponse)
+  public function ping($objRequest, $objResponse)
   {
-    $objResponse->setData($objRequest->getParams()[0]);
+    $objResponse->setData('pong');
   }
 }
 ```
@@ -34,6 +34,8 @@ Within the default implementation contao-rpc supports JSON-RPC 2.0. Find out mor
 [here](http://www.jsonrpc.org/specification). However, contao-rpc is designed to be very flexibel
 and extendable. This means if you need something other then JSON-RPC, in most cases it should
  be easy to implement using contao-rpc as your base.
+
+
 
 ## License
 Copyright (c) 2012 Simon Kusterer
