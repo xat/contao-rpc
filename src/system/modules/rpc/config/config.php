@@ -240,29 +240,9 @@ $GLOBALS['RPC'] = array
 
 	'methods' => array
 	(
-		'pong'    => array
-		(
-			'call'    => array('Contao\Rpc\TestMethods', 'pong')
-		),
 		'generateHash'    => array
 		(
 			'call'    => array('Contao\Rpc\RpcStandardMethods', 'generateHash')
-		),
-		'notActivePong'    => array
-		(
-			'call'    => array('Contao\Rpc\TestMethods', 'pong')
-		),
-		'feGroupPong'    => array
-		(
-			'call'    => array('Contao\Rpc\TestMethods', 'pong')
-		),
-		'beGroupPong'    => array
-		(
-			'call'    => array('Contao\Rpc\TestMethods', 'pong')
-		),
-		'adminPong'    => array
-		(
-			'call'    => array('Contao\Rpc\TestMethods', 'pong')
 		)
 	)
 );
