@@ -156,24 +156,29 @@ $arrDefaultConfig = array
 				(
 					'accessors' => array
 					(
-						'public' => array
+						'secure' => array
 						(
 							'priority' => 100,
+							'class' => '\Contao\Rpc\RpcSecureAccessor'
+						),
+						'public' => array
+						(
+							'priority' => 90,
 							'class' => '\Contao\Rpc\RpcPublicAccessor'
 						),
 						'admin' => array
 						(
-							'priority' => 90,
+							'priority' => 80,
 							'class' => '\Contao\Rpc\RpcAdminAccessor'
 						),
 						'backend' => array
 						(
-							'priority' => 80,
+							'priority' => 70,
 							'class' => '\Contao\Rpc\RpcBeAccessor'
 						),
 						'frontend' => array
 						(
-							'priority' => 70,
+							'priority' => 60,
 							'class' => '\Contao\Rpc\RpcFeAccessor'
 						)
 					)

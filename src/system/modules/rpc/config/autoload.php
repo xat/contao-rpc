@@ -33,6 +33,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcTableLookup' => 'system/modules/rpc/classes/RpcTableLookup.php',
 	'Contao\Rpc\RpcBasicDecryption' => 'system/modules/rpc/classes/RpcBasicDecryption.php',
 	'Contao\Rpc\RpcContaoDecrypter' => 'system/modules/rpc/classes/RpcContaoDecrypter.php',
+	'Contao\Rpc\RpcHelpers' => 'system/modules/rpc/classes/RpcHelpers.php',
 
 	'Contao\Rpc\JsonRpcDecoder' => 'system/modules/rpc/classes/JsonRpcDecoder.php',
 	'Contao\Rpc\JsonRpcEncoder' => 'system/modules/rpc/classes/JsonRpcEncoder.php',
@@ -77,6 +78,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcUserAccessor' => 'system/modules/rpc/classes/RpcUserAccessor.php',
 	'Contao\Rpc\RpcPublicAccessor' => 'system/modules/rpc/classes/RpcPublicAccessor.php',
 	'Contao\Rpc\RpcAdminAccessor' => 'system/modules/rpc/classes/RpcAdminAccessor.php',
+	'Contao\Rpc\RpcSecureAccessor' => 'system/modules/rpc/classes/RpcSecureAccessor.php',
 	'Contao\Rpc\RpcFeAccessor' => 'system/modules/rpc/classes/RpcFeAccessor.php',
 	'Contao\Rpc\RpcBeAccessor' => 'system/modules/rpc/classes/RpcBeAccessor.php',
 	'Contao\Rpc\RpcBasicAccess' => 'system/modules/rpc/classes/RpcBasicAccess.php',
