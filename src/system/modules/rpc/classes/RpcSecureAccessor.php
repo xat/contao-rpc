@@ -18,6 +18,12 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
+	 * abort result
+	 * @var boolean
+	 */
+	private $blnAbort;
+
+	/**
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
@@ -26,7 +32,8 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($arrMethod)
 	{
-		return !((isset($arrMethod['secure']) && $arrMethod['secure'] === '1') && !\Environment::get('ssl'));
+		$this->blnAbort = (isset($arrMethod['secure']) && $arrMethod['secure'] === '1') && !\Environment::get('ssl');
+		return  false;
 	}
 
 	/**
@@ -36,7 +43,7 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function abort()
 	{
-		return true;
+		return $this->blnAbort;
 	}
 
 }
