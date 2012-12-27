@@ -23,4 +23,11 @@ interface IRpcAccessor
 	 * @return boolean
 	 */
 	public function hasAccess($arrMethod);
+
+	/**
+	 * Abort if access fails.
+	 *
+	 * @return boolean
+	 */
+	public function abort();
 }

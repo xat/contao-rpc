@@ -35,4 +35,14 @@ class RpcFeAccessor extends RpcUserAccessor
 		return \Contao\Rpc\RpcFrontendUser::getInstance();
 	}
 
+	/**
+	 * Abort if access fails.
+	 *
+	 * @return boolean
+	 */
+	public function abort()
+	{
+		return false;
+	}
+
 }

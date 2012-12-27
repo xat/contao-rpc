@@ -34,4 +34,14 @@ class RpcPublicAccessor implements IRpcAccessor, IRpcSetup
 		return false;
 	}
 
+	/**
+	 * Abort if access fails.
+	 *
+	 * @return boolean
+	 */
+	public function abort()
+	{
+		return false;
+	}
+
 }
