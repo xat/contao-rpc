@@ -60,7 +60,9 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 			return false;
 		}
 
-		foreach ($this->arrConfig['accessors'] as $arrAccessor)
+		$arrAccessors = RpcHelpers::sortByPriority($this->arrConfig['accessors']);
+
+		foreach ($arrAccessors as $arrAccessor)
 		{
 			// TODO: We are poluting objects here. Find better way.
 			$objAccessor = RpcSetupFactory::create($arrAccessor);
