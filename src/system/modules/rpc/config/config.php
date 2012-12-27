@@ -91,6 +91,7 @@ $arrDefaultConfig = array
 					(
 						'backend_credentials' => array
 						(
+							'priority' => 100,
 							'class' => '\Contao\Rpc\RpcBeCredentialsAuthenticator',
 							'config' => array
 							(
@@ -100,6 +101,7 @@ $arrDefaultConfig = array
 						),
 						'frontend_credentials' => array
 						(
+							'priority' => 90,
 							'class' => '\Contao\Rpc\RpcFeCredentialsAuthenticator',
 							'config' => array
 							(
@@ -109,6 +111,7 @@ $arrDefaultConfig = array
 						),
 						'backend_apikey' => array
 						(
+							'priority' => 80,
 							'class' => '\Contao\Rpc\RpcBeApikeyAuthenticator',
 							'config' => array
 							(
@@ -117,6 +120,7 @@ $arrDefaultConfig = array
 						),
 						'frontend_apikey' => array
 						(
+							'priority' => 70,
 							'class' => '\Contao\Rpc\RpcFeApikeyAuthenticator',
 							'config' => array
 							(
@@ -125,6 +129,7 @@ $arrDefaultConfig = array
 						),
 						'backend_hash' => array
 						(
+							'priority' => 60,
 							'class' => '\Contao\Rpc\RpcBeHashAuthenticator',
 							'config' => array
 							(
@@ -133,6 +138,7 @@ $arrDefaultConfig = array
 						),
 						'frontend_hash' => array
 						(
+							'priority' => 50,
 							'class' => '\Contao\Rpc\RpcFeHashAuthenticator',
 							'config' => array
 							(

@@ -26,7 +26,10 @@ class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup, IRpcSetInpu
 	 */
 	public function authenticate()
 	{
-		foreach ($this->arrConfig['authenticators'] as $arrSettings)
+
+		$arrAuthenticators = RpcHelpers::sortByPriority($this->arrConfig['authenticators']);
+
+		foreach ($arrAuthenticators as $arrSettings)
 		{
 			$objAuthenticator = RpcSetupFactory::create($arrSettings, $this->objInput);
 
