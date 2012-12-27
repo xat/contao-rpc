@@ -10,7 +10,7 @@
  * @copyright Simon Kusterer 2012
  */
 
-$GLOBALS['RPC'] = array
+$arrDefaultConfig = array
 (
 	'providers' => array
 	(
@@ -246,6 +246,8 @@ $GLOBALS['RPC'] = array
 		)
 	)
 );
+
+$GLOBALS['RPC'] = is_array($GLOBALS['RPC']) ? array_merge_recursive($GLOBALS['RPC'],$arrDefaultConfig) : $arrDefaultConfig;
 
 $GLOBALS['BE_MOD']['system']['rpc'] = array
 (
