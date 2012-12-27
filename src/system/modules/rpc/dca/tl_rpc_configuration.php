@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['copy'],
-				'href'                => 'act=paste&amp;mode=copy',
+				'href'                => 'act=copy',
 				'icon'                => 'copy.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
