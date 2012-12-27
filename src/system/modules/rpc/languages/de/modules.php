@@ -12,3 +12,5 @@
 
 $GLOBALS['TL_LANG']['MOD']['rpc'][0] = 'RPC Methoden';
 $GLOBALS['TL_LANG']['MOD']['rpc'][1] = 'RPC Methoden verwalten';
+$GLOBALS['TL_LANG']['MOD']['rpc_configuration'][0] = 'RPC Konfigurationen';
+$GLOBALS['TL_LANG']['MOD']['rpc_configuration'][1] = 'RPC Konfigurationen verwalten';

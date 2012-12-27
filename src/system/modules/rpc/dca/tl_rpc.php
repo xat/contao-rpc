@@ -10,9 +10,10 @@
  * @copyright Simon Kusterer 2012
  */
 
-	/**
-	 * Table tl_rpc
-	 */
+$this->loadLanguageFile('tl_rpc_configuration');
+/**
+ * Table tl_rpc
+ */
 $GLOBALS['TL_DCA']['tl_rpc'] = array
 (
 
@@ -75,7 +76,7 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('not_public', 'method'),
-		'default'                     => '{title_legend},method;{rights_legend},active,secure,not_public'
+		'default'                     => '{title_legend},method;{configuration_legend},active,configuration'
 	),
 
 	// Subpalettes
@@ -111,58 +112,56 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 			'filter'                  => true,
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
-		'secure' => array
+		'configuration' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['secure'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'filter'                  => true,
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'not_public' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['not_public'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'filter'                  => true,
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default '1'"
-		),
-		'fe_groups' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['fe_groups'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['configuration'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_member_group.name',
+			'options_callback'		  => array('tl_rpc','getConfigurations'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['providers'],
+			'save_callback'			  => array(array('tl_rpc','checkConfigurations')),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
-		),
-		'be_groups' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['be_groups'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('multiple'=>true),
-			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
-		),
-		'admins' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc']['admins'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'filter'                  => true,
-			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
 
 class tl_rpc extends \Backend
 {
+	/**
+	 * Return all RPC configurations
+	 * @return String[][] assoc array grouped by provider
+	 */
+	public function getConfigurations()
+	{
+		$arrReturn = array();
+		foreach(array_keys($GLOBALS['RPC']['providers']) as $strProvider)
+		{
+			$objConfigurations = $this->Database->prepare("SELECT id,name FROM tl_rpc_configuration WHERE provider=?")->execute($strProvider);
+			$arrReturn[$strProvider] = array_combine($objConfigurations->fetchEach('id'),$objConfigurations->fetchEach('name'));
+		}
+		return $arrReturn;
+
+	}
+
+	/**
+	 * Check the configuration set. If there are more than one configuration per provider throw an exception
+	 * @param  String $strValue field value
+	 * @param  DataContainer $dc DataContainer
+	 * @return String field value
+	 * @throws Exception If there are more than one configurations per provider
+	 */
+	public function checkConfigurations($strValue, DataContainer $dc)
+	{
+		$objCheck = $this->Database->query("SELECT if (COUNT(DISTINCT provider)=count(id), 0,1) AS not_unique FROM tl_rpc_configuration WHERE id IN(" . implode(',', array_map('intval', deserialize($strValue))) . ")");
+		if ($objCheck->not_unique)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['tl_rpc']['notUnique']);
+		}
+		return $strValue;
+	}
 
 	public function refreshTable()
 	{

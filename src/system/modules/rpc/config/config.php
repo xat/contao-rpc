@@ -269,3 +269,8 @@ $GLOBALS['BE_MOD']['system']['rpc'] = array
 	'tables'  => array('tl_rpc'),
 	'icon'    => 'system/modules/rpc/html/icons/connect.png'
 );
+$GLOBALS['BE_MOD']['system']['rpc_configuration'] = array
+(
+	'tables'  => array('tl_rpc_configuration'),
+	// 'icon'    => 'system/modules/rpc/html/icons/configuration.png'
+);
