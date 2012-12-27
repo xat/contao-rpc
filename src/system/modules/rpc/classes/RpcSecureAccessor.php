@@ -26,11 +26,7 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($arrMethod)
 	{
-		if (isset($arrMethod['secure']) && $arrMethod['secure'] === '1')
-		{
-			return \Environment::get('ssl');
-		}
-		return true;
+		return !((isset($arrMethod['secure']) && $arrMethod['secure'] === '1') && !\Environment::get('ssl'));
 	}
 
 	/**
