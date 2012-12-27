@@ -18,22 +18,22 @@ class RpcRunner
 	/**
 	 * @var
 	 */
-	protected $objInput;
+	public $objInput;
 
 	/**
 	 * @var
 	 */
-	protected $arrSettings;
+	public $arrSettings;
 
 	/**
 	 * @var
 	 */
-	protected $arrPairs;
+	public $arrPairs;
 
 	/**
 	 * @var
 	 */
-	protected $strResponse;
+	public $strResponse;
 
 	/**
 	 * @return RpcRunner
@@ -133,7 +133,7 @@ class RpcRunner
 
 				// Run the actual RPC Method and pass in
 				// an Request and an Response object
-				(new $arrRpc['call'][0])->$arrRpc['call'][1]($objPair->request, $objPair->response);
+				(new $arrRpc['call'][0])->$arrRpc['call'][1]($objPair->request, $objPair->response, $this);
 			}
 		}
 
