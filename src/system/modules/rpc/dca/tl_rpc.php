@@ -48,8 +48,9 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 		),
 		'label' => array
 		(
-			'fields'                  => array('method'),
-			'showColumns'             => true
+			'fields'                  => array('method','configuration'),
+			'showColumns'             => true,
+			'label_callback'		  => array('tl_rpc','getLabel')
 		),
 		'global_operations' => array
 		(
@@ -147,6 +148,25 @@ class tl_rpc extends \Backend
 	}
 
 	/**
+	 * Replace configuration with the configuration name and provider
+	 * @param array
+	 * @param string
+	 * @param \DataContainer
+	 * @param array
+	 * @return string
+	 */
+	public function getLabel($arrRow, $strLabel, DataContainer $dc, $arrArgs)
+	{
+		$arrIds = deserialize($arrRow['configuration']);
+		if (is_array($arrIds) && count($arrIds)>0)
+		{
+			$objConfigurations = $this->Database->query("SELECT concat(name,' (',provider,')') AS name FROM tl_rpc_configuration WHERE id IN(" . implode(',', array_map('intval', $arrIds)) . ")");
+			$arrArgs[1] = implode(', ',$objConfigurations->fetchEach('name'));
+		}
+		return $arrArgs;
+	}
+
+	/**
 	 * Check the configuration set. If there are more than one configuration per provider throw an exception
 	 * @param  String $strValue field value
 	 * @param  DataContainer $dc DataContainer
@@ -155,10 +175,14 @@ class tl_rpc extends \Backend
 	 */
 	public function checkConfigurations($strValue, DataContainer $dc)
 	{
-		$objCheck = $this->Database->query("SELECT if (COUNT(DISTINCT provider)=count(id), 0,1) AS not_unique FROM tl_rpc_configuration WHERE id IN(" . implode(',', array_map('intval', deserialize($strValue))) . ")");
-		if ($objCheck->not_unique)
+		$arrIds = deserialize($strValue);
+		if (is_array($arrIds))
 		{
-			throw new Exception($GLOBALS['TL_LANG']['tl_rpc']['notUnique']);
+			$objCheck = $this->Database->query("SELECT if (COUNT(DISTINCT provider)=count(id), 0,1) AS not_unique FROM tl_rpc_configuration WHERE id IN(" . implode(',', array_map('intval', $arrIds)) . ")");
+			if ($objCheck->not_unique)
+			{
+				throw new Exception($GLOBALS['TL_LANG']['tl_rpc']['notUnique']);
+			}
 		}
 		return $strValue;
 	}
