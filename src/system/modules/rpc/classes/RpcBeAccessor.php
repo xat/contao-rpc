@@ -24,7 +24,11 @@ class RpcBeAccessor extends RpcUserAccessor
 	 */
 	public function hasAccess($arrMethod)
 	{
-		return $this->hasAccessByGroupArray(deserialize($arrMethod['be_groups']));
+		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] === '1')
+		{
+			return $this->hasAccessByGroupArray(deserialize($arrMethod['be_groups']));
+		}
+		return false;
 	}
 
 	/**
