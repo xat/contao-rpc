@@ -67,12 +67,9 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 			if ($objAccessor->hasAccess($arrSettings))
 			{
 				return true;
-			} else
+			} elseif ($objAccessor->abort())
 			{
-				if ($objAccessor->abort())
-				{
-					return false;
-				}
+				return false;
 			}
 		}
 
