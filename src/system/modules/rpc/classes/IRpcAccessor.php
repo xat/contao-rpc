@@ -15,19 +15,18 @@ namespace Contao\Rpc;
 interface IRpcAccessor
 {
 
+	const ALLOW = 0;
+
+	const SKIP  = 1;
+
+	const DENY  = 2;
+
 	/**
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
 	 * @param array
-	 * @return boolean
+	 * @return int
 	 */
-	public function hasAccess($arrMethod);
-
-	/**
-	 * Abort if access fails.
-	 *
-	 * @return boolean
-	 */
-	public function abort();
+	public function accessState($arrMethod);
 }

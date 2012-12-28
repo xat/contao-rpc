@@ -20,15 +20,19 @@ class RpcFeAccessor extends RpcUserAccessor
 	 * to a certain Method.
 	 *
 	 * @param array
-	 * @return boolean
+	 * @return int
 	 */
-	public function hasAccess($arrMethod)
+	public function accessState($arrMethod)
 	{
 		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] === '1')
 		{
-			return $this->hasAccessByGroupArray(deserialize($arrMethod['fe_groups']));
+			if ($this->hasAccessByGroupArray(deserialize($arrMethod['fe_groups'])))
+			{
+				return self::ALLOW;
+			}
 		}
-		return false;
+
+		return self::SKIP;
 	}
 
 	/**
@@ -37,16 +41,6 @@ class RpcFeAccessor extends RpcUserAccessor
 	function getUser()
 	{
 		return \Contao\Rpc\RpcFrontendUser::getInstance();
-	}
-
-	/**
-	 * Abort if access fails.
-	 *
-	 * @return boolean
-	 */
-	public function abort()
-	{
-		return false;
 	}
 
 }

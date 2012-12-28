@@ -22,30 +22,20 @@ class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 	 * to a certain Method.
 	 *
 	 * @param array
-	 * @return boolean
+	 * @return int
 	 */
-	public function hasAccess($arrMethod)
+	public function accessState($arrMethod)
 	{
 		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] === '1' && isset($arrMethod['admins']) && $arrMethod['admins'] === '1')
 		{
 			$objUser = \Contao\Rpc\RpcBackendUser::getInstance();
 			if ($objUser->admin === '1')
 			{
-				return true;
+				return self::ALLOW;
 			}
 		}
 
-		return false;
-	}
-
-	/**
-	 * Abort if access fails.
-	 *
-	 * @return boolean
-	 */
-	public function abort()
-	{
-		return false;
+		return self::SKIP;
 	}
 
 }

@@ -24,9 +24,9 @@ abstract class RpcUserAccessor implements IRpcAccessor, IRpcSetup
 
 	/**
 	 * @param $arrMethod
-	 * @return mixed
+	 * @return int
 	 */
-	abstract function hasAccess($arrMethod);
+	abstract function accessState($arrMethod);
 
 	/**
 	 * @param $arrMethodGroups

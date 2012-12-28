@@ -66,15 +66,21 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 		{
 			// TODO: We are poluting objects here. Find better way.
 			$objAccessor = RpcSetupFactory::create($arrAccessor);
-			if ($objAccessor->hasAccess($arrSettings))
+			$intAccessState = $objAccessor->accessState($arrSettings);
+
+			if ($intAccessState === IRpcAccessor::ALLOW)
 			{
 				return true;
-			} elseif ($objAccessor->abort())
+			} elseif ($intAccessState === IRpcAccessor::DENY)
 			{
 				return false;
 			}
+
+			// if none of the above if statements apply, we will just
+			// try the next accessor.
 		}
 
+		// If no accessor explicity allows the access then deny access
 		return false;
 	}
 

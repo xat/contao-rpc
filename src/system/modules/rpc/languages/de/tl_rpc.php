@@ -12,7 +12,6 @@
 
 $GLOBALS['TL_LANG']['tl_rpc']['method'][0] = 'Methode';
 $GLOBALS['TL_LANG']['tl_rpc']['method'][1] = 'Die zu konfigurierende RPC Methode';
-$GLOBALS['TL_LANG']['tl_rpc']['secure'][1] = 'Nur sichere Verbindung erlauben.';
 $GLOBALS['TL_LANG']['tl_rpc']['active'][0] = 'Aktiv';
 $GLOBALS['TL_LANG']['tl_rpc']['active'][1] = 'Diese Methode aktivieren.';
 $GLOBALS['TL_LANG']['tl_rpc']['configuration'][0] = 'Konfigurationen';
