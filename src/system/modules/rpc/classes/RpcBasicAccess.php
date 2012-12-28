@@ -55,11 +55,6 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 			}
 		}
 
-		if ($arrSettings['active'] !== '1')
-		{
-			return false;
-		}
-
 		$arrAccessors = RpcHelpers::sortByPriority($this->arrConfig['accessors']);
 
 		foreach ($arrAccessors as $arrAccessor)

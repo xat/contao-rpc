@@ -77,6 +77,7 @@ ClassLoader::addClasses(array
 
 	'Contao\Rpc\RpcUserAccessor' => 'system/modules/rpc/classes/RpcUserAccessor.php',
 	'Contao\Rpc\RpcPublicAccessor' => 'system/modules/rpc/classes/RpcPublicAccessor.php',
+	'Contao\Rpc\RpcActiveAccessor' => 'system/modules/rpc/classes/RpcActiveAccessor.php',
 	'Contao\Rpc\RpcAdminAccessor' => 'system/modules/rpc/classes/RpcAdminAccessor.php',
 	'Contao\Rpc\RpcSecureAccessor' => 'system/modules/rpc/classes/RpcSecureAccessor.php',
 	'Contao\Rpc\RpcFeAccessor' => 'system/modules/rpc/classes/RpcFeAccessor.php',

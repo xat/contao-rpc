@@ -156,6 +156,11 @@ $arrDefaultConfig = array
 				(
 					'accessors' => array
 					(
+						'active' => array
+						(
+							'priority' => 110,
+							'class' => '\Contao\Rpc\RpcActiveAccessor'
+						),
 						'secure' => array
 						(
 							'priority' => 100,
