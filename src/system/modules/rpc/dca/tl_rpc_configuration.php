@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'		  => array('tl_rpc_configuration','getProviders'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['providers'],
+			'reference'               => &$GLOBALS['TL_LANG']['RPC']['providers'],
 			'filter'                  => true,
 			'eval'					  => array('mandatory'=>true,'includeBlankOption'=>true,'submitOnChange'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
