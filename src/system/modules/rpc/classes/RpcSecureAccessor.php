@@ -24,9 +24,9 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	 * @param array
 	 * @return int
 	 */
-	public function accessState($arrMethod)
+	public function accessState($objConfiguration, $objMethod)
 	{
-		if ((isset($arrMethod['secure']) && $arrMethod['secure'] === '1') && (!\Environment::get('ssl')))
+		if ((isset($objConfiguration->secure) && $objConfiguration->secure === '1') && (!\Environment::get('ssl')))
 		{
 			return self::DENY;
 		}

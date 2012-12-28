@@ -23,6 +23,8 @@ class RpcTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testBadRequest()
 	{
+		$strResult = rpcRequest(RPC_URL);
+		var_dump($strResult);
 		$this->assertEquals(rpcRequest(RPC_URL), 'Bad Request');
 	}
 

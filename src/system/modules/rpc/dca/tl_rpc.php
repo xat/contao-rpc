@@ -124,7 +124,8 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 			'save_callback'			  => array(array('tl_rpc','checkConfigurations')),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+			'foreignKey'              => 'tl_rpc_configuration.id',
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		)
 	)
 );

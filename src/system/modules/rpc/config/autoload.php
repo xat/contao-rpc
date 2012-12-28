@@ -88,6 +88,9 @@ ClassLoader::addClasses(array
 
 	// TODO: Namespace caused Problems: Fatal error: Class 'RpcModel' not found in /home/sope/projects/contaorpc.dev.soped.lan/www/src/system/modules/rpc/dca/tl_rpc.php on line 152
 	'RpcModel' => 'system/modules/rpc/models/RpcModel.php',
+	'RpcConfigurationModel' => 'system/modules/rpc/models/RpcConfigurationModel.php',
+
+	'Contao\Rpc\RpcRegistry' => 'system/modules/rpc/classes/RpcRegistry.php',
 
 	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php',
 	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',

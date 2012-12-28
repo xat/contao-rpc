@@ -31,6 +31,8 @@ class RpcModel extends \Model
 		$objResults = static::findAll();
 		$arrResults = array();
 
+
+
 		if (!is_null($objResults))
 		{
 			while ($objResults->next())
@@ -69,6 +71,8 @@ class RpcModel extends \Model
 				\Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE method=?")->execute($strMethod);
 			}
 		}
+
+		self::findAllAssocWithMethodAsKey();
 	}
 
 	/**
@@ -78,18 +82,41 @@ class RpcModel extends \Model
 	 */
 	public static function findAllAssocWithMethodAsKey()
 	{
-		$objResults = static::findAll();
+		$objResults = static::findAll(array('eager' => true));
 		$arrResults = array();
 
 		if (!is_null($objResults))
 		{
 			while ($objResults->next())
 			{
-				$arrResults[$objResults->method] = $objResults->row();
+				$arrResults[$objResults->method] = $objResults->current();
 			}
 		}
 
 		return $arrResults;
 	}
 
+	/**
+	 * Search the related Configurations for one
+	 * which is dedicated to a specific Provider.
+	 *
+	 * @param string
+	 * @return mixed
+	 */
+	public function getRelatedConfigurationByProvider($strProvider)
+	{
+		// TODO: Cache this
+
+		$objConfiguration = $this->getRelated('configuration');
+
+		while ($objConfiguration->next())
+		{
+			if ($objConfiguration->provider === $strProvider)
+			{
+				return $objConfiguration->current();
+			}
+		}
+
+		return null;
+	}
 }

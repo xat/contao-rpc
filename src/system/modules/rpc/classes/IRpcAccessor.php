@@ -25,8 +25,9 @@ interface IRpcAccessor
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
+	 * @param object
+	 * @param object
 	 * @return int
 	 */
-	public function accessState($arrMethod);
+	public function accessState($objConfiguration, $objMethod);
 }

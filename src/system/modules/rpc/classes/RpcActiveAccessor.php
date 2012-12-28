@@ -24,9 +24,9 @@ class RpcActiveAccessor implements IRpcAccessor, IRpcSetup
 	 * @param array
 	 * @return int
 	 */
-	public function accessState($arrMethod)
+	public function accessState($objConfiguration, $objMethod)
 	{
-		if (isset($arrMethod['active']) && $arrMethod['active'] === '1')
+		if (isset($objMethod->active) && $objMethod->active === '1')
 		{
 			return self::SKIP;
 		}

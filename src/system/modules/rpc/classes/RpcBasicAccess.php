@@ -35,7 +35,7 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 	 */
 	public function hasAccess($strMethod)
 	{
-		if (!($arrSettings = self::$arrMethodCache[$strMethod]))
+		if (!($objMethod = self::$arrMethodCache[$strMethod]))
 		{
 			if (!self::$blnRefreshed)
 			{
@@ -44,7 +44,7 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 				self::$blnRefreshed = true;
 
 				// try one more time..
-				if (!($arrSettings = self::$arrMethodCache[$strMethod]))
+				if (!($objMethod = self::$arrMethodCache[$strMethod]))
 				{
 					return false;
 				}
@@ -55,13 +55,14 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 			}
 		}
 
+		$objConfiguration = $objMethod->getRelatedConfigurationByProvider(RpcRegistry::get('provider'));
 		$arrAccessors = RpcHelpers::sortByPriority($this->arrConfig['accessors']);
 
 		foreach ($arrAccessors as $arrAccessor)
 		{
 			// TODO: We are poluting objects here. Find better way.
 			$objAccessor = RpcSetupFactory::create($arrAccessor);
-			$intAccessState = $objAccessor->accessState($arrSettings);
+			$intAccessState = $objAccessor->accessState($objConfiguration, $objMethod);
 
 			if ($intAccessState === IRpcAccessor::ALLOW)
 			{

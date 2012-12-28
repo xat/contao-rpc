@@ -22,11 +22,11 @@ class RpcBeAccessor extends RpcUserAccessor
 	 * @param array
 	 * @return int
 	 */
-	public function accessState($arrMethod)
+	public function accessState($objConfiguration, $objMethod)
 	{
-		if (isset($arrMethod['not_public']) && $arrMethod['not_public'] === '1')
+		if (isset($objConfiguration->not_public) && $objConfiguration->not_public === '1')
 		{
-			if ($this->hasAccessByGroupArray(deserialize($arrMethod['be_groups'])))
+			if ($this->hasAccessByGroupArray(deserialize($objConfiguration->be_groups)))
 			{
 				return self::ALLOW;
 			}

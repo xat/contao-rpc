@@ -42,14 +42,15 @@ class RpcRunner
 	{
 		$blnFoundProvider = false;
 
-		foreach ($GLOBALS['RPC']['providers'] as $arrSettings)
+		foreach ($GLOBALS['RPC']['providers'] as $strProvider => $arrSettings)
 		{
 			$objInput           = RpcSetupFactory::create($arrSettings['input']);
 			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility'], $objInput);
 
 			if ($objResponsibility->isResponsible())
 			{
-				// This Provider seams to be responsible
+				// This Provider seems to be responsible
+				RpcRegistry::set('provider', $strProvider);
 				$blnFoundProvider = true;
 				break;
 			}
