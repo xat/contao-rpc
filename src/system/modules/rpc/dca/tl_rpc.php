@@ -10,7 +10,6 @@
  * @copyright Simon Kusterer 2012
  */
 
-$this->loadLanguageFile('tl_rpc_configuration');
 /**
  * Table tl_rpc
  */
@@ -120,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'options_callback'		  => array('tl_rpc','getConfigurations'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['providers'],
+			'reference'               => &$GLOBALS['TL_LANG']['RPC']['providers'],
 			'save_callback'			  => array(array('tl_rpc','checkConfigurations')),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",

@@ -37,5 +37,3 @@ $GLOBALS['TL_LANG']['tl_rpc_configuration']['delete'][0] = 'Konfiguration lösch
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['delete'][1] = 'Konfiguration ID %s löschen';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['title_legend'] = 'Allgemein';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['rights_legend'] = 'Berechtigungen';
-
-$GLOBALS['TL_LANG']['tl_rpc_configuration']['providers']['json'] = 'JSON';
