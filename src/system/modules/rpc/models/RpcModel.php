@@ -63,7 +63,6 @@ class RpcModel extends \Model
 				$objRpc->tstamp = $time;
 				$objRpc->method = $strMethod;
 				$objRpc->active = '0';
-				$objRpc->not_public = '1';
 				$objRpc->save();
 			} else
 			{
