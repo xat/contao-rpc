@@ -23,7 +23,7 @@ $GLOBALS['TL_LANG']['tl_rpc_configuration']['be_groups'][1] = 'Diesen Backend Gr
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['admins'][0] = 'Admins erlauben';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['admins'][1] = 'Admins den Zugriff erlauben';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'][0] = 'Sichere Verbindung';
-$GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'][1] = 'Nur sichere Verbindung erlauben.';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'][1] = 'Nur sichere Verbindungen mit SSL erlauben.';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['not_public'][0] = 'Authentifizierung erforderlich';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['not_public'][1] = 'Methoden mit dieser Konfiguration erfordern eine Authentifizierung';
 
