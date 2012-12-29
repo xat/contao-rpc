@@ -75,14 +75,14 @@ $GLOBALS['TL_DCA']['tl_rpc'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('not_public', 'method'),
+		'__selector__'                => array('notPublic', 'method'),
 		'default'                     => '{title_legend},method;{configuration_legend},active,configuration'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'not_public'                     => 'admins,fe_groups,be_groups'
+		'notPublic'                     => 'admins,fe_groups,be_groups'
 	),
 
 	// Fields

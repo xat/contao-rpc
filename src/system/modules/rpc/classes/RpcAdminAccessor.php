@@ -26,7 +26,7 @@ class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function accessState($objConfiguration, $objMethod)
 	{
-		if (isset($objConfiguration->not_public) && $objConfiguration->not_public === '1' && isset($objConfiguration->admins) && $objConfiguration->admins === '1')
+		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic === '1' && isset($objConfiguration->admins) && $objConfiguration->admins === '1')
 		{
 			$objUser = \Contao\Rpc\RpcBackendUser::getInstance();
 			if ($objUser->admin === '1')

@@ -24,7 +24,7 @@ class RpcFeAccessor extends RpcUserAccessor
 	 */
 	public function accessState($objConfiguration, $objMethod)
 	{
-		if (isset($objConfiguration->not_public) && $objConfiguration->not_public === '1')
+		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic === '1')
 		{
 			if ($this->hasAccessByGroupArray(deserialize($objConfiguration->fe_groups)))
 			{
