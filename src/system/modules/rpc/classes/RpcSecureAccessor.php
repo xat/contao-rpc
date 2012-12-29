@@ -21,17 +21,18 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
+	 * @param object
+	 * @param object
 	 * @return int
 	 */
-	public function accessState($objConfiguration, $objMethod)
+	public function hasAccess($objConfiguration, $objMethod)
 	{
 		if ((isset($objConfiguration->secure) && $objConfiguration->secure === '1') && (!\Environment::get('ssl')))
 		{
-			return self::DENY;
+			throw new ERpcAccessorException('Only SSL connections allowed');
 		}
 
-		return self::SKIP;
+		return false;
 	}
 
 }

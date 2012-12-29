@@ -21,10 +21,11 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
+	 * @param object
+	 * @param object
 	 * @return int
 	 */
-	public function accessState($objConfiguration, $objMethod)
+	public function hasAccess($objConfiguration, $objMethod)
 	{
 		if (strlen($objConfiguration->ipList))
 		{
@@ -34,18 +35,29 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 				$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
 					. implode(',', array_map('intval', deserialize($objConfiguration->ipListBlack)))
 					. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute(\Environment::get('ip'));
-				return $objBlackIp->has_access ? self::SKIP : self::DENY;
 
+				if ($objBlackIp->has_access)
+				{
+					return false;
+				}
+
+				throw new ERpcAccessorException('IP is on the blacklist');
 			}else{
 				// whitelist
 				$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
 					. implode(',', array_map('intval', deserialize($objConfiguration->ipListWhite)))
 					. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute(\Environment::get('ip'));
-				return $objWhiteIp->has_access ? self::SKIP : self::DENY;
+
+				if ($objWhiteIp->has_access)
+				{
+					return false;
+				}
+
+				throw new ERpcAccessorException('IP is not on the whitelist');
 			}
 		}
 
-		return self::SKIP;
+		return false;
 	}
 
 }

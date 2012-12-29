@@ -357,7 +357,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$varResult = json_decode($strResult);
-		$this->assertEquals($varResult->error->message, 'Access denied');
+		$this->assertEquals($varResult->error->message, 'Method not active');
 		$this->assertEquals($varResult->error->code, '2');
 	}
 

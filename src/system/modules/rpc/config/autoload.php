@@ -94,5 +94,7 @@ ClassLoader::addClasses(array
 
 	'Contao\Rpc\RpcRegistry' => 'system/modules/rpc/classes/RpcRegistry.php',
 
+	'Contao\Rpc\ERpcAccessorException' => 'system/modules/rpc/classes/ERpcAccessorException.php',
+
 	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php'
 ));

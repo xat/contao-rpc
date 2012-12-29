@@ -21,17 +21,18 @@ class RpcActiveAccessor implements IRpcAccessor, IRpcSetup
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
-	 * @return int
+	 * @param object
+	 * @param object
+	 * @return boolean
 	 */
-	public function accessState($objConfiguration, $objMethod)
+	public function hasAccess($objConfiguration, $objMethod)
 	{
 		if (isset($objMethod->active) && $objMethod->active === '1')
 		{
-			return self::SKIP;
+			return false;
 		}
 
-		return self::DENY;
+		throw new ERpcAccessorException('Method not active');
 	}
 
 }

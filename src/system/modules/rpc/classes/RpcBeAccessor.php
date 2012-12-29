@@ -19,20 +19,21 @@ class RpcBeAccessor extends RpcUserAccessor
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
-	 * @return int
+	 * @param object
+	 * @param object
+	 * @return boolean
 	 */
-	public function accessState($objConfiguration, $objMethod)
+	public function hasAccess($objConfiguration, $objMethod)
 	{
 		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic === '1')
 		{
 			if ($this->hasAccessByGroupArray(deserialize($objConfiguration->be_groups)))
 			{
-				return self::ALLOW;
+				return true;
 			}
 		}
 
-		return self::SKIP;
+		return false;
 	}
 
 	/**

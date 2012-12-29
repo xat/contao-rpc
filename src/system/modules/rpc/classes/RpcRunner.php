@@ -124,9 +124,16 @@ class RpcRunner
 		{
 			if (!$objPair->response->getError())
 			{
-				if (!$objAccess->hasAccess($objPair->request->getMethodName()))
+				try
 				{
-					$objPair->response->setErrorType(RpcResponse::ACCESS_DENIED);
+					if (!$objAccess->hasAccess($objPair->request->getMethodName()))
+					{
+						$objPair->response->setErrorType(RpcResponse::ACCESS_DENIED);
+						continue;
+					}
+				} catch (ERpcAccessorException $e)
+				{
+					$objPair->response->setError(2, $e->getMessage());
 					continue;
 				}
 

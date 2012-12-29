@@ -58,22 +58,15 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 		$objConfiguration = $objMethod->getRelatedConfigurationByProvider(RpcRegistry::get('provider'));
 		$arrAccessors = RpcHelpers::sortByPriority($this->arrConfig['accessors']);
 
-		foreach ($arrAccessors as $strAccessor => $arrAccessor)
+		foreach ($arrAccessors  as $arrAccessor)
 		{
 			// TODO: We are poluting objects here. Find better way.
 			$objAccessor = RpcSetupFactory::create($arrAccessor);
-			$intAccessState = $objAccessor->accessState($objConfiguration, $objMethod);
 
-			if ($intAccessState === IRpcAccessor::ALLOW)
+			if ($objAccessor->hasAccess($objConfiguration, $objMethod))
 			{
 				return true;
-			} elseif ($intAccessState === IRpcAccessor::DENY)
-			{
-				return false;
 			}
-
-			// if none of the above if statements apply, we will just
-			// try the next accessor.
 		}
 
 		// If no accessor explicity allows the access then deny access

@@ -21,21 +21,22 @@ class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param array
+	 * @param object
+	 * @param object
 	 * @return int
 	 */
-	public function accessState($objConfiguration, $objMethod)
+	public function hasAccess($objConfiguration, $objMethod)
 	{
 		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic === '1' && isset($objConfiguration->admins) && $objConfiguration->admins === '1')
 		{
 			$objUser = \Contao\Rpc\RpcBackendUser::getInstance();
 			if ($objUser->admin === '1')
 			{
-				return self::ALLOW;
+				return true;
 			}
 		}
 
-		return self::SKIP;
+		return false;
 	}
 
 }
