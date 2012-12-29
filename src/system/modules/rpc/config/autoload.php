@@ -94,6 +94,5 @@ ClassLoader::addClasses(array
 
 	'Contao\Rpc\RpcRegistry' => 'system/modules/rpc/classes/RpcRegistry.php',
 
-	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php',
-	'Contao\Rpc\TestMethods' => 'system/modules/rpc/classes/TestMethods.php',
+	'Contao\Rpc\RpcStandardMethods' => 'system/modules/rpc/classes/RpcStandardMethods.php'
 ));

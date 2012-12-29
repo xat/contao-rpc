@@ -108,6 +108,7 @@ class RpcModel extends \Model
 		// TODO: Cache this
 
 		$objConfiguration = $this->getRelated('configuration');
+		$objConfiguration->reset();
 
 		while ($objConfiguration->next())
 		{
