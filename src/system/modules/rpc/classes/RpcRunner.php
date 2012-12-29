@@ -45,12 +45,12 @@ class RpcRunner
 		foreach ($GLOBALS['RPC']['providers'] as $strProvider => $arrSettings)
 		{
 			$objInput           = RpcSetupFactory::create($arrSettings['input']);
-			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility'], $objInput);
+			$objResponsibility  = RpcSetupFactory::create($arrSettings['responsibility']);
+			$objResponsibility->setInput($objInput);
 
 			if ($objResponsibility->isResponsible())
 			{
 				// This Provider seems to be responsible
-				RpcRegistry::set('provider', $strProvider);
 				$blnFoundProvider = true;
 				break;
 			}
@@ -66,6 +66,9 @@ class RpcRunner
 		$this->objInput    = $objInput;
 		$this->arrSettings = $arrSettings;
 
+		RpcRegistry::set('provider', $strProvider);
+		RpcRegistry::set('input', $objInput);
+
 		return $this;
 	}
 
@@ -75,7 +78,7 @@ class RpcRunner
 	public function decrypt()
 	{
 		// perform decryption, if needed
-		$objDecryption  = RpcSetupFactory::create($this->arrSettings['decryption'], $this->objInput);
+		$objDecryption  = RpcSetupFactory::create($this->arrSettings['decryption']);
 		$objDecryption->decrypt();
 
 		return $this;
@@ -87,7 +90,7 @@ class RpcRunner
 	public function authenticate()
 	{
 		// perform authentication
-		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication'], $this->objInput);
+		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication']);
 		if (!($strAuthType = $objAuthentication->authenticate()))
 		{
 			// Abort on a failed authentication.
@@ -105,7 +108,7 @@ class RpcRunner
 	 */
 	public function decode()
 	{
-		$objDecoder = RpcSetupFactory::create($this->arrSettings['decoder'], $this->objInput);
+		$objDecoder = RpcSetupFactory::create($this->arrSettings['decoder']);
 		$this->arrPairs = $objDecoder->decode();
 
 		return $this;
@@ -167,7 +170,7 @@ class RpcRunner
 	public function encrypt()
 	{
 		// Run encryption, if needed
-		$objEncryption = RpcSetupFactory::create($this->arrSettings['encryption'], $this->objInput);
+		$objEncryption = RpcSetupFactory::create($this->arrSettings['encryption']);
 		if ($strEncrypted = $objEncryption->encrypt($this->strResponse))
 		{
 			$this->strResponse = $strEncrypted;

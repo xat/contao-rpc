@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-class RpcBasicEncryption implements IRpcEncryption, IRpcSetup, IRpcSetInput
+class RpcBasicEncryption implements IRpcEncryption, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * Try to perform encryption.
@@ -27,7 +25,7 @@ class RpcBasicEncryption implements IRpcEncryption, IRpcSetup, IRpcSetInput
 	 */
 	public function encrypt($strResponse)
 	{
-		if (!($strEncryptField = $this->objInput->get($this->arrConfig['encrypt_field'])))
+		if (!($strEncryptField = RpcRegistry::get('input')->get($this->arrConfig['encrypt_field'])))
 		{
 			return false;
 		}

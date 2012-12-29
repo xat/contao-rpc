@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-class RpcBasicDecryption implements IRpcDecryption, IRpcSetup, IRpcSetInput
+class RpcBasicDecryption implements IRpcDecryption, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * Try to perform decryption.
@@ -28,7 +26,7 @@ class RpcBasicDecryption implements IRpcDecryption, IRpcSetup, IRpcSetInput
 	public function decrypt()
 	{
 
-		if (!($strDecryptField = $this->objInput->get($this->arrConfig['decrypt_field'])))
+		if (!($strDecryptField = RpcRegistry::get('input')->get($this->arrConfig['decrypt_field'])))
 		{
 			return false;
 		}
@@ -42,7 +40,7 @@ class RpcBasicDecryption implements IRpcDecryption, IRpcSetup, IRpcSetInput
 
 		foreach ($this->arrConfig['lookups'] as $arrLookup)
 		{
-			$objLookup = RpcSetupFactory::create($arrLookup, $this->objInput);
+			$objLookup = RpcSetupFactory::create($arrLookup, RpcRegistry::get('input'));
 			if ($strKey = $objLookup->lookup())
 			{
 				// abort after the first match.
@@ -59,9 +57,9 @@ class RpcBasicDecryption implements IRpcDecryption, IRpcSetup, IRpcSetInput
 
 		foreach ($this->arrConfig['decrypted_fields'] as $strField)
 		{
-			if ($strVal = $this->objInput->get($strField))
+			if ($strVal = RpcRegistry::get('input')->get($strField))
 			{
-				$this->objInput->set($strField, $objDecrypter->decrypt($strVal, $strKey));
+				RpcRegistry::get('input')->set($strField, $objDecrypter->decrypt($strVal, $strKey));
 			}
 		}
 

@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-class RpcTableLookup extends \System implements IRpcLookup, IRpcSetup, IRpcSetInput
+class RpcTableLookup extends \System implements IRpcLookup, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * Make the constructor visible
@@ -59,7 +57,7 @@ class RpcTableLookup extends \System implements IRpcLookup, IRpcSetup, IRpcSetIn
 
 		for($i=1; $i<count($this->arrConfig['where']); $i++)
 		{
-			$strField = $this->objInput->get($this->arrConfig['where'][$i]);
+			$strField = RpcRegistry::get('input')->get($this->arrConfig['where'][$i]);
 
 			if (!$strField)
 			{

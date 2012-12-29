@@ -22,10 +22,9 @@ class RpcSetupFactory
 	 * the value of config.
 	 *
 	 * @param array
-	 * @param IRpcInput
 	 * @return mixed
 	 */
-	static public function create($arrSettings, $objInput = null)
+	static public function create($arrSettings)
 	{
 		if (!isset($arrSettings['class']))
 		{
@@ -43,12 +42,6 @@ class RpcSetupFactory
 
 		$obj->setup($arrSettings['config']);
 
-		if ($obj instanceof IRpcSetInput && !is_null($objInput) && $objInput instanceof IRpcInput)
-		{
-			$obj->setInput($objInput);
-		}
-
-		// Create an instance of
 		return $obj;
 	}
 }

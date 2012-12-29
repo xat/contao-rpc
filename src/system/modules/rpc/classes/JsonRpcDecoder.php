@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-class JsonRpcDecoder implements IRpcDecoder, IRpcSetup, IRpcSetInput
+class JsonRpcDecoder implements IRpcDecoder, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	protected $arrDefaults = array
 	(
@@ -32,7 +30,7 @@ class JsonRpcDecoder implements IRpcDecoder, IRpcSetup, IRpcSetInput
 	 */
 	public function decode()
 	{
-		$strRpc = $this->objInput->get($this->arrConfig['rpc_field']);
+		$strRpc = RpcRegistry::get('input')->get($this->arrConfig['rpc_field']);
 
 		if (!$strRpc)
 		{

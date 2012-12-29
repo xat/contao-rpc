@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSetup, IRpcSetInput
+abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * @return boolean
@@ -26,7 +24,7 @@ abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSet
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithCredentials($this->objInput->get($this->arrConfig['username_field']), $this->objInput->get($this->arrConfig['password_field'])))
+		if ($objRpcUser->authenticateWithCredentials(RpcRegistry::get('input')->get($this->arrConfig['username_field']), RpcRegistry::get('input')->get($this->arrConfig['password_field'])))
 		{
 			return true;
 		}
@@ -51,7 +49,7 @@ abstract class RpcCredentialsAuthenticator implements IRpcAuthenticator, IRpcSet
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig['username_field']) || !$this->objInput->get($this->arrConfig['password_field']))
+		if (!RpcRegistry::get('input')->get($this->arrConfig['username_field']) || !RpcRegistry::get('input')->get($this->arrConfig['password_field']))
 		{
 			return false;
 		}

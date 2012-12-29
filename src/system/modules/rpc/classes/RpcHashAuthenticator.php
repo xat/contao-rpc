@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup, IRpcSetInput
+abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * @return boolean
@@ -26,7 +24,7 @@ abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup, IRp
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithHash($this->objInput->get($this->arrConfig['hash_field'])))
+		if ($objRpcUser->authenticateWithHash(RpcRegistry::get('input')->get($this->arrConfig['hash_field'])))
 		{
 			return true;
 		}
@@ -51,7 +49,7 @@ abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup, IRp
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig['hash_field']))
+		if (!RpcRegistry::get('input')->get($this->arrConfig['hash_field']))
 		{
 			return false;
 		}

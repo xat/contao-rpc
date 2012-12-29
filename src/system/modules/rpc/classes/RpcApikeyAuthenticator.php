@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup, IRpcSetInput
+abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * @return boolean
@@ -26,7 +24,7 @@ abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup, I
 	{
 		$objRpcUser = $this->getUser();
 
-		if ($objRpcUser->authenticateWithApikey($this->objInput->get($this->arrConfig['apikey_field'])))
+		if ($objRpcUser->authenticateWithApikey(RpcRegistry::get('input')->get($this->arrConfig['apikey_field'])))
 		{
 			return true;
 		}
@@ -51,7 +49,7 @@ abstract class RpcApikeyAuthenticator implements IRpcAuthenticator, IRpcSetup, I
 	 */
 	public function isResponsible()
 	{
-		if (!$this->objInput->get($this->arrConfig['apikey_field']))
+		if (!RpcRegistry::get('input')->get($this->arrConfig['apikey_field']))
 		{
 			return false;
 		}

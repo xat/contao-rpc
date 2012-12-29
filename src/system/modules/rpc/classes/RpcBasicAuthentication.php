@@ -12,12 +12,10 @@
 
 namespace Contao\Rpc;
 
-class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup, IRpcSetInput
+class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup
 {
 
 	use TRpcSetup;
-
-	use TRpcSetInput;
 
 	/**
 	 * Run Authentication
@@ -31,7 +29,7 @@ class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup, IRpcSetInpu
 
 		foreach ($arrAuthenticators as $arrSettings)
 		{
-			$objAuthenticator = RpcSetupFactory::create($arrSettings, $this->objInput);
+			$objAuthenticator = RpcSetupFactory::create($arrSettings);
 
 			if ($objAuthenticator->isResponsible())
 			{
