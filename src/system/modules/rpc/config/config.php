@@ -161,29 +161,34 @@ $arrDefaultConfig = array
 							'priority' => 110,
 							'class' => '\Contao\Rpc\RpcActiveAccessor'
 						),
-						'secure' => array
+						'ipList' => array
 						(
 							'priority' => 100,
+							'class' => '\Contao\Rpc\RpcIpListAccessor'
+						),
+						'secure' => array
+						(
+							'priority' => 90,
 							'class' => '\Contao\Rpc\RpcSecureAccessor'
 						),
 						'public' => array
 						(
-							'priority' => 90,
+							'priority' => 80,
 							'class' => '\Contao\Rpc\RpcPublicAccessor'
 						),
 						'admin' => array
 						(
-							'priority' => 80,
+							'priority' => 70,
 							'class' => '\Contao\Rpc\RpcAdminAccessor'
 						),
 						'backend' => array
 						(
-							'priority' => 70,
+							'priority' => 60,
 							'class' => '\Contao\Rpc\RpcBeAccessor'
 						),
 						'frontend' => array
 						(
-							'priority' => 60,
+							'priority' => 50,
 							'class' => '\Contao\Rpc\RpcFeAccessor'
 						)
 					)
@@ -269,13 +274,22 @@ $arrDefaultConfig = array
 
 $GLOBALS['RPC'] = is_array($GLOBALS['RPC']) ? array_merge_recursive($GLOBALS['RPC'],$arrDefaultConfig) : $arrDefaultConfig;
 
-$GLOBALS['BE_MOD']['system']['rpc'] = array
+
+$GLOBALS['BE_MOD']['rpc'] = array
 (
-	'tables'  => array('tl_rpc'),
-	'icon'    => 'system/modules/rpc/html/icons/connect.png'
-);
-$GLOBALS['BE_MOD']['system']['rpc_configuration'] = array
-(
-	'tables'  => array('tl_rpc_configuration'),
-	// 'icon'    => 'system/modules/rpc/html/icons/configuration.png'
+	'method' => array
+	(
+		'tables'  => array('tl_rpc'),
+		'icon'    => 'system/modules/rpc/html/icons/connect.png'
+	),
+	'configuration' => array
+	(
+		'tables'  => array('tl_rpc_configuration'),
+		// 'icon'    => 'system/modules/rpc/html/icons/configuration.png'
+	),
+	'iplist' => array
+	(
+		'tables'  => array('tl_rpc_iplist', 'tl_rpc_iplist_item'),
+		// 'icon'    => 'system/modules/rpc/html/icons/iplist.png'
+	)
 );

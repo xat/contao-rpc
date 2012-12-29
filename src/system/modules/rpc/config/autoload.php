@@ -79,6 +79,7 @@ ClassLoader::addClasses(array
 	'Contao\Rpc\RpcPublicAccessor' => 'system/modules/rpc/classes/RpcPublicAccessor.php',
 	'Contao\Rpc\RpcActiveAccessor' => 'system/modules/rpc/classes/RpcActiveAccessor.php',
 	'Contao\Rpc\RpcAdminAccessor' => 'system/modules/rpc/classes/RpcAdminAccessor.php',
+	'Contao\Rpc\RpcIpListAccessor' => 'system/modules/rpc/classes/RpcIpListAccessor.php',
 	'Contao\Rpc\RpcSecureAccessor' => 'system/modules/rpc/classes/RpcSecureAccessor.php',
 	'Contao\Rpc\RpcFeAccessor' => 'system/modules/rpc/classes/RpcFeAccessor.php',
 	'Contao\Rpc\RpcBeAccessor' => 'system/modules/rpc/classes/RpcBeAccessor.php',
@@ -88,6 +89,7 @@ ClassLoader::addClasses(array
 
 	// TODO: Namespace caused Problems: Fatal error: Class 'RpcModel' not found in /home/sope/projects/contaorpc.dev.soped.lan/www/src/system/modules/rpc/dca/tl_rpc.php on line 152
 	'RpcModel' => 'system/modules/rpc/models/RpcModel.php',
+	'RpcIpListItemModel' => 'system/modules/rpc/models/RpcIpListItemModel.php',
 	'RpcConfigurationModel' => 'system/modules/rpc/models/RpcConfigurationModel.php',
 
 	'Contao\Rpc\RpcRegistry' => 'system/modules/rpc/classes/RpcRegistry.php',

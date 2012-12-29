@@ -11,6 +11,8 @@
  * @copyright Sebastian Tilch 2012
  */
 
+
+$this->loadLanguageFile('tl_rpc_iplist');
 /**
 * Table tl_rpc_configuration
 */
@@ -22,6 +24,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 	(
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => true,
+		'switchToEdit'				  => true,
 		'sql' => array
 		(
 			'keys' => array
@@ -83,15 +86,17 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('provider', 'not_public'),
+		'__selector__'                => array('provider','ipList','not_public'),
 		'default'              		  => '{title_legend},name,provider',
-		'json'						  => '{title_legend},name,provider;{rights_legend},secure,not_public'
+		'json'						  => '{title_legend},name,provider;{rights_legend},ipList,secure,not_public'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'not_public'                     => 'admins,fe_groups,be_groups'
+		'not_public'                  => 'admins,fe_groups,be_groups',
+		'ipList_white'				  => 'ipListWhite',
+		'ipList_black'				  => 'ipListBlack'
 	),
 
 	// Fields
@@ -124,6 +129,37 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'filter'                  => true,
 			'eval'					  => array('mandatory'=>true,'includeBlankOption'=>true,'submitOnChange'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'ipList' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['ipList'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'		  		  => array('white','black'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_rpc_iplist']['types'],
+			'filter'                  => true,
+			'eval'					  => array('includeBlankOption'=>true,'submitOnChange'=>true),
+			'sql'                     => "varchar(5) NOT NULL default ''"
+		),
+		'ipListWhite' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['ipListWhite'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options_callback'		  => array('tl_rpc_configuration','getIpLists'),
+			'eval'					  => array('mandatory'=>true,'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+		),
+		'ipListBlack' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['ipListBlack'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options_callback'		  => array('tl_rpc_configuration','getIpLists'),
+			'eval'					  => array('mandatory'=>true,'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
 		),
 		'secure' => array
 		(
@@ -181,6 +217,12 @@ class tl_rpc_configuration extends \Backend
 	public function getProviders()
 	{
 		return array_keys($GLOBALS['RPC']['providers']);
+	}
+
+	public function getIpLists(\DataContainer $dc)
+	{
+		$obj = $this->Database->prepare("SELECT id, name FROM tl_rpc_iplist WHERE type=?")->execute($dc->activeRecord->ipList);
+		return array_combine($obj->fetchEach('id'), $obj->fetchEach('name'));
 	}
 
 }
