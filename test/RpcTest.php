@@ -361,6 +361,19 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '2');
 	}
 
+	public function testAccessNoConfigMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'noConfigPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Method has no configuration');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
 	public function testAccessCorrectFeGroupMethod()
 	{
 		$strResult = rpcRequest(

@@ -107,15 +107,21 @@ class RpcModel extends \Model
 	{
 		// TODO: Cache this
 
-		$objConfiguration = $this->getRelated('configuration');
-		$objConfiguration->reset();
-
-		while ($objConfiguration->next())
+		try
 		{
-			if ($objConfiguration->provider === $strProvider)
+			$objConfiguration = $this->getRelated('configuration');
+			$objConfiguration->reset();
+
+			while ($objConfiguration->next())
 			{
-				return $objConfiguration->current();
+				if ($objConfiguration->provider === $strProvider)
+				{
+					return $objConfiguration->current();
+				}
 			}
+		} catch (Exception $e)
+		{
+			return null;
 		}
 
 		return null;

@@ -158,8 +158,13 @@ $arrDefaultConfig = array
 					(
 						'active' => array
 						(
-							'priority' => 110,
+							'priority' => 120,
 							'class' => '\Contao\Rpc\RpcActiveAccessor'
+						),
+						'config' => array
+						(
+							'priority' => 110,
+							'class' => '\Contao\Rpc\RpcConfigAccessor'
 						),
 						'ipList' => array
 						(

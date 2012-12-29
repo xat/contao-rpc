@@ -28,6 +28,10 @@ $GLOBALS['RPC']['methods'] = array_merge($GLOBALS['RPC']['methods'], array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'pong')
 	),
+	'noConfigPong'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'pong')
+	),
 	'adminPong'    => array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'pong')
