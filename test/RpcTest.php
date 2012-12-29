@@ -160,18 +160,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($strResult, 'Access Denied');
 	}
-/*
-	public function testBackendCorrectHashAuthentication()
-	{
-		$strResult = rpcRequest(
-			RPC_URL,
-			array('provider' => 'json', 'be_hash' => 'd72f6cf752dad70be42db7c3fbb6ab09ede6f09e'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
-		);
-
-		$this->assertNotEquals($strResult, 'Access Denied');
-	}
-*/
 
 	public function testBackendHashGeneration()
 	{
@@ -250,19 +238,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($strResult, 'Access Denied');
 	}
-
-/*
-	public function testFrontendCorrectHashAuthentication()
-	{
-		$strResult = rpcRequest(
-			RPC_URL,
-			array('provider' => 'json', 'fe_hash' => 'd685b9c00f18f94313663ca375e55a4ff9552d3f'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong')
-		);
-
-		$this->assertNotEquals($strResult, 'Access Denied');
-	}
-*/
 
 	public function testFrontendHashGeneration()
 	{
