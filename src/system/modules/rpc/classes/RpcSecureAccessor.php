@@ -29,7 +29,7 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	{
 		if ((isset($objConfiguration->secure) && $objConfiguration->secure === '1') && (!\Environment::get('ssl')))
 		{
-			throw new ERpcAccessorException('Only SSL connections allowed');
+			throw new ERpcAccessorException('Only SSL connections are allowed');
 		}
 
 		return false;

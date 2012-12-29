@@ -349,6 +349,19 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '2');
 	}
 
+	public function testAccessNoSslMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'sslPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Only SSL connections are allowed');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
 	public function testAccessCorrectFeGroupMethod()
 	{
 		$strResult = rpcRequest(
