@@ -137,7 +137,8 @@ trait TRpcUser
 	 */
 	public function authenticateWithApikey($strApikey)
 	{
-		if (empty($strApikey) || !$strApikey)
+		// TODO: change "16" in an changeable value
+		if (empty($strApikey) || !is_string($strApikey) || strlen($strApikey) < 16)
 		{
 			return false;
 		}

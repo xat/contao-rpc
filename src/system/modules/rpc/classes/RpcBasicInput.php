@@ -54,7 +54,7 @@ class RpcBasicInput implements IRpcInput, IRpcSetup
 			return $this->arrCache[$strKey];
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
