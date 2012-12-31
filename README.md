@@ -26,14 +26,17 @@ class MyPing
 }
 ```
 
-In the backend of contao you can define who is able to access the methods from external:
-
-![CustomSelectWidget](https://raw.github.com/xat/contao-rpc/master/contao-rpc.png)
-
 Within the default implementation contao-rpc supports JSON-RPC 2.0. Find out more about JSON-RPC
 [here](http://www.jsonrpc.org/specification). However, contao-rpc is designed to be very flexibel
 and extendable. This means if you need something other then JSON-RPC, in most cases it should
  be easy to implement using contao-rpc as your base.
+
+## Use Cases
+
+* Building any kind of Frontend GUI using Contao as Backend. E.g.: Native mobile Apps, JavaScript Apps, Flash Apps, Java Apps,....
+* Run certain tasks remotely: Export Data (e.g. Newsletter receivers, Backups), Create News Entries,...
+* Use it as Ajax Entrypoint for a normal Contao Website
+* Create a native mobile Contao-Backend-App using contao-rpc as Entrypoint
 
 ## Dependencies
 KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (optional, but recommend)
