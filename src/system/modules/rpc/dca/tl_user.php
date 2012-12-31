@@ -22,8 +22,10 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['apikey'] = array
 	'exclude'                 => true,
 	'search'                  => false,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'minlength' => 16, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
+	'wizard'		  => array(array('\KeyGenerator\KeyGenerator','getWizard')),
+	'save_callback'		  => array(array('\KeyGenerator\KeyGenerator','setKeyIfEmpty')),
+	'eval'                    => array('maxlength'=>32, 'minlength' => 32, 'feEditable'=>false, 'feViewable'=>false, 'feGroup'=>'rpc', 'tl_class'=>'w50 wizard'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_user']['fields']['encryptionkey'] = array
@@ -32,6 +34,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['encryptionkey'] = array
 	'exclude'                 => true,
 	'search'                  => false,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'minlength' => 16, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
+	'wizard'		  => array(array('\KeyGenerator\KeyGenerator','getWizard')),
+	'save_callback'		  => array(array('\KeyGenerator\KeyGenerator','setKeyIfEmpty')),
+	'eval'                    => array('maxlength'=>32, 'minlength' => 32, 'feEditable'=>false, 'feViewable'=>false, 'feGroup'=>'rpc', 'tl_class'=>'w50 wizard'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
