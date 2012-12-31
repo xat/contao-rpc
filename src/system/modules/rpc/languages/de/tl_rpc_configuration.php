@@ -34,6 +34,12 @@ $GLOBALS['TL_LANG']['tl_rpc_configuration']['encryption'][0]  = 'Verschlüsselun
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['encryption'][1]      = 'Nur Verschlüsselte Anfragen bearbeiten.';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['notPublic'][0]  = 'Authentifizierung erforderlich';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['notPublic'][1]   = 'Methoden mit dieser Konfiguration erfordern eine Authentifizierung';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['credentialsAuth'][0]      = 'Benutzername/Passwort Auth';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['credentialsAuth'][1]      = 'Authentifizierung mit Benutzername und Passwort erlauben';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['hashAuth'][0]      = 'Hash Auth';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['hashAuth'][1]      = 'Authentifizierung mit Hash erlauben';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['apikeyAuth'][0]      = 'Apikey Auth';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['apikeyAuth'][1]      = 'Authentifizierung mit Apikey erlauben';
 
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['new'][0]         = 'Neue Konfiguration';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['new'][1]         = 'Neue Konfiguration hinzufügen.';

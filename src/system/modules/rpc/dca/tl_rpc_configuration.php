@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'notPublic'                  => 'admins,fe_groups,be_groups',
+		'notPublic'                  => 'admins,fe_groups,be_groups,credentialsAuth,hashAuth,apikeyAuth',
 		'ipList_white'				  => 'ipListWhite',
 		'ipList_black'				  => 'ipListBlack'
 	),
@@ -215,6 +215,33 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'inputType'               => 'checkbox',
 			'filter'                  => true,
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'credentialsAuth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['credentialsAuth'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default '1'"
+		),
+		'hashAuth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['hashAuth'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default '1'"
+		),
+		'apikeyAuth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['apikeyAuth'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default '1'"
 		)
 	)
 );

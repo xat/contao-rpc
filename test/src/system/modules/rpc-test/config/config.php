@@ -32,6 +32,10 @@ $GLOBALS['RPC']['methods'] = array_merge($GLOBALS['RPC']['methods'], array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'pong')
 	),
+	'accessPong'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'pong')
+	),
 	'sslPong'    => array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'pong')

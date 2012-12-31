@@ -12,9 +12,8 @@
 
 namespace Contao\Rpc;
 
-class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
+class RpcAuthenticatorAccessor implements IRpcAccessor, IRpcSetup
 {
-
 	use TRpcSetup;
 
 	/**
@@ -27,16 +26,19 @@ class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{
-		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic === '1' && isset($objConfiguration->admins) && $objConfiguration->admins === '1')
+		$strDcaField = $this->arrConfig['dca_field'];
+
+		if (isset($objConfiguration->$strDcaField) && $objConfiguration->$strDcaField !== '1')
 		{
-			$objUser = \Contao\Rpc\RpcBackendUser::getInstance();
-			if ($objUser->admin === '1')
+			foreach ($this->arrConfig['authenticators'] as $strAuthenticator)
 			{
-				return true;
+				if (RpcRegistry::get('authenticator') === $strAuthenticator)
+				{
+					throw new ERpcAccessorException('This type of Authentication is not allowed');
+				}
 			}
 		}
 
 		return false;
 	}
-
 }

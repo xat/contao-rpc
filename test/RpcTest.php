@@ -441,4 +441,17 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '2');
 	}
 
+	public function testAccessWrongAuthMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json', 'be_apikey' => '098f6bcd4621d373cade4e832627b4f6'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'accessPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'This type of Authentication is not allowed');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
 }

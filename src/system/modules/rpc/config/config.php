@@ -190,19 +190,49 @@ $arrDefaultConfig = array
 							'priority' => 70,
 							'class' => '\Contao\Rpc\RpcPublicAccessor'
 						),
-						'admin' => array
+						'credentials' => array
 						(
 							'priority' => 60,
+							'class' => '\Contao\Rpc\RpcAuthenticatorAccessor',
+							'config' => array
+							(
+								'dca_field' => 'credentialsAuth',
+								'authenticators' => array('backend_credentials', 'frontend_credentials')
+							)
+						),
+						'hash' => array
+						(
+							'priority' => 50,
+							'class' => '\Contao\Rpc\RpcAuthenticatorAccessor',
+							'config' => array
+							(
+								'dca_field' => 'hashAuth',
+								'authenticators' => array('backend_hash', 'frontend_hash')
+							)
+						),
+						'apikey' => array
+						(
+							'priority' => 40,
+							'class' => '\Contao\Rpc\RpcAuthenticatorAccessor',
+							'config' => array
+							(
+								'dca_field' => 'apikeyAuth',
+								'authenticators' => array('backend_apikey', 'frontend_apikey')
+							)
+						),
+						'admin' => array
+						(
+							'priority' => 30,
 							'class' => '\Contao\Rpc\RpcAdminAccessor'
 						),
 						'backend' => array
 						(
-							'priority' => 50,
+							'priority' => 20,
 							'class' => '\Contao\Rpc\RpcBeAccessor'
 						),
 						'frontend' => array
 						(
-							'priority' => 40,
+							'priority' => 10,
 							'class' => '\Contao\Rpc\RpcFeAccessor'
 						)
 					)
