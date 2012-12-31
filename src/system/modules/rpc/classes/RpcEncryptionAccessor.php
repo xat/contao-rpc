@@ -41,7 +41,7 @@ class RpcEncryptionAccessor implements IRpcAccessor, IRpcSetup
 			$strValue = RpcRegistry::get('input')->get($strField);
 			if (empty($strValue))
 			{
-				throw new ERpcAccessorException('Only encoded communication is permitted');
+				throw new ERpcAccessorException('Only encrypted communication is permitted');
 			}
 		}
 

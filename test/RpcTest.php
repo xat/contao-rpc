@@ -454,4 +454,17 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '2');
 	}
 
+	public function testAccessNoEncryptionAuthMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'encryptionAccessPong', 'params' => array('ping'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->message, 'Only encrypted communication is permitted');
+		$this->assertEquals($varResult->error->code, '2');
+	}
+
 }
