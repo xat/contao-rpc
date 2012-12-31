@@ -81,8 +81,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'pong', 'params' => array('ping'))
 		);
 
-		var_dump($strResult);
-
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->result, 'ping');
 		$this->assertEquals($varResult->id, '1337');
