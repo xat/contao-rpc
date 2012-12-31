@@ -179,7 +179,11 @@ $arrDefaultConfig = array
 						'encryption' => array
 						(
 							'priority' => 80,
-							'class' => '\Contao\Rpc\RpcEncryptionAccessor'
+							'class' => '\Contao\Rpc\RpcEncryptionAccessor',
+							'config' => array
+							(
+								'require' => array('decrypt', 'encrypt')
+							)
 						),
 						'public' => array
 						(

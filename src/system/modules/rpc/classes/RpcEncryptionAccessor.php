@@ -27,11 +27,21 @@ class RpcEncryptionAccessor implements IRpcAccessor, IRpcSetup
 	public function hasAccess($objConfiguration, $objMethod)
 	{
 		$blnEncryption = isset($objConfiguration->encryption) && $objConfiguration->encryption === '1';
-		$blnEncryptString = strlen($objConfiguration->encrypt);
-		$blnDecryptString = strlen($objConfiguration->decrypt);
-		$blnParams = true; // TODO: WE NEED THE PARAMS
+		//$blnEncryptString = strlen($objConfiguration->encrypt);
+		//$blnDecryptString = strlen($objConfiguration->decrypt);
+		$blnParams = true;
 
-		if ($blnEncryption && !($blnDecryptString && (!$blnParams || ($blnParams && $blnEncryptString))))
+		foreach ($this->arrConfig['require'] as $strField)
+		{
+			$strValue = RpcRegistry::get('input')->get($strField);
+			if (empty($strValue))
+			{
+				$blnParams = false;
+				break;
+			}
+		}
+
+		if ($blnEncryption && !$blnParams)
 		{
 			throw new ERpcAccessorException('Only encoded communication is permitted');
 		}
