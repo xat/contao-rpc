@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 	(
 		'__selector__'                => array('provider','ipList','notPublic'),
 		'default'              		  => '{title_legend},name,provider',
-		'json'						  => '{title_legend},name,provider;{rights_legend},ipList,secure,notPublic'
+		'json'						  => '{title_legend},name,provider;{rights_legend},ipList,secure,encryption,notPublic'
 	),
 
 	// Subpalettes
@@ -164,6 +164,14 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 		'secure' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'encryption' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_rpc_configuration']['encryption'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'filter'                  => true,

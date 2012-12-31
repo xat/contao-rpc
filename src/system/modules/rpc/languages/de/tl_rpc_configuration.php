@@ -30,8 +30,10 @@ $GLOBALS['TL_LANG']['tl_rpc_configuration']['ipListBlack'][0] = 'Blacklist';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['ipListBlack'][1] = 'Methodenzugriff von folgende IP Adressen verbieten.';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'][0]      = 'Sichere Verbindung';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['secure'][1]      = 'Nur sichere Verbindungen mit SSL erlauben.';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['encryption'][0]  = 'Verschlüsselung';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['encryption'][1]      = 'Nur Verschlüsselte Anfragen bearbeiten.';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['notPublic'][0]  = 'Authentifizierung erforderlich';
-$GLOBALS['TL_LANG']['tl_rpc_configuration']['notPublic'][1]  = 'Methoden mit dieser Konfiguration erfordern eine Authentifizierung';
+$GLOBALS['TL_LANG']['tl_rpc_configuration']['notPublic'][1]   = 'Methoden mit dieser Konfiguration erfordern eine Authentifizierung';
 
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['new'][0]         = 'Neue Konfiguration';
 $GLOBALS['TL_LANG']['tl_rpc_configuration']['new'][1]         = 'Neue Konfiguration hinzufügen.';
