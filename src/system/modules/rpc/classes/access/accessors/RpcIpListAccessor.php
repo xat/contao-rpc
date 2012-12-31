@@ -32,14 +32,14 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 			if($objConfiguration->ipList == 'black')
 			{
 				// blacklist
-				if (RpcIpListItemModel::isBlacklisted($objConfiguration->ipListBlack, \Environment::get('ip')))
+				if (\RpcIpListModel::isBlacklisted($objConfiguration->ipListBlack, \Environment::get('ip')))
 				{
 					throw new ERpcAccessorException('IP is on the blacklist');
 				}
 			} else
 			{
 				// whitelist
-				if (!RpcIpListItemModel::isWhitelisted($objConfiguration->ipListWhite, \Environment::get('ip')))
+				if (!\RpcIpListModel::isWhitelisted($objConfiguration->ipListWhite, \Environment::get('ip')))
 				{
 					throw new ERpcAccessorException('IP is not on the whitelist');
 				}
