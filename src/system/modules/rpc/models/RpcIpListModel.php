@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Contao Open Source CMS
  *
@@ -7,55 +6,54 @@
  *
  * @package
  * @author    Sebastian Tilch
+ * @author    Simon Kusterer
  * @license   LGPL
  * @copyright Sebastian Tilch 2012
  */
 
-//namespace Contao\Rpc;
-
-class RpcIpListItemModel extends \Model
+class RpcIpListModel extends \Model
 {
 
 	/**
 	 * Table name
 	 * @var string
 	 */
-	protected static $strTable = 'tl_rpc_iplist_item';
+	protected static $strTable = 'tl_rpc_iplist';
 
 	/**
-	 * Refresh all IP list items. Delete not valid items
-	 * @return integer Number of deleted rows
+	 * Check if a certain IP is blacklisted
+	 *
+	 * @param $intIpList
+	 * @param $strIp
+	 * @return bool
 	 */
-	public static function refreshAllItems()
+	public static function isBlacklisted($intIpList, $strIp)
 	{
-		$obj = \Database::getInstance()->query("DELETE FROM " . self::$strTable . " WHERE validityPeriod='1' AND untilTstamp < UNIX_TIMESTAMP()");
-		return $obj->affectedRows;
+		// TODO: Caching
+
+		$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
+			. implode(',', array_map('intval', deserialize($intIpList)))
+			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
+
+		return ($objBlackIp->has_access) ? false : true;
 	}
 
 	/**
-	 * Add a new IP item to an IP list
-	 * @param integer  $intIpList	The ID of the IP list (tl_rpc_iplist.id)
-	 * @param String  $strIp	IP address
-	 * @param integer $intUntilTstamp	If the IP item is only valid until a date. If no unix timestamp is given this IP item is always valid.
-	 * @return boolean	On success true will be returned
+	 * Check if a certain IP is whitelisted
+	 *
+	 * @param $intIpList
+	 * @param $strIp
+	 * @return bool
 	 */
-	public static function add($intIpList, $strIp, $intUntilTstamp=0)
+	public static function isWhitelisted($intIpList, $strIp)
 	{
-		// Check if the IP List is a available list
-		$obj = \Database::getInstance()->prepare("SELECT COUNT(id) AS counter FROM " . self::getTable() . " WHERE id=?")->execute($intIpList);
-		if ($obj->counter != 1)
-		{
-			return false;
-		}
-		$objItem = new self();
-		$objItem->tstamp = time();
-		$objItem->pid = $intIpList;
-		$objItem->ip = $strIp;
-		if ($intUntilTstamp != 0)
-		{
-			$objItem->validityPeriod = 1;
-			$objItem->untilTstamp = $intUntilTstamp;
-		}
-		return isset($objItem->save());
+		// TODO: Caching
+
+		$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
+			. implode(',', array_map('intval', deserialize($intIpList)))
+			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
+
+		return ($objWhiteIp->has_access) ? true : false;
 	}
+
 }

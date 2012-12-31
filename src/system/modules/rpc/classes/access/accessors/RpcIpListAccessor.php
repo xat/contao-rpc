@@ -32,28 +32,17 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 			if($objConfiguration->ipList == 'black')
 			{
 				// blacklist
-				$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-					. implode(',', array_map('intval', deserialize($objConfiguration->ipListBlack)))
-					. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute(\Environment::get('ip'));
-
-				if ($objBlackIp->has_access)
+				if (RpcIpListItemModel::isBlacklisted($objConfiguration->ipListBlack, \Environment::get('ip')))
 				{
-					return false;
+					throw new ERpcAccessorException('IP is on the blacklist');
 				}
-
-				throw new ERpcAccessorException('IP is on the blacklist');
-			}else{
+			} else
+			{
 				// whitelist
-				$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-					. implode(',', array_map('intval', deserialize($objConfiguration->ipListWhite)))
-					. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute(\Environment::get('ip'));
-
-				if ($objWhiteIp->has_access)
+				if (!RpcIpListItemModel::isWhitelisted($objConfiguration->ipListWhite, \Environment::get('ip')))
 				{
-					return false;
+					throw new ERpcAccessorException('IP is not on the whitelist');
 				}
-
-				throw new ERpcAccessorException('IP is not on the whitelist');
 			}
 		}
 
