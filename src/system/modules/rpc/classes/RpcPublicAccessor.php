@@ -27,7 +27,6 @@ class RpcPublicAccessor implements IRpcAccessor, IRpcSetup
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{
-
 		if (isset($objConfiguration->notPublic) && $objConfiguration->notPublic !== '1')
 		{
 			return true;

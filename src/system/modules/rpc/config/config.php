@@ -179,12 +179,12 @@ $arrDefaultConfig = array
 						'encryption' => array
 						(
 							'priority' => 80,
-							'class' => '\Contao\Rpc\RpcSecureAccessor'
+							'class' => '\Contao\Rpc\RpcEncryptionAccessor'
 						),
 						'public' => array
 						(
-							'priority' => 80,
-							'class' => '\Contao\Rpc\RpcEncryptionAccessor'
+							'priority' => 70,
+							'class' => '\Contao\Rpc\RpcPublicAccessor'
 						),
 						'admin' => array
 						(
