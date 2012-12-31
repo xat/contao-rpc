@@ -35,6 +35,8 @@ Within the default implementation contao-rpc supports JSON-RPC 2.0. Find out mor
 and extendable. This means if you need something other then JSON-RPC, in most cases it should
  be easy to implement using contao-rpc as your base.
 
+## Dependencies
+KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (optional, but recommend)
 
 
 ## License
