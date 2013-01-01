@@ -32,7 +32,7 @@ class RpcIpListModel extends \Model
 		// TODO: Caching
 
 		$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-			. implode(',', array_map('intval', deserialize($intIpList)))
+			. implode(',', array_map('intval', $intIpList))
 			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
 
 		return ($objBlackIp->has_access) ? false : true;
@@ -50,7 +50,7 @@ class RpcIpListModel extends \Model
 		// TODO: Caching
 
 		$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-			. implode(',', array_map('intval', deserialize($intIpList)))
+			. implode(',', array_map('intval', $intIpList))
 			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
 
 		return ($objWhiteIp->has_access) ? true : false;

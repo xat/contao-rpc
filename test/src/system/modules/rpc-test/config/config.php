@@ -51,5 +51,13 @@ $GLOBALS['RPC']['methods'] = array_merge($GLOBALS['RPC']['methods'], array
 	'adminPong'    => array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'pong')
+	),
+	'isBlacklisted'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'isBlacklisted')
+	),
+	'isWhitelisted'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'isWhitelisted')
 	))
 );

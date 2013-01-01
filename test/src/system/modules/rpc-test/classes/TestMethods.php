@@ -20,4 +20,13 @@ class TestMethods
 		$objResponse->setData($objRequest->getParams()[0]);
 	}
 
+	public function isBlacklisted($objRequest, $objResponse)
+	{
+		$objResponse->setData(\RpcIpListModel::isBlacklisted($objRequest->getParams()[0], $objRequest->getParams()[1]));
+	}
+
+	public function isWhitelisted($objRequest, $objResponse)
+	{
+		$objResponse->setData(\RpcIpListModel::isWhitelisted($objRequest->getParams()[0], $objRequest->getParams()[1]));
+	}
 }

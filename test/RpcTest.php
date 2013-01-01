@@ -480,4 +480,46 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '2');
 	}
 
+	public function testIsBlacklistedMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(array(2), '3.3.3.3'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, true);
+
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(array(2), '1.2.3.4'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, false);
+	}
+
+	public function testIsWhitelistedMethod()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(array(1), '5.5.5.5'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, true);
+
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(array(2), '1.2.3.4'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->result, false);
+	}
+
 }
