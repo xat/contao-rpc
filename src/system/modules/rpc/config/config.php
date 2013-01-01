@@ -329,11 +329,11 @@ $GLOBALS['BE_MOD']['rpc'] = array
 	'configuration' => array
 	(
 		'tables'  => array('tl_rpc_configuration'),
-		// 'icon'    => 'system/modules/rpc/html/icons/configuration.png'
+		'icon'    => 'system/modules/rpc/html/icons/cog.png'
 	),
 	'iplist' => array
 	(
 		'tables'  => array('tl_rpc_iplist', 'tl_rpc_iplist_item'),
-		// 'icon'    => 'system/modules/rpc/html/icons/iplist.png'
+		'icon'    => 'system/modules/rpc/html/icons/door_in.png'
 	)
 );
