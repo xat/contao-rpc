@@ -39,8 +39,9 @@ and extendable. This means if you need something other then JSON-RPC, in most ca
 * Create a native mobile Contao-Backend-App using contao-rpc as Entrypoint
 
 ## Dependencies
-Hooky: https://github.com/xat/contao-hooky (required)
-KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (optional, but recommend)
+
+* Hooky: https://github.com/xat/contao-hooky (required)
+* KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (required)
 
 ## License
 Copyright (c) 2012 Simon Kusterer
