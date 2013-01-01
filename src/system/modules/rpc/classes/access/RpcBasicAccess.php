@@ -17,8 +17,14 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 
 	use TRpcSetup;
 
+	/**
+	 * @var array
+	 */
 	protected static $arrMethodCache = array();
 
+	/**
+	 * @var bool
+	 */
 	protected static $blnRefreshed = false;
 
 	public function __construct()
@@ -73,9 +79,22 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 		return false;
 	}
 
+	/**
+	 * Update the Method Cache
+	 */
 	protected function updateCache()
 	{
 		self::$arrMethodCache = \RpcModel::findAllAssocWithMethodAsKey();
+	}
+
+	/**
+	 * Return the Model instance of a certain Method
+	 *
+	 * @param $strMethod
+	 */
+	public function getMethodFromCache($strMethod)
+	{
+		self::$arrMethodCache[$strMethod];
 	}
 
 }
