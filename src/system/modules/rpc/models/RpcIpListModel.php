@@ -20,6 +20,8 @@ class RpcIpListModel extends \Model
 	 */
 	protected static $strTable = 'tl_rpc_iplist';
 
+	protected static $ipCache = array();
+
 	/**
 	 * Check if a certain IP is blacklisted
 	 *
@@ -29,13 +31,16 @@ class RpcIpListModel extends \Model
 	 */
 	public static function isBlacklisted($intIpList, $strIp)
 	{
-		// TODO: Caching
+		if (!isset(self::$ipCache[$intIpList][$strIp]))
+		{
+			$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
+				. $intIpList
+				. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
 
-		$objBlackIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,1,0) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-			. implode(',', array_map('intval', $intIpList))
-			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
+			self::$ipCache[$intIpList][$strIp] = (boolean)$objBlackIp->has_access;
+		}
 
-		return ($objBlackIp->has_access) ? false : true;
+		return !self::$ipCache[$intIpList][$strIp];
 	}
 
 	/**
@@ -47,13 +52,16 @@ class RpcIpListModel extends \Model
 	 */
 	public static function isWhitelisted($intIpList, $strIp)
 	{
-		// TODO: Caching
+		if (!isset(self::$ipCache[$intIpList][$strIp]))
+		{
+			$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
+				. $intIpList
+				. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
 
-		$objWhiteIp = \Database::getInstance()->prepare("SELECT IF (COUNT(ip)=0,0,1) AS has_access FROM tl_rpc_iplist_item WHERE ip=? AND pid IN("
-			. implode(',', array_map('intval', $intIpList))
-			. ")  AND ((validityPeriod='1' AND untilTstamp>UNIX_TIMESTAMP()) OR validityPeriod != '1')")->execute($strIp);
+			self::$ipCache[$intIpList][$strIp] = (boolean)$objWhiteIp->has_access;
+		}
 
-		return ($objWhiteIp->has_access) ? true : false;
+		return self::$ipCache[$intIpList][$strIp];
 	}
 
 }

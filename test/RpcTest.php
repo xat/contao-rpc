@@ -485,7 +485,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(array(2), '3.3.3.3'))
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(2, '3.3.3.3'))
 		);
 
 		$varResult = json_decode($strResult);
@@ -494,7 +494,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(array(2), '1.2.3.4'))
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isBlacklisted', 'params' => array(2, '1.2.3.4'))
 		);
 
 		$varResult = json_decode($strResult);
@@ -506,7 +506,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(array(1), '5.5.5.5'))
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(1, '5.5.5.5'))
 		);
 
 		$varResult = json_decode($strResult);
@@ -515,7 +515,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
-			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(array(2), '1.2.3.4'))
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(1, '1.2.3.4'))
 		);
 
 		$varResult = json_decode($strResult);
