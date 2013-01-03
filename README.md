@@ -44,6 +44,10 @@ and extendable. This means if you need something other then JSON-RPC, in most ca
 * KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (required)
 * Hooky: https://github.com/xat/contao-hooky (required)
 
+## Contributers
+
+* [Sebastian Tilch]: https://github.com/mediabakery
+
 ## License
-Copyright (c) 2012 Simon Kusterer
+Copyright (c) 2013 Simon Kusterer
 Licensed under the LGPL license.
