@@ -46,7 +46,7 @@ and extendable. This means if you need something other then JSON-RPC, in most ca
 
 ## Contributers
 
-* [Sebastian Tilch]: https://github.com/mediabakery
+* [Sebastian Tilch](https://github.com/mediabakery)
 
 ## License
 Copyright (c) 2013 Simon Kusterer
