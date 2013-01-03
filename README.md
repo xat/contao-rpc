@@ -40,8 +40,9 @@ and extendable. This means if you need something other then JSON-RPC, in most ca
 
 ## Dependencies
 
-* Hooky: https://github.com/xat/contao-hooky (required)
+* MultiRadio Wizard: https://github.com/mediabakery/contao-MultiRadio (required)
 * KeyGenerator Wizard: https://github.com/mediabakery/contao-KeyGenerator (required)
+* Hooky: https://github.com/xat/contao-hooky (required)
 
 ## License
 Copyright (c) 2012 Simon Kusterer
