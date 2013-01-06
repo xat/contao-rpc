@@ -31,6 +31,10 @@ Within the default implementation contao-rpc supports JSON-RPC 2.0. Find out mor
 and extendable. This means if you need something other then JSON-RPC, in most cases it should
  be easy to implement using contao-rpc as your base.
 
+## Example
+
+We have a basic GUI which uses contao-rpc. You can check it out [here](http://xat.github.com/contao-rpc-example/).
+
 ## Use Cases
 
 * Building any kind of Frontend GUI using Contao as Backend. E.g.: Native mobile Apps, JavaScript Apps, Flash Apps, Java Apps,....
