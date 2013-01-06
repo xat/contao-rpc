@@ -29,4 +29,9 @@ class TestMethods
 	{
 		$objResponse->setData(\RpcIpListModel::isWhitelisted($objRequest->getParams()[0], $objRequest->getParams()[1]));
 	}
+
+	public function exception($objRequest, $objResponse)
+	{
+		throw new \Exception('whatever');
+	}
 }

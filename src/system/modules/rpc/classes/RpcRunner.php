@@ -154,9 +154,16 @@ class RpcRunner
 				$objMethodModel = $objAccess->getMethodFromCache($objPair->request->getMethodName());
 				$objMethod      = new $arrRpc['call'][0];
 
-				// Run the actual RPC Method and pass in
-				// an Request and an Response object
-				$objMethod->$arrRpc['call'][1]($objPair->request, $objPair->response, $objMethodModel, $this);
+				try
+				{
+					// Run the actual RPC Method and pass in
+					// an Request and an Response object
+					$objMethod->$arrRpc['call'][1]($objPair->request, $objPair->response, $objMethodModel, $this);
+				} catch (\Exception $e)
+				{
+					$objPair->response->setErrorType(RpcResponse::INTERNAL_ERROR);
+				}
+
 				\Hooky::trigger('rpc_run_method_post', $this, $objPair, $objMethod, $objMethodModel);
 			}
 		}

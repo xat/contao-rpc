@@ -475,8 +475,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'whitelistPong', 'params' => array('ping'))
 		);
 
-		var_dump($strResult);
-
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->error->message, 'IP is not on the whitelist');
 		$this->assertEquals($varResult->error->code, '2');
@@ -526,7 +524,6 @@ class RpcTest extends PHPUnit_Framework_TestCase
 
 	public function testAllowOriginHeader()
 	{
-
 		$strResult = rpcRequest(
 			RPC_URL,
 			array('provider' => 'json'),
@@ -535,6 +532,22 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->assertContains('Access-Control-Allow-Origin: *', $strResult['header']);
+	}
+
+	public function testExceptionMethod()
+	{
+		// passing i a worng parameter (int instead of array)
+		// this triggers an Exception within the RpcMethod
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'exception')
+		);
+
+		$varResult = json_decode($strResult);
+
+		$this->assertEquals($varResult->error->message, 'Internal error');
+		$this->assertEquals($varResult->error->code, '-32603');
 	}
 
 }

@@ -59,5 +59,10 @@ $GLOBALS['RPC']['methods'] = array_merge($GLOBALS['RPC']['methods'], array
 	'isWhitelisted'    => array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'isWhitelisted')
-	))
+	),
+	'exception'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'exception')
+	)
+	)
 );
