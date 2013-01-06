@@ -17,6 +17,12 @@ class RpcBasicOutput implements IRpcOutput, IRpcSetup
 
 	use TRpcSetup;
 
+	protected $arrDefaults = array
+	(
+		'cross_origin' => true,
+		'cross_origin_domains' => '*'
+	);
+
 	/**
 	 * Output a String
 	 *
@@ -25,6 +31,12 @@ class RpcBasicOutput implements IRpcOutput, IRpcSetup
 	 */
 	public function output($strResponse)
 	{
+
+		if ($this->arrConfig['cross_origin'])
+		{
+			header('Access-Control-Allow-Origin: ' . $this->arrConfig['cross_origin_domains']);
+		}
+
 		echo $strResponse;
 	}
 

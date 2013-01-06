@@ -11,7 +11,7 @@
  */
 
 
-function rpcRequest($url, $postFields = array(), $data = null)
+function rpcRequest($url, $postFields = array(), $data = null, $headers = false)
 {
 	if ($data)
 	{
@@ -34,7 +34,18 @@ function rpcRequest($url, $postFields = array(), $data = null)
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$result = curl_exec($ch);
+	if ($headers)
+	{
+		curl_setopt($ch, CURLOPT_HEADER, 1);
+		$response = curl_exec($ch);
+		$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+		$header = substr($response, 0, $header_size);
+		$body = substr($response, $header_size);
+		$result = array('header' => $header, 'body' => $body);
+	} else {
+		$result = curl_exec($ch);
+	}
+
 	return $result;
 }
 
