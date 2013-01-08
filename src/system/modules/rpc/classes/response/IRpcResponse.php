@@ -54,9 +54,10 @@ interface IRpcResponse
 	/**
 	 * @param $intCode
 	 * @param $strMessage
+	 * @param $mixData
 	 * @return mixed
 	 */
-	public function setError($intCode, $strMessage);
+	public function setError($intCode, $strMessage, $mixData);
 
 	/**
 	 * @param $varData

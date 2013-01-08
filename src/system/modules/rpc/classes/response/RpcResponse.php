@@ -73,15 +73,21 @@ class RpcResponse implements IRpcResponse
 	/**
 	 * @param $intCode
 	 * @param $strMessage
+	 * @param $mixData
 	 * @return mixed
 	 */
-	public function setError($intCode, $strMessage)
+	public function setError($intCode, $strMessage, $mixData=null)
 	{
 		$this->arrError = array
 		(
 			'code'    => $intCode,
 			'message' => $strMessage
 		);
+
+		if (isset($mixData))
+		{
+			$this->arrError['data'] = $mixData;
+		}
 
 		return $this;
 	}
