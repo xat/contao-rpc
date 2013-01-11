@@ -36,10 +36,8 @@ class RpcBasicAuthentication implements IRpcAuthenticate, IRpcSetup
 				{
 					RpcRegistry::set('authenticator', $strAuthenticator);
 					return $objAuthenticator->getType();
-				} else
-				{
-					return null;
 				}
+				return null;
 			}
 		}
 

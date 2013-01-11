@@ -518,6 +518,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'isWhitelisted', 'params' => array(array(1), '1.2.3.4'))
 		);
 
+
 		$varResult = json_decode($strResult);
 		$this->assertEquals($varResult->result, false);
 	}

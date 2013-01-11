@@ -31,8 +31,6 @@ class RpcModel extends \Model
 		$objResults = static::findAll();
 		$arrResults = array();
 
-
-
 		if (!is_null($objResults))
 		{
 			while ($objResults->next())
