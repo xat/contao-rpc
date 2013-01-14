@@ -17,12 +17,13 @@ class RpcAuthenticatorAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * This accessor will deny access if the client uses an authentication type
+	 * which is not allowed with the current RPC method.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

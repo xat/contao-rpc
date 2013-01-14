@@ -18,12 +18,13 @@ class RpcSecureAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * If the configuration says 'Only SSL Connections allowed' we
+	 * will, of course, reject non-SSL connections.
 	 *
-	 * @param object
-	 * @param object
-	 * @return int
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

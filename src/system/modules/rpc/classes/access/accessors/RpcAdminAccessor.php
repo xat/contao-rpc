@@ -18,12 +18,12 @@ class RpcAdminAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * If Admins are allowed to use the current RPC method then this
+	 * method will grant them access.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

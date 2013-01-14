@@ -16,12 +16,12 @@ class RpcBeAccessor extends RpcUserAccessor
 {
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * Check if the current logged-in Backend-User has access
+	 * to the RPC method.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{
@@ -37,7 +37,7 @@ class RpcBeAccessor extends RpcUserAccessor
 	}
 
 	/**
-	 * @return mixed
+	 * @return \Contao\Rpc\RpcBackendUser
 	 */
 	function getUser()
 	{

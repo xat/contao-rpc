@@ -18,12 +18,12 @@ class RpcConfigAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * Deny Access to RPC methods which don't have an assigned configuration.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

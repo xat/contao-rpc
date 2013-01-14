@@ -18,8 +18,8 @@ interface IRpcAccessor
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param object
-	 * @param object
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
 	 * @return boolean
 	 */
 	public function hasAccess($objConfiguration, $objMethod);

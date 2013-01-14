@@ -18,18 +18,16 @@ class RpcEncryptionAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the request is encoded
+	 * If the current RPC method requires encryption and no encryption
+	 * is given by the client we will the an ERpcAccessorException Exception.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{
-		//$blnEncryption = isset($objConfiguration->encryption) && $objConfiguration->encryption === '1';
-		//$blnEncryptString = strlen($objConfiguration->encrypt);
-		//$blnDecryptString = strlen($objConfiguration->decrypt);
-		//$blnParams = true;
 
 		if (!(isset($objConfiguration->encryption) && $objConfiguration->encryption === '1'))
 		{

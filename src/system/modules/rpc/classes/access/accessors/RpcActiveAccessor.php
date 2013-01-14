@@ -18,12 +18,13 @@ class RpcActiveAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * Check if the RPC method is marked as 'active'
+	 * within the backend.
 	 *
-	 * @param object
-	 * @param object
-	 * @return boolean
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

@@ -16,26 +16,41 @@ class RpcRunner
 {
 
 	/**
-	 * @var
+	 * The Input Handler
+	 *
+	 * @var $objInput IRpcInput
 	 */
 	public $objInput;
 
 	/**
-	 * @var
+	 * Settings pulled out of the $GLOBALS['RPC']['providers'][<providerName>] Array
+	 *
+	 * @var $arrSettings Array
 	 */
 	public $arrSettings;
 
 	/**
-	 * @var
+	 * Contains an Array of stdClass Objects.
+	 * Each Object contains a Request/Response Pair.
+	 * Notice that each RPC-Method gets called with its
+	 * own Request/Response Pair
+	 *
+	 * @var $arrPairs Array
 	 */
 	public $arrPairs;
 
 	/**
-	 * @var
+	 * Contains the Result String how it's gonna be sent back to the
+	 * Client.
+	 *
+	 * @var $strResponse string
 	 */
 	public $strResponse;
 
 	/**
+	 * Finds a responsible Provider for the current Request:
+	 * The first Provider who yells 'I'm responsible' wins.
+	 *
 	 * @return RpcRunner
 	 */
 	public function find()
@@ -76,24 +91,29 @@ class RpcRunner
 	}
 
 	/**
+	 * Checks if the Request needs decryption before it can be processed further.
+	 * If so, decryption will be performed with the decryption handler given through the Input
+	 *
 	 * @return RpcRunner
 	 */
 	public function decrypt()
 	{
-		// perform decryption, if needed
-		$objDecryption  = RpcSetupFactory::create($this->arrSettings['decryption']);
+		$objDecryption = RpcSetupFactory::create($this->arrSettings['decryption']);
 		$objDecryption->decrypt();
 
 		return $this;
 	}
 
 	/**
+	 * If the client sends authentication information along with the Request
+	 * we will perform authentication here.
+	 *
 	 * @return RpcRunner
 	 */
 	public function authenticate()
 	{
 		// perform authentication
-		$objAuthentication  = RpcSetupFactory::create($this->arrSettings['authentication']);
+		$objAuthentication = RpcSetupFactory::create($this->arrSettings['authentication']);
 		if (!($strAuthType = $objAuthentication->authenticate()))
 		{
 			\Hooky::trigger('rpc_access_denied', $this);
@@ -110,6 +130,8 @@ class RpcRunner
 	}
 
 	/**
+	 * Decode the incoming Request into an Array of Request/Response objects.
+	 *
 	 * @return RpcRunner
 	 */
 	public function decode()
@@ -122,6 +144,10 @@ class RpcRunner
 	}
 
 	/**
+	 * This is where actual RPC methods get called.
+	 * Before an RPC method gets called we are checking if the client has access
+	 * to this method.
+	 *
 	 * @return RpcRunner
 	 */
 	public function run()
@@ -138,12 +164,17 @@ class RpcRunner
 				{
 					if (!$objAccess->hasAccess($objPair->request->getMethodName()))
 					{
+						// If no accessor explicity permits access to the current method
+						// we will send the client a general ACCESS_DENIED Message.
 						$objPair->response->setErrorType(RpcResponse::ACCESS_DENIED);
 						\Hooky::trigger('rpc_run_method_access_denied', $this, $objPair);
 						continue;
 					}
 				} catch (ERpcAccessorException $e)
 				{
+					// Accessors throw an ERpcAccessorException exception if they want to abort
+					// the Accessor loop and trigger an Error. The message of the exception
+					// gets sent back to the client so he is aware of what went wrong.
 					$objPair->response->setError(2, $e->getMessage());
 					\Hooky::trigger('rpc_run_method_exception', $this, $e);
 					continue;
@@ -156,11 +187,15 @@ class RpcRunner
 
 				try
 				{
-					// Run the actual RPC Method and pass in
-					// an Request and an Response object
+					// Run the actual RPC method and pass in
+					// an Request/Response object and some other stuff.
+					// The RPC method will set his response within the Response object.
 					$objMethod->$arrRpc['call'][1]($objPair->request, $objPair->response, $objMethodModel, $this);
 				} catch (\Exception $e)
 				{
+					// If something totally went wrong inside an RPC method and an
+					// Exception was thrown we will catch here and tell the client something
+					// about an internal error.
 					$objPair->response->setErrorType(RpcResponse::INTERNAL_ERROR);
 				}
 
@@ -174,13 +209,13 @@ class RpcRunner
 	}
 
 	/**
+	 * Transform all RPC reponses into something we can send back to the client.
+	 *
 	 * @return RpcRunner
 	 */
 	public function encode()
 	{
 		$objEncoder = RpcSetupFactory::create($this->arrSettings['encoder']);
-		// transform all RPC Reponses into something
-		// we can send back to the user.
 		$this->strResponse = $objEncoder->encode($this->arrPairs);
 		\Hooky::trigger('rpc_encode_post', $this);
 
@@ -188,6 +223,8 @@ class RpcRunner
 	}
 
 	/**
+	 * The Response String can be encrypted if the client wants that.
+	 *
 	 * @return RpcRunner
 	 */
 	public function encrypt()
@@ -203,8 +240,9 @@ class RpcRunner
 		return $this;
 	}
 
-
 	/**
+	 * Send back the final response to the client.
+	 *
 	 * @return RpcRunner
 	 */
 	public function output()

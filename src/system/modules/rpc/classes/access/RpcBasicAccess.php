@@ -36,7 +36,7 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 	 * Check if the current User has access
 	 * to a certain Method.
 	 *
-	 * @param string
+	 * @param string $strMethod
 	 * @return boolean
 	 */
 	public function hasAccess($strMethod)
@@ -66,7 +66,6 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 
 		foreach ($arrAccessors  as $arrAccessor)
 		{
-			// TODO: We are poluting objects here. Find better way.
 			$objAccessor = RpcSetupFactory::create($arrAccessor);
 
 			if ($objAccessor->hasAccess($objConfiguration, $objMethod))

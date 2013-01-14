@@ -18,12 +18,13 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * Check if the current IP is on a Black/White List and grant/deny
+	 * Access based on that information.
 	 *
-	 * @param object
-	 * @param object
-	 * @return int
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
+	 * @throws ERpcAccessorException
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

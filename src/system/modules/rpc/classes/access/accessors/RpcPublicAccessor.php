@@ -18,12 +18,12 @@ class RpcPublicAccessor implements IRpcAccessor, IRpcSetup
 	use TRpcSetup;
 
 	/**
-	 * Check if the current User has access
-	 * to a certain Method.
+	 * If the current RPC method is flagged as 'public'
+	 * then access will be granted.
 	 *
-	 * @param object
-	 * @param object
-	 * @return int
+	 * @param \RpcConfigurationModel $objConfiguration
+	 * @param \RpcModel $objMethod
+	 * @return bool
 	 */
 	public function hasAccess($objConfiguration, $objMethod)
 	{

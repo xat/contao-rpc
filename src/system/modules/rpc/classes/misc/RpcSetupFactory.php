@@ -21,7 +21,7 @@ class RpcSetupFactory
 	 * is created and the setup-method gets injected with
 	 * the value of config.
 	 *
-	 * @param array
+	 * @param array $arrSettings
 	 * @return mixed
 	 */
 	static public function create($arrSettings)
