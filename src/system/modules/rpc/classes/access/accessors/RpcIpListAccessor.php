@@ -20,6 +20,8 @@ class RpcIpListAccessor implements IRpcAccessor, IRpcSetup
 	/**
 	 * Check if the current IP is on a Black/White List and grant/deny
 	 * Access based on that information.
+	 * NOTICE: Only using the IP as Accessor for an critical RPC method does NOT
+	 * make that method secure: You should always also use authentication.
 	 *
 	 * @param \RpcConfigurationModel $objConfiguration
 	 * @param \RpcModel $objMethod
