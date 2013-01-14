@@ -39,7 +39,7 @@ class JsonRpcDecoder implements IRpcDecoder, IRpcSetup
 
 		$varRpc = json_decode($strRpc);
 
-		if ($varRpc == NULL)
+		if (is_null($varRpc))
 		{
 			return array($this->createErrorPair(RpcResponse::PARSE_ERROR));
 		}
