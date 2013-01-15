@@ -174,7 +174,7 @@ trait TRpcUser
 
 		// Clean up old sessions
 		$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-			->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $this->strHash);
+			->execute(($time - $GLOBALS['TL_CONFIG']['rpcSessionTimeout']), $this->strHash);
 
 		// Save the session in the database
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
@@ -186,5 +186,16 @@ trait TRpcUser
 		return $this->strHash;
 	}
 
+	/**
+	 * Destroy the virtual Session.
+	 */
+	public function destroyHash()
+	{
+		// Clean up session
+		$this->Database->prepare("DELETE FROM tl_session WHERE hash=?")
+			->execute($this->strHash);
 
+		// Save the logout status
+		$_SESSION['TL_USER_LOGGED_IN'] = false;
+	}
 }

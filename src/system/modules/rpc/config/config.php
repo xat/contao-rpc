@@ -337,3 +337,6 @@ $GLOBALS['BE_MOD']['rpc'] = array
 		'icon'    => 'system/modules/rpc/html/icons/door_in.png'
 	)
 );
+
+// Default Session Timeout
+$GLOBALS['TL_CONFIG']['rpcSessionTimeout'] = 3600;
