@@ -126,6 +126,8 @@ trait TRpcUser
 			session_start();
 		}
 
+		$this->strHash = $strHash;
+
 		return true;
 	}
 
@@ -180,6 +182,7 @@ trait TRpcUser
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
 			->execute($this->intId, $time, $this->strHashName, session_id(), $this->strIp, $this->strHash);
 
+		// TODO: Do we need to set this?
 		// Save the login status
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
 
@@ -195,6 +198,7 @@ trait TRpcUser
 		$this->Database->prepare("DELETE FROM tl_session WHERE hash=?")
 			->execute($this->strHash);
 
+		// TODO: Do we need to set this?
 		// Save the logout status
 		$_SESSION['TL_USER_LOGGED_IN'] = false;
 	}

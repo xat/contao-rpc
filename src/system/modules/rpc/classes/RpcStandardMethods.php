@@ -44,4 +44,26 @@ class RpcStandardMethods extends \System
 		}
 	}
 
+	/**
+	 * Destroy an hash
+	 *
+	 * @param $objRequest
+	 * @param $objResponse
+	 */
+	public function destroyHash($objRequest, $objResponse)
+	{
+		if (RpcRegistry::get('authenticator') === 'frontend_hash')
+		{
+			RpcFrontendUser::getInstance()->destroyHash();
+			$objResponse->setData(RpcRegistry::get('hash'));
+		} elseif (RpcRegistry::get('authenticator') === 'backend_hash')
+		{
+			RpcBackendUser::getInstance()->destroyHash();
+			$objResponse->setData(RpcRegistry::get('hash'));
+		} else
+		{
+			$objResponse->setErrorType(RpcResponse::AUTH_REQUIRED);
+		}
+	}
+
 }

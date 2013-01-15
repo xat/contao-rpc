@@ -312,6 +312,10 @@ $arrDefaultConfig = array
 		'generateHash'    => array
 		(
 			'call'    => array('Contao\Rpc\RpcStandardMethods', 'generateHash')
+		),
+		'destroyHash'    => array
+		(
+			'call'    => array('Contao\Rpc\RpcStandardMethods', 'destroyHash')
 		)
 	)
 );

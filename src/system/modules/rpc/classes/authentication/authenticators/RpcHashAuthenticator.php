@@ -26,6 +26,7 @@ abstract class RpcHashAuthenticator implements IRpcAuthenticator, IRpcSetup
 
 		if ($objRpcUser->authenticateWithHash(RpcRegistry::get('input')->get($this->arrConfig['hash_field'])))
 		{
+			RpcRegistry::set('hash', $this->arrConfig['hash_field']);
 			return true;
 		}
 
