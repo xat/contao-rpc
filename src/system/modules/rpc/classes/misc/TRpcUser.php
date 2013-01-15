@@ -192,7 +192,7 @@ trait TRpcUser
 	/**
 	 * Destroy the virtual Session.
 	 *
-	 * @return int
+	 * @return boolean
 	 */
 	public function destroyHash()
 	{
@@ -207,6 +207,6 @@ trait TRpcUser
 			$_SESSION['TL_USER_LOGGED_IN'] = false;
 		}
 
-		return $objResult->affectedRows;
+		return $objResult->affectedRows > 0;
 	}
 }
