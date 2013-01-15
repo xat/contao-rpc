@@ -191,15 +191,22 @@ trait TRpcUser
 
 	/**
 	 * Destroy the virtual Session.
+	 *
+	 * @return int
 	 */
 	public function destroyHash()
 	{
 		// Clean up session
-		$this->Database->prepare("DELETE FROM tl_session WHERE hash=?")
+		$objResult = $this->Database->prepare("DELETE FROM tl_session WHERE hash=?")
 			->execute($this->strHash);
 
-		// TODO: Do we need to set this?
-		// Save the logout status
-		$_SESSION['TL_USER_LOGGED_IN'] = false;
+		if ($objResult->affectedRows > 0)
+		{
+			// TODO: Do we need to set this?
+			// Save the logout status
+			$_SESSION['TL_USER_LOGGED_IN'] = false;
+		}
+
+		return $objResult->affectedRows;
 	}
 }

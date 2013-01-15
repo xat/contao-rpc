@@ -54,12 +54,10 @@ class RpcStandardMethods extends \System
 	{
 		if (RpcRegistry::get('authenticator') === 'frontend_hash')
 		{
-			RpcFrontendUser::getInstance()->destroyHash();
-			$objResponse->setData(RpcRegistry::get('hash'));
+			$objResponse->setData(RpcFrontendUser::getInstance()->destroyHash());
 		} elseif (RpcRegistry::get('authenticator') === 'backend_hash')
 		{
-			RpcBackendUser::getInstance()->destroyHash();
-			$objResponse->setData(RpcRegistry::get('hash'));
+			$objResponse->setData(RpcBackendUser::getInstance()->destroyHash());
 		} else
 		{
 			$objResponse->setErrorType(RpcResponse::AUTH_REQUIRED);

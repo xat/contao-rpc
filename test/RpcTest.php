@@ -204,7 +204,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$varResult = json_decode($strResult);
-		$this->assertInternalType('string', $varResult->result);
+		$this->assertEquals($varResult->result, '1');
 
 		$strResult = rpcRequest(
 			RPC_URL,
@@ -313,7 +313,7 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		);
 
 		$varResult = json_decode($strResult);
-		$this->assertInternalType('string', $varResult->result);
+		$this->assertEquals($varResult->result, '1');
 
 		$strResult = rpcRequest(
 			RPC_URL,
