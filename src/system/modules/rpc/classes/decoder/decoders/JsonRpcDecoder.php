@@ -94,9 +94,20 @@ class JsonRpcDecoder implements IRpcDecoder, IRpcSetup
 			return RpcResponse::INVALID_REQUEST;
 		}
 
-		if (!isset($objRpc->method) || !isset($GLOBALS['RPC']['methods'][$objRpc->method]))
+		if (!isset($objRpc->method))
 		{
 			return RpcResponse::METHOD_NOTFOUND;
+		}
+
+		if (!isset($GLOBALS['RPC']['methods'][$objRpc->method]))
+		{
+			// This Hook provides a way to perform late-binding of RPC methods
+			\Hooky::trigger('rpc_method_late_binding');
+
+			if (!isset($GLOBALS['RPC']['methods'][$objRpc->method]))
+			{
+				return RpcResponse::METHOD_NOTFOUND;
+			}
 		}
 
 		// We dont support Notifications atm,

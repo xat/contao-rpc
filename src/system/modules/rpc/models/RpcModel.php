@@ -39,6 +39,9 @@ class RpcModel extends \Model
 			}
 		}
 
+		// This Hook provides a way to perform late-binding of RPC methods
+		\Hooky::trigger('rpc_method_late_binding');
+
 		foreach ($GLOBALS['RPC']['methods'] as $strMethod => $arrMethod)
 		{
 			if (isset($arrResults[$strMethod]))
