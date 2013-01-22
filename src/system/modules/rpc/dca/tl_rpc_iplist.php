@@ -24,7 +24,6 @@ $GLOBALS['TL_DCA']['tl_rpc_iplist'] = array
 		'enableVersioning'            => true,
 		'ctable'                      => array('tl_rpc_iplist_item'),
 		'switchToEdit'                => true,
-		'enableVersioning'            => true,
 		'sql' => array
 		(
 			'keys' => array
