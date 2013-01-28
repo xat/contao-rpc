@@ -194,8 +194,9 @@ class RpcRunner
 				} catch (\Exception $e)
 				{
 					// If something totally went wrong inside an RPC method and an
-					// Exception was thrown we will catch here and tell the client something
+					// Exception was thrown we will catch here, log the error and tell the client something
 					// about an internal error.
+                    \System::log($e->getMessage(), 'RpcRunner run()', TL_ERROR);
 					$objPair->response->setErrorType(RpcResponse::INTERNAL_ERROR);
 				}
 
