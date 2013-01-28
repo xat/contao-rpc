@@ -193,12 +193,12 @@ class RpcRunner
 					$objMethod->$arrRpc['call'][1]($objPair->request, $objPair->response, $objMethodModel, $this);
 				} catch (\Exception $e)
 				{
-					// If something totally went wrong inside an RPC method and an
-					// Exception was thrown we will catch here, log the error and tell the client something
-					// about an internal error.
-                    \System::log($e->getMessage(), 'RpcRunner run()', TL_ERROR);
-					$objPair->response->setErrorType(RpcResponse::INTERNAL_ERROR);
-				}
+                    // If something totally went wrong inside an RPC method and an
+                    // Exception was thrown we will catch here, log the error and tell the client something
+                    // about an internal error.
+                    \System::log($e, 'RpcRunner run()', TL_ERROR);
+                    $objPair->response->setErrorType(RpcResponse::INTERNAL_ERROR);
+                }
 
 				\Hooky::trigger('rpc_run_method_post', $this, $objPair, $objMethod, $objMethodModel);
 			}
