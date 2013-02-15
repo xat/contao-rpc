@@ -67,6 +67,10 @@ class JsonRpcEncoder implements IRpcEncoder, IRpcSetup
 		{
 			$obj->error = new \stdClass();
 			$obj->error->code = $arrError['code'];
+			if (isset($arrError['data']))
+			{
+				$obj->error->data = $arrError['data'];
+			}
 			$obj->error->message = $arrError['message'];
 		} else
 		{

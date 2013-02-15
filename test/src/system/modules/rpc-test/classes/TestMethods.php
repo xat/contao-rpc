@@ -34,4 +34,9 @@ class TestMethods
 	{
 		throw new \Exception('whatever');
 	}
+
+	public function mixData($objRequest, $objResponse)
+	{
+		$objResponse->setError(100, 'test', array('k' => 'mixdata rules'));
+	}
 }

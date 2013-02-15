@@ -613,4 +613,18 @@ class RpcTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($varResult->error->code, '-32603');
 	}
 
+	public function testMixData()
+	{
+		$strResult = rpcRequest(
+			RPC_URL,
+			array('provider' => 'json'),
+			array('id' => '1337', 'jsonrpc' => '2.0', 'method' => 'mixData', 'params' => array('mixData'))
+		);
+
+		$varResult = json_decode($strResult);
+		$this->assertEquals($varResult->error->code, '100');
+		$this->assertEquals($varResult->error->message, 'test');
+		$this->assertEquals($varResult->error->data->k, 'mixdata rules');
+	}
+
 }

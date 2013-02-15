@@ -63,6 +63,10 @@ $GLOBALS['RPC']['methods'] = array_merge($GLOBALS['RPC']['methods'], array
 	'exception'    => array
 	(
 		'call'    => array('Contao\Rpc\TestMethods', 'exception')
+	),
+	'mixData'    => array
+	(
+		'call'    => array('Contao\Rpc\TestMethods', 'mixData')
 	)
 	)
 );
