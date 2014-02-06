@@ -148,8 +148,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'		  => array('tl_rpc_configuration','getIpLists'),
 			'eval'					  => array('mandatory'=>true,'multiple'=>true),
-			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+			'sql'                     => "blob NULL"
 		),
 		'ipListBlack' => array
 		(
@@ -158,8 +157,7 @@ $GLOBALS['TL_DCA']['tl_rpc_configuration'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'		  => array('tl_rpc_configuration','getIpLists'),
 			'eval'					  => array('mandatory'=>true,'multiple'=>true),
-			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+			'sql'                     => "blob NULL"
 		),
 		'secure' => array
 		(
