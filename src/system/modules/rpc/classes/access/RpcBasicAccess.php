@@ -45,7 +45,7 @@ class RpcBasicAccess extends \System implements IRpcAccess, IRpcSetup
 		{
 			if (!self::$blnRefreshed)
 			{
-				\RpcModel::refresh();
+				\RpcModel::updateMethods();
 				$this->updateCache();
 				self::$blnRefreshed = true;
 

@@ -26,7 +26,7 @@ class RpcModel extends \Model
 	 * Delete used Methods and add new ones.
 	 *
 	 */
-	public static function refresh()
+	public static function updateMethods()
 	{
 		$objResults = static::findAll();
 		$arrResults = array();

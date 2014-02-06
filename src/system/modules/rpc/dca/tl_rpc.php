@@ -189,7 +189,7 @@ class tl_rpc extends \Backend
 
 	public function refreshTable()
 	{
-		\RpcModel::refresh();
+		\RpcModel::updateMethods();
 	}
 
 }
