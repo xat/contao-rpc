@@ -111,6 +111,12 @@ class RpcModel extends \Model
 		try
 		{
 			$objConfiguration = $this->getRelated('configuration');
+
+			if (is_null($objConfiguration))
+			{
+				return;
+			}
+
 			$objConfiguration->reset();
 
 			while ($objConfiguration->next())
@@ -122,9 +128,9 @@ class RpcModel extends \Model
 			}
 		} catch (Exception $e)
 		{
-			return null;
+			return;
 		}
 
-		return null;
+		return;
 	}
 }
