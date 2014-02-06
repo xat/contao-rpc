@@ -15,7 +15,7 @@ $GLOBALS['RPC']['methods'] => array
   )
 );
 
-\\ Your MyPong class:
+\\ Your MyPing class:
 
 class MyPing
 {
