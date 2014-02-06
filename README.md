@@ -35,6 +35,10 @@ and extendable. This means if you need something other then JSON-RPC, in most ca
 
 We have a basic GUI which uses contao-rpc. You can check it out [here](http://xat.github.com/contao-rpc-example/).
 
+## Compatibility
+
+contao-rpc has been tested with Contao 3.0.x, 3.1.x and 3.2.x.
+
 ## Use Cases
 
 * Building any kind of Frontend GUI using Contao as Backend. E.g.: Native mobile Apps, JavaScript Apps, Flash Apps, Java Apps,....
